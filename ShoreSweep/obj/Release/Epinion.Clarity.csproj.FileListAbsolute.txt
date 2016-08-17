@@ -1,0 +1,13 @@
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\bin\Release\Epinion.Clarity.dll.config
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\bin\Release\Epinion.Clarity.dll
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\bin\Release\Epinion.Clarity.pdb
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\bin\Release\Conjurer.dll
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\bin\Release\EntityFramework.dll
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\bin\Release\EntityFramework.SqlServer.dll
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\bin\Release\Newtonsoft.Json.dll
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\bin\Release\EntityFramework.xml
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\bin\Release\EntityFramework.SqlServer.xml
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\bin\Release\Newtonsoft.Json.xml
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\obj\Release\Epinion.Clarity.csprojResolveAssemblyReference.cache
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\obj\Release\Epinion.Clarity.dll
+D:\Huynh_Quoc_Thao\Projects\Ad Hoc Projects\Epinion.ChangiKiosks\Epinion.Clarity\obj\Release\Epinion.Clarity.pdb

@@ -1,0 +1,42 @@
+﻿<form name="loginForm" class="login-form" data-ng-submit="viewModel.submit()">
+    <label class="error-message" data-ng-show="viewModel.errorMessage.length > 0">{{ viewModel.errorMessage }}</label>
+
+  	<div class="margin-bottom-20">
+      <select ui-select2 id="login-username" class="form-input username-input" data-ng-model="viewModel.user.username" required placeholder="Username">
+        <option  value=""></option>
+        <option data-ng-repeat="user in viewModel.userList" value="{{user.username}}">{{user.username}}</option>
+      </select>
+    </div>
+
+    <div class="margin-bottom-20">
+      <select id="login-terminal" class="form-input" data-ng-model="viewModel.user.terminalId" required>
+        <option  value="" disabled selected>Terminal</option>
+        <option data-ng-repeat="item in viewModel.terminalList" value="{{item.id}}">{{item.name}}</option>
+      </select>
+    </div>
+
+    <div class="margin-bottom-20">
+      <select id="login-terminal" class="form-input" data-ng-model="viewModel.user.locationId" required>
+        <option value="" disabled selected>Location</option>
+        <option data-ng-repeat="item in viewModel.locationList" value="{{item.id}}">{{item.name}}</option>
+      </select>
+    </div>
+
+    <div class="margin-bottom-20">
+      <select id="login-numOfCounter" class="form-input" data-ng-model="viewModel.user.numberOfCounter" required>
+        <option value="" disabled selected>Number of active kiosks</option>
+        <option data-ng-repeat="item in viewModel.numberOfCounterList" value="{{item}}">{{item}}</option>
+      </select>
+    </div>
+
+    <div class="margin-bottom-20">
+      <select id="login-numOfCounter" class="form-input" data-ng-model="viewModel.user.shift" required>
+        <option value="" disabled selected>Shift</option>
+        <option data-ng-repeat="item in viewModel.shiftList" value="{{item}}">{{item}}</option>
+      </select>
+    </div>
+
+    <div>
+      <button type="submit" value="submit" class="submit" data-ng-disabled="loginForm.$invalid" id="btnLogin">Login</button>
+    </div>
+</form>

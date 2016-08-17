@@ -1,0 +1,68 @@
+﻿<div id="kiosksSurvey" layout="column" layout-sm="column" layout-wrap>
+
+  <md-toolbar>
+    <!--<div layout="row" layout-align="center center" class="sv-header">
+      <div flex="25">
+				<div>
+          <img src="../img/logo-changi-small.png"/>
+        </div>
+			</div>
+      <div flex="25">
+        <div class="label-title">Interviewer ID</div>
+        <div class="info-title overflow-text">{{viewModel.$rootScope.user.username}}</div>
+        <hr/>
+      </div> 
+      <div flex="15">
+        <div class="label-title">No of active kiosks</div>
+        <div class="info-title">{{viewModel.$rootScope.user.numberOfCounter}}</div>
+        <hr/>
+      </div>
+      <div flex="15">
+        <div class="label-title">Terminal</div>
+        <div class="info-title">{{viewModel.$rootScope.user.terminalId}}</div>
+        <hr/>
+      </div>
+			<div flex="15">    
+        <div class="label-title">Location</div>
+        <div class="info-title">{{viewModel.locationName}}</div>
+        <hr/>                   
+      </div>           	
+      <div flex="5" data-ng-controller="LogoutController">
+        <span class="logout-section">
+          <i class="fa fa-sign-out ico-logout" data-ng-click="viewModel.submit()"></i>
+        </span>    
+			</div>
+    </div>-->
+
+    <div layout="row" layout-align="center center" class="sv-header-note">
+      <div class="eachInput clearfix">
+        <label for="">CSV File <span class="red">*</span></label>
+        <div class="input-file-wrapper">
+          <input type="file" name="upload" accept="*" onchange="angular.element(this).scope().viewModel.uploadFile(this)" required />
+        </div>
+      </div>
+
+      <div class="tpl-submit clearfix">
+        <a href="/template/trashList.csv"><b><i class="download-excel-template"> Trash.csv </i></b></a>
+        <button type="button" data-ng-click="viewModel.importCSVFile()" class="b-f-submit">Import</button>
+      </div>
+
+      <!--<div flex="5" data-ng-controller="LogoutController">
+        <span class="logout-section">
+          <i class="fa fa-sign-out ico-logout" data-ng-click="viewModel.submit()"></i>
+        </span>
+      </div>-->
+
+    </div>
+</md-toolbar>
+  
+  <md-content flex layout-padding>
+      <md-card>
+          <md-card-content>		
+            
+
+          </md-card-content>    
+        </md-card>				
+		</md-content>
+</div>
+

@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Huynh_Quoc_Thao\Deploy\eTRS16082016</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Conjurer.dll">
+      <publishTime>01/20/2013 13:38:36</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>03/02/2015 09:32:26</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>03/02/2015 09:32:26</publishTime>
+    </File>
+    <File Include="bin/Epinion.Clarity.Api.dll">
+      <publishTime>08/16/2016 14:33:15</publishTime>
+    </File>
+    <File Include="bin/Epinion.Clarity.dll">
+      <publishTime>08/16/2016 14:33:14</publishTime>
+    </File>
+    <File Include="bin/Epinion.Clarity.Web.dll">
+      <publishTime>08/16/2016 14:33:17</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>06/13/2016 23:06:14</publishTime>
+    </File>
+    <File Include="css/font-awsome/font-awesome.css">
+      <publishTime>07/20/2016 23:06:45</publishTime>
+    </File>
+    <File Include="css/font-awsome/font-awesome.min.css">
+      <publishTime>07/20/2016 23:06:45</publishTime>
+    </File>
+    <File Include="css/jquery-ui.css">
+      <publishTime>07/20/2016 23:06:45</publishTime>
+    </File>
+    <File Include="css/jquery-ui.min.css">
+      <publishTime>07/20/2016 23:06:45</publishTime>
+    </File>
+    <File Include="css/main-style.css">
+      <publishTime>08/04/2016 16:34:21</publishTime>
+    </File>
+    <File Include="css/sass/components/_input_select.scss">
+      <publishTime>07/20/2016 23:06:45</publishTime>
+    </File>
+    <File Include="css/sass/main-style.scss">
+      <publishTime>08/04/2016 16:34:20</publishTime>
+    </File>
+    <File Include="default-editable.html">
+      <publishTime>07/25/2016 11:17:58</publishTime>
+    </File>
+    <File Include="default.html">
+      <publishTime>08/16/2016 14:33:25</publishTime>
+    </File>
+    <File Include="font/changi_etrs/icomoon.eot">
+      <publishTime>07/26/2016 11:10:17</publishTime>
+    </File>
+    <File Include="font/changi_etrs/icomoon.svg">
+      <publishTime>07/26/2016 11:10:17</publishTime>
+    </File>
+    <File Include="font/changi_etrs/icomoon.ttf">
+      <publishTime>07/26/2016 11:10:17</publishTime>
+    </File>
+    <File Include="font/changi_etrs/icomoon.woff">
+      <publishTime>07/26/2016 11:10:17</publishTime>
+    </File>
+    <File Include="font/fa/fontawesome-webfont.eot">
+      <publishTime>07/20/2016 23:06:45</publishTime>
+    </File>
+    <File Include="font/fa/fontawesome-webfont.svg">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/fa/fontawesome-webfont.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/fa/fontawesome-webfont.woff">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/fa/FontAwesome.otf">
+      <publishTime>07/20/2016 23:06:45</publishTime>
+    </File>
+    <File Include="font/hal/icomoon.eot">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/hal/icomoon.svg">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/hal/icomoon.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/hal/icomoon.woff">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/roboto/Roboto-Black.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/roboto/Roboto-BlackItalic.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/roboto/Roboto-Bold.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/roboto/Roboto-BoldItalic.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/roboto/Roboto-Italic.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/roboto/Roboto-Light.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/roboto/Roboto-LightItalic.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/roboto/Roboto-Medium.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/roboto/Roboto-MediumItalic.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/roboto/Roboto-Regular.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/roboto/Roboto-Thin.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="font/roboto/Roboto-ThinItalic.ttf">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>07/20/2016 23:06:44</publishTime>
+    </File>
+    <File Include="gulpfile.js">
+      <publishTime>07/26/2016 22:44:11</publishTime>
+    </File>
+    <File Include="html/access-denied.html">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="html/admin-header.html">
+      <publishTime>07/20/2016 23:06:46</publishTime>
+    </File>
+    <File Include="html/color-dialog.html">
+      <publishTime>07/27/2016 21:19:44</publishTime>
+    </File>
+    <File Include="html/error.html">
+      <publishTime>07/20/2016 23:06:47</publishTime>
+    </File>
+    <File Include="html/kiosks-survey.html">
+      <publishTime>08/04/2016 16:25:45</publishTime>
+    </File>
+    <File Include="html/login.html">
+      <publishTime>07/25/2016 11:24:46</publishTime>
+    </File>
+    <File Include="html/login_form.html">
+      <publishTime>08/12/2016 17:05:43</publishTime>
+    </File>
+    <File Include="html/modal-form.html">
+      <publishTime>07/20/2016 23:06:47</publishTime>
+    </File>
+    <File Include="html/not-authorized.html">
+      <publishTime>07/20/2016 23:06:47</publishTime>
+    </File>
+    <File Include="html/not-found.html">
+      <publishTime>07/20/2016 23:06:47</publishTime>
+    </File>
+    <File Include="html/pre-loading.html">
+      <publishTime>07/20/2016 23:06:47</publishTime>
+    </File>
+    <File Include="html/user.html">
+      <publishTime>07/20/2016 23:06:47</publishTime>
+    </File>
+    <File Include="img/changi_kiosks.jpg">
+      <publishTime>07/25/2016 11:34:14</publishTime>
+    </File>
+    <File Include="img/check-ico.png">
+      <publishTime>07/20/2016 23:06:47</publishTime>
+    </File>
+    <File Include="img/Forecourt_Changi_Logo_2.png">
+      <publishTime>07/25/2016 11:41:20</publishTime>
+    </File>
+    <File Include="img/loading.gif">
+      <publishTime>07/20/2016 23:06:47</publishTime>
+    </File>
+    <File Include="img/logo-changi-small.png">
+      <publishTime>07/25/2016 11:41:20</publishTime>
+    </File>
+    <File Include="img/logo-changi.png">
+      <publishTime>07/25/2016 11:40:51</publishTime>
+    </File>
+    <File Include="img/logo-epinion.png">
+      <publishTime>07/20/2016 23:06:47</publishTime>
+    </File>
+    <File Include="img/logo-incite.png">
+      <publishTime>07/20/2016 23:06:47</publishTime>
+    </File>
+    <File Include="js/all.min.js">
+      <publishTime>08/16/2016 14:33:24</publishTime>
+    </File>
+    <File Include="js/clarity-app.js">
+      <publishTime>08/01/2016 14:11:05</publishTime>
+    </File>
+    <File Include="js/controllers/authentication/LoginController.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/controllers/authentication/LogoutController.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/controllers/IController.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/controllers/MainController.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/helpers/MainHelper.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/model/BaseModel.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/model/KioskLogModel.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/model/TerminalModel.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/model/UserLogModel.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/model/UserModel.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/services/AuthenticationService.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/services/BaseService.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/services/IService.ts">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="js/services/KioskLogService.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/services/LocationService.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/services/TerminalService.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/services/UserLogService.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="js/services/UserService.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="lib/angular-material/angular-animate.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular-material/angular-animate.min.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular-material/angular-aria.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular-material/angular-aria.min.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular-material/angular-material.css">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/angular-material/angular-material.js">
+      <publishTime>07/20/2016 23:06:51</publishTime>
+    </File>
+    <File Include="lib/angular-material/angular-material.min.css">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/angular-material/angular-material.min.js">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/angular-spec/angular-mocks.d.ts">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/angular-spec/angular-mocks.js">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/angular/angular-cookies.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular/angular-cookies.min.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular/angular-cookies.min.js.map">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular/angular-route.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular/angular-route.min.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular/angular-route.min.js.map">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular/angular.d.ts">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular/angular.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular/angular.min.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular/angular.min.js.map">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular/ng-context-menu.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular/ng-context-menu.min.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/angular/ui-bootstrap.min.js">
+      <publishTime>07/20/2016 23:06:49</publishTime>
+    </File>
+    <File Include="lib/blanket/blanket.min.js">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/blanket/jasmine-blanket.js">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/jasmine/jasmine-html.js">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/jasmine/jasmine.css">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/jasmine/jasmine.d.ts">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/jasmine/jasmine.js">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/jquery/jquery-1.9.1.js">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/jquery/jquery-1.9.1.min.js">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/jquery/jquery-ui.js">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/jquery/jquery-ui.min.js">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/jquery/jquery.d.ts">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/jquery/jquery.scrollUp.min.js">
+      <publishTime>07/20/2016 23:06:50</publishTime>
+    </File>
+    <File Include="lib/select2/angular-ui/angular-ui.js">
+      <publishTime>07/20/2016 23:06:51</publishTime>
+    </File>
+    <File Include="lib/select2/angular-ui/select2.js">
+      <publishTime>07/20/2016 23:06:51</publishTime>
+    </File>
+    <File Include="lib/select2/select2-spinner.gif">
+      <publishTime>07/20/2016 23:06:51</publishTime>
+    </File>
+    <File Include="lib/select2/select2.css">
+      <publishTime>07/20/2016 23:06:51</publishTime>
+    </File>
+    <File Include="lib/select2/select2.js">
+      <publishTime>07/20/2016 23:06:51</publishTime>
+    </File>
+    <File Include="lib/select2/select2.png">
+      <publishTime>07/20/2016 23:06:51</publishTime>
+    </File>
+    <File Include="lib/sortable/sortable.js">
+      <publishTime>07/20/2016 23:06:51</publishTime>
+    </File>
+    <File Include="package.json">
+      <publishTime>07/20/2016 23:06:45</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>07/21/2016 00:09:27</publishTime>
+    </File>
+    <File Include="Robots.txt">
+      <publishTime>07/20/2016 23:06:45</publishTime>
+    </File>
+    <File Include="spec/controllers/authentication/LoginControllerSpec.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="spec/controllers/authentication/LogoutControllerSpec.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="spec/controllers/MainControllerSpec.js">
+      <publishTime>08/16/2016 14:33:16</publishTime>
+    </File>
+    <File Include="spec/runner.html">
+      <publishTime>07/26/2016 22:59:37</publishTime>
+    </File>
+    <File Include="spec/services/AuthenticationServiceSpec.js">
+      <publishTime>07/20/2016 23:07:59</publishTime>
+    </File>
+    <File Include="spec/services/BaseServiceSpec.js">
+      <publishTime>07/20/2016 23:07:58</publishTime>
+    </File>
+    <File Include="spec/spec-helper.js">
+      <publishTime>07/20/2016 23:07:58</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>07/26/2016 07:51:57</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

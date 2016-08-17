@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{057A7706-245A-49EE-8FBA-91A645190CF0}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Epinion.Clarity.Web</RootNamespace>
+    <AssemblyName>Epinion.Clarity.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <JSLintSkip>\lib\</JSLintSkip>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DeployIisAppPath>Default Web Site/</DeployIisAppPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Conjurer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Conjurer.1.0.0\lib\net35\Conjurer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\font-awsome\font-awesome.css" />
+    <Content Include="css\font-awsome\font-awesome.min.css" />
+    <Content Include="css\main-style.css" />
+    <Content Include="css\jquery-ui.css" />
+    <Content Include="css\jquery-ui.min.css" />
+    <Content Include="default-editable.html" />
+    <Content Include="font\changi_etrs\icomoon.svg" />
+    <Content Include="font\fa\fontawesome-webfont.svg" />
+    <Content Include="font\hal\icomoon.svg" />
+    <Content Include="gulpfile.js" />
+    <Content Include="html\color-dialog.html" />
+    <Content Include="html\index.html" />
+    <Content Include="html\kiosks-survey.html" />
+    <Content Include="html\not-authorized.html" />
+    <Content Include="default.html" />
+    <Content Include="Global.asax" />
+    <Content Include="html\admin-header.html" />
+    <Content Include="html\access-denied.html" />
+    <Content Include="html\login_form.html" />
+    <Content Include="html\modal-form.html" />
+    <Content Include="html\error.html" />
+    <Content Include="html\not-found.html" />
+    <Content Include="html\login.html" />
+    <Content Include="html\pre-loading.html" />
+    <Content Include="html\user.html" />
+    <Content Include="img\shore_sweep.jpg" />
+    <Content Include="img\check-ico.png" />
+    <Content Include="img\logo-changi-small.png" />
+    <Content Include="img\logo-changi.png" />
+    <Content Include="img\loading.gif" />
+    <Content Include="img\logo-epinion.png" />
+    <Content Include="img\logo-incite.png" />
+    <Content Include="js\all.min.js" />
+    <Content Include="js\clarity-app.js" />
+    <TypeScriptCompile Include="js\controllers\MainController.ts" />
+    <TypeScriptCompile Include="js\controllers\authentication\LoginController.ts" />
+    <TypeScriptCompile Include="js\controllers\authentication\LogoutController.ts" />
+    <Content Include="font\roboto\Roboto-Black.ttf" />
+    <Content Include="font\roboto\Roboto-BlackItalic.ttf" />
+    <Content Include="font\roboto\Roboto-Bold.ttf" />
+    <Content Include="font\roboto\Roboto-BoldItalic.ttf" />
+    <Content Include="font\roboto\Roboto-Italic.ttf" />
+    <Content Include="font\roboto\Roboto-Light.ttf" />
+    <Content Include="font\roboto\Roboto-LightItalic.ttf" />
+    <Content Include="font\roboto\Roboto-Medium.ttf" />
+    <Content Include="font\roboto\Roboto-MediumItalic.ttf" />
+    <Content Include="font\roboto\Roboto-Regular.ttf" />
+    <Content Include="font\roboto\Roboto-Thin.ttf" />
+    <Content Include="font\roboto\Roboto-ThinItalic.ttf" />
+    <TypeScriptCompile Include="js\controllers\IController.ts" />
+    <TypeScriptCompile Include="js\helpers\MainHelper.ts" />
+    <TypeScriptCompile Include="js\model\UserLogModel.ts" />
+    <TypeScriptCompile Include="js\services\BaseService.ts" />
+    <TypeScriptCompile Include="js\model\BaseModel.ts" />
+    <TypeScriptCompile Include="js\model\UserModel.ts" />
+    <TypeScriptCompile Include="js\services\AuthenticationService.ts" />
+    <TypeScriptCompile Include="js\model\KioskLogModel.ts" />
+    <TypeScriptCompile Include="js\model\TerminalModel.ts" />
+    <TypeScriptCompile Include="js\services\UserLogService.ts" />
+    <TypeScriptCompile Include="js\services\LocationService.ts" />
+    <TypeScriptCompile Include="js\services\TrashService.ts" />
+    <TypeScriptCompile Include="lib\angular\angular-cookies.d.ts" />
+    <TypeScriptCompile Include="js\services\KioskLogService.ts" />
+    <TypeScriptCompile Include="js\services\TerminalService.ts" />
+    <TypeScriptCompile Include="js\services\UserService.ts" />
+    <Content Include="js\services\IService.ts" />
+    <Content Include="lib\angular-material\angular-animate.js" />
+    <Content Include="lib\angular-material\angular-animate.min.js" />
+    <Content Include="lib\angular-material\angular-aria.js" />
+    <Content Include="lib\angular-material\angular-aria.min.js" />
+    <Content Include="lib\angular-material\angular-material.css" />
+    <Content Include="lib\angular-material\angular-material.js" />
+    <Content Include="lib\angular-material\angular-material.min.css" />
+    <Content Include="lib\angular-material\angular-material.min.js" />
+    <Content Include="lib\angular-spec\angular-mocks.d.ts" />
+    <Content Include="lib\angular-spec\angular-mocks.js" />
+    <Content Include="lib\angular\angular-cookies.js" />
+    <Content Include="lib\angular\angular-cookies.min.js" />
+    <Content Include="lib\angular\angular-route.js" />
+    <Content Include="lib\angular\angular-route.min.js" />
+    <Content Include="lib\angular\angular.d.ts" />
+    <Content Include="lib\angular\angular.js" />
+    <Content Include="lib\angular\angular.min.js" />
+    <Content Include="lib\angular\ng-context-menu.js" />
+    <Content Include="lib\angular\ng-context-menu.min.js" />
+    <Content Include="lib\angular\ui-bootstrap.min.js" />
+    <Content Include="lib\blanket\blanket.min.js" />
+    <Content Include="lib\blanket\jasmine-blanket.js" />
+    <Content Include="lib\jasmine\jasmine-html.js" />
+    <Content Include="lib\jasmine\jasmine.css" />
+    <Content Include="lib\jasmine\jasmine.d.ts" />
+    <Content Include="lib\jasmine\jasmine.js" />
+    <Content Include="lib\jquery\jquery-1.9.1.js" />
+    <Content Include="lib\jquery\jquery-1.9.1.min.js" />
+    <Content Include="lib\jquery\jquery-ui.js" />
+    <Content Include="lib\jquery\jquery-ui.min.js" />
+    <Content Include="lib\jquery\jquery.d.ts" />
+    <Content Include="lib\jquery\jquery.scrollUp.min.js" />
+    <Content Include="lib\select2\angular-ui\angular-ui.js" />
+    <Content Include="lib\select2\angular-ui\select2.js" />
+    <Content Include="lib\select2\select2-spinner.gif" />
+    <Content Include="lib\select2\select2.css" />
+    <Content Include="lib\select2\select2.js" />
+    <Content Include="lib\select2\select2.png" />
+    <Content Include="lib\sortable\sortable.js" />
+    <Content Include="Robots.txt" />
+    <Content Include="spec\controllers\authentication\LoginControllerSpec.js" />
+    <Content Include="spec\controllers\authentication\LogoutControllerSpec.js" />
+    <TypeScriptCompile Include="spec\controllers\authentication\LogoutControllerSpec.ts" />
+    <TypeScriptCompile Include="spec\controllers\authentication\LoginControllerSpec.ts" />
+    <TypeScriptCompile Include="spec\controllers\MainControllerSpec.ts" />
+    <Content Include="spec\runner.html" />
+    <Content Include="spec\services\AuthenticationServiceSpec.js" />
+    <Content Include="spec\services\BaseServiceSpec.js" />
+    <Content Include="spec\spec-helper.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\angular\angular-route.min.js.map" />
+    <Content Include="lib\angular\angular.min.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\angular\angular-cookies.min.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\sass\components\_input_select.scss" />
+    <Content Include="css\sass\main-style.scss" />
+    <None Include="Epinion.Clarity.Web.wpp.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="package.json" />
+    <Content Include="font\fa\fontawesome-webfont.eot" />
+    <Content Include="font\fa\fontawesome-webfont.ttf" />
+    <Content Include="font\fa\fontawesome-webfont.woff" />
+    <Content Include="font\fa\FontAwesome.otf" />
+    <Content Include="font\hal\icomoon.eot" />
+    <Content Include="font\hal\icomoon.ttf" />
+    <Content Include="font\hal\icomoon.woff" />
+    <Content Include="font\changi_etrs\icomoon.eot" />
+    <Content Include="font\changi_etrs\icomoon.ttf" />
+    <Content Include="font\changi_etrs\icomoon.woff" />
+    <None Include="Properties\PublishProfiles\Changi_eTRS.pubxml" />
+    <None Include="Properties\PublishProfiles\Clarity.pubxml" />
+    <None Include="Properties\PublishProfiles\Forecourt.pubxml" />
+    <Content Include="template\trashList.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShoreSweep.Api\ShoreSweep.Api.csproj">
+      <Project>{e285c106-353d-469a-9aba-ce41b24bfaa7}</Project>
+      <Name>ShoreSweep.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShoreSweep\ShoreSweep.csproj">
+      <Project>{6f2e7475-1ce0-4569-b24e-81cf1d572edc}</Project>
+      <Name>ShoreSweep</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AutoDeploy|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>9090</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <UsingTask TaskName="TokenReplace" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <SourceFile ParameterType="System.String" Required="true" />
+      <TargetFile ParameterType="System.String" Required="true" />
+      <Token ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Code Type="Fragment" Language="cs"><![CDATA[
+        DateTime now = DateTime.Now;
+        string version = now.ToString("yyMMddHHmm");
+
+        string content = File.ReadAllText(SourceFile);
+        content = content.Replace(Token, version);
+
+        File.WriteAllText(TargetFile, content);
+        ]]></Code>
+    </Task>
+  </UsingTask>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>-->
+  <Target Name="AfterBuild">
+    <TokenReplace SourceFile="$(MSBuildProjectDirectory)\default-editable.html" TargetFile="$(MSBuildProjectDirectory)\default.html" Token="$VERSION_NUMBER$" />
+  </Target>
+  <PropertyGroup>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptIncludeComments>false</TypeScriptIncludeComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <CompileDependsOn>
+		$(CompileDependsOn);
+		MinifyAndCombineJsAndCss;
+	</CompileDependsOn>
+  </PropertyGroup>
+  <Target Name="MinifyAndCombineJsAndCss" DependsOnTargets="CompileTypeScript">
+    <Exec Command="gulp" />
+  </Target>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <CompileDependsOn>
+		$(CompileDependsOn);
+		CombineJsAndCss;
+	</CompileDependsOn>
+  </PropertyGroup>
+  <Target Name="CombineJsAndCss" DependsOnTargets="CompileTypeScript">
+    <Exec Command="gulp combine-only" />
+  </Target>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" />
+</Project>

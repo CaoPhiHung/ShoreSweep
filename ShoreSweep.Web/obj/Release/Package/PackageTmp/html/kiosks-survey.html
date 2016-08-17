@@ -1,0 +1,165 @@
+﻿<div id="kiosksSurvey" layout="column" layout-sm="column" layout-wrap>
+
+  <md-toolbar>
+    <div layout="row" layout-align="center center" class="sv-header">
+      <div flex="25">
+				<div>
+          <img src="../img/logo-changi-small.png"/>
+        </div>
+			</div>
+      <div flex="25">
+        <div class="label-title">Interviewer ID</div>
+        <div class="info-title overflow-text">{{viewModel.$rootScope.user.username}}</div>
+        <hr/>
+      </div> 
+      <div flex="15">
+        <div class="label-title">No of active kiosks</div>
+        <div class="info-title">{{viewModel.$rootScope.user.numberOfCounter}}</div>
+        <hr/>
+      </div>
+      <div flex="15">
+        <div class="label-title">Terminal</div>
+        <div class="info-title">{{viewModel.$rootScope.user.terminalId}}</div>
+        <hr/>
+      </div>
+			<div flex="15">    
+        <div class="label-title">Location</div>
+        <div class="info-title">{{viewModel.locationName}}</div>
+        <hr/>                   
+      </div>           	
+      <div flex="5" data-ng-controller="LogoutController">
+        <span class="logout-section">
+          <i class="fa fa-sign-out ico-logout" data-ng-click="viewModel.submit()"></i>
+        </span>    
+			</div>
+    </div>
+
+    <div layout="row" layout-align="center center" class="sv-header-note">
+      <span><b>Note:</b> Please click 3 time stamps: Start, Enter, Leave, "No of receipt", "No of pax in front" before submit an observation. Unless if an observation is abandoned, "Reason" must be registered and other fields can be left blank.</span>
+    </div>
+</md-toolbar>
+  
+  <md-content flex layout-padding>
+      <md-card>
+          <md-card-content>		
+            
+            <div layout="row" layout-align="center center" class="md-row sv-header-type">		
+              <div flex="20" class="md-cell border-right">TIME</div>
+              <div class="flex-29-custom md-cell border-right"></div>
+              <div class="flex-24-custom md-cell border-right">REMARK</div>
+              <div class="flex-17-custom md-cell border-right">ABANDON</div>
+              <div flex="10"></div>
+					  </div>
+
+            <div layout="row" layout-align="center center" class="md-row sv-header-detail">
+              <div flex="20" layout="row" class="md-cell border-right">
+                <div flex="33" class="md-cell border-right">Start</div>
+                <div flex="33" class="md-cell border-right">Enter</div>
+                <div flex="33" class="md-cell">Leave</div>
+              </div>
+              
+              <div flex="5" class="md-cell border-right break-heading">Queue<br /><span class="highlight">(Bend)</span></div>
+              <div flex="5" class="md-cell border-right break-heading">Gender<br /><span class="highlight">(Male)</span></div>
+              <div flex="5" class="md-cell border-right">Color</div>
+
+              <div class="flex-7-custom md-cell border-right break-heading">No of<br/>receipt</div>
+              <div class="flex-7-custom md-cell border-right break-heading-2">No of<br/>pax in<br/>front</div>
+              
+              <div class="flex-12-custom md-cell border-right break-heading">Remark 1<br/>(CC as token)</div>
+              <div class="flex-12-custom md-cell border-right">Remark 2</div>
+              <div flex="5" class="md-cell border-right break-heading">Y/N<br/><span class="highlight">(Yes)</span></div>
+              <div class="flex-12-custom md-cell border-right">Reason</div>
+              <div flex="10"></div>
+            </div>
+
+            <div layout="row" layout-align="center center" data-ng-repeat="kioskLog in viewModel.kioskLogs" class="md-row fade" data-ng-style="{ 'background-color': kioskLog.color }">
+              <!--STAR/ENTER/LEAVE-->
+              <div flex="20" layout="row" layout-align="center center" class="md-cell border-right">               
+                <div flex="33" class="md-cell border-right">
+                  <div class="ico-btn car-arrive" data-ng-click="viewModel.submitKioskStartLog(kioskLog)"
+                    data-ng-class="{'disabled': viewModel.isKioskStartStarted(kioskLog)}">
+                      <i class="icon-Changi_eTRS_Start ico-start"></i>
+                  </div>
+							  </div>
+                <div flex="33" class="md-cell border-right">
+                  <div class="ico-btn car-arrive" data-ng-click="viewModel.submitKioskEnterLog(kioskLog)"
+                       data-ng-class="{'disabled': !viewModel.isKioskStartStarted(kioskLog) || viewModel.isKioskEnterStarted(kioskLog)}">
+                    <i class="icon-Changi_eTRS_Enter"></i>
+                  </div>
+                </div>
+							  <div flex="33" class="md-cell">
+                  <div class="ico-btn car-leave" data-ng-click="viewModel.submitKioskLeaveLog(kioskLog)"
+                    data-ng-class="{'disabled': !viewModel.isKioskStartStarted(kioskLog) || !viewModel.isKioskEnterStarted(kioskLog) || viewModel.isKioskLeaveStarted(kioskLog)}">
+                    <i class="icon-Changi_eTRS_Leave"></i>
+                  </div>
+							  </div>
+						  </div>
+              <!--QUEUE-->
+              <div flex="5" class="md-cell border-right">
+                <label for="queueType-{{$index}}" class="label-for-click">
+                  <input type="checkbox" class="regular-checkbox big-checkbox" id="queueType-{{$index}}" data-ng-model="kioskLog.queueType" />
+                  <label for="queueType-{{$index}}"></label>
+                </label>
+              </div>
+              <!--GENDER-->
+              <div flex="5" class="md-cell border-right">
+                <label for="gender-{{$index}}" class="label-for-click">
+                  <input type="checkbox" class="regular-checkbox big-checkbox" id="gender-{{$index}}" data-ng-model="kioskLog.gender" />
+                  <label for="gender-{{$index}}"></label>
+                </label>
+              </div>
+              <!--COLOR PICKER-->
+              <div flex="5" class="md-cell border-right">
+                <i class="color-picker-ico icon-Changi_eTRS_Color" data-ng-click="viewModel.showColorDialog(kioskLog, $event)"></i>
+              </div>
+              <!--NO OF RECEIPT-->
+              <div class="flex-7-custom md-cell border-right">
+                <select class="sv-form-input dropdown-input" data-ng-model="kioskLog.numberOfReceipt">
+                  <option value=""></option>
+                  <option ng-repeat="item in viewModel.numberOfReceipts" value="{{item}}">{{item}}</option>
+                </select>
+              </div>
+              <!--NO OF PAX-->
+              <div class="flex-7-custom md-cell border-right">
+                <select class="sv-form-input dropdown-input" data-ng-model="kioskLog.numberOfPax">
+                  <option value=""></option>
+                  <option ng-repeat="item in viewModel.numberOfPaxs" value="{{item}}">{{item}}</option>
+                </select>
+              </div>           
+              <!--REMARK 1-->
+              <div class="flex-12-custom md-cell border-right">
+                <input type="text" class="comment" data-ng-model="kioskLog.remark1" placeholder="Remark 1"/>
+              </div>
+              <!--REMARK 2-->
+              <div class="flex-12-custom md-cell border-right">
+                <input type="text" class="comment" data-ng-model="kioskLog.remark2" placeholder="Remark 2" />
+              </div>
+              <!--ABANDON-->
+              <div flex="5" class="md-cell border-right">
+                <label for="abandon-{{$index}}" class="label-for-click">
+                  <input type="checkbox" class="regular-checkbox big-checkbox" id="abandon-{{$index}}" data-ng-model="kioskLog.isAbandon"
+                         data-ng-change="viewModel.onIsAbandonChange(kioskLog)"/>
+                  <label for="abandon-{{$index}}"></label>
+                </label>
+              </div>
+              <!--ABANDON REASON-->
+              <div class="flex-12-custom md-cell border-right">
+                <input type="text" class="comment" data-ng-model="kioskLog.abandonReason" placeholder="Reason"
+                       data-ng-disabled="kioskLog.isAbandon == false || kioskLog.isAbandon == undefined"/>
+              </div>
+              <!--SUBMIT / DELETE-->
+              <div flex="10" layout="row" layout-align="center center" class="md-cell submit-section">
+                <div class="ico-btn car-submit" data-ng-click="viewModel.submitKioskLog(kioskLog, $index)" data-ng-dblclick="false"
+                     data-ng-class="{'disabled': !viewModel.enableSubmitKioskLog(kioskLog), 'submitted': viewModel.isKioskSubmitted(kioskLog)}">
+                  <strong>OK</strong>
+                </div>
+                <i class="icon-Changi_eTRS_Delete sv-delete-ico" data-ng-click="viewModel.deleteKioskLogConfirm($index, $event)"
+                   data-ng-class="{'disabled': !viewModel.isKioskStartStarted(kioskLog) && !kioskLog.isAbandon}"></i>
+              </div>
+            </div>
+
+          </md-card-content>         
+        </md-card>				
+		</md-content>
+</div>
+
