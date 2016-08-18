@@ -30,7 +30,7 @@ namespace ShoreSweep
         public string Type { get; set; }
         public string AssignedTo { get; set; }
 
-        public void ApplyJson(JObject json)
+        public void ApplyJson(JToken json)
         {
             TrashID = json.Value<long>("trashId");
             Latitude = json.Value<string>("latitude");
@@ -47,13 +47,15 @@ namespace ShoreSweep
             SubLocality = json.Value<string>("subLocality");
             Description = json.Value<string>("description");
 
-            Status = (Status)json.Value<int>("status");
-            Size = (Size)json.Value<int>("size");
+            //Status = (Status)json.Value<int>("status");
+            //Size = (Size)json.Value<int>("size");
 
             Url = json.Value<string>("url");
             Images = json.Value<string>("images");
             Type = json.Value<string>("type");
             AssignedTo = json.Value<string>("assignedTo");
         }
+
+
     }
 }

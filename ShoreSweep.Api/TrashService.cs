@@ -37,5 +37,25 @@ namespace ShoreSweep.Api
 
             return new RestApiResult { StatusCode = HttpStatusCode.OK };
         }
+
+        [Route(HttpVerb.Post, "/trash/importTrashRecord")]
+        public RestApiResult ImportTrashRecord(JObject json)
+        {
+            if (json == null)
+            {
+                return new RestApiResult { StatusCode = HttpStatusCode.BadRequest };
+            }
+            var trashes = json.Value<JArray>("trashes");
+
+            foreach (var trash in trashes)
+            {
+                TrashInformation newTrash = new TrashInformation();
+                newTrash.ApplyJson(trash);
+                ClarityDB.Instance.TrashInformations.Add(newTrash);
+            }
+
+            ClarityDB.Instance.SaveChanges();
+            return new RestApiResult { StatusCode = HttpStatusCode.OK };
+        }
     }
 }

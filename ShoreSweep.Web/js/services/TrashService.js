@@ -25,6 +25,12 @@ var Clarity;
                     _this.doCallback(errorCallback, data);
                 });
             };
+            TrashService.prototype.importTrashRecord = function (entity, successCallback, errorCallback) {
+                var _this = this;
+                this.http.post('/api/trash/importTrashRecord', { 'trashes': entity })
+                    .success(function (data) { _this.doCallback(successCallback, data); })
+                    .error(function () { _this.doCallback(errorCallback, null); });
+            };
             return TrashService;
         }(Service.BaseService));
         Service.TrashService = TrashService;

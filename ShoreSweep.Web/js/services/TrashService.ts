@@ -20,5 +20,10 @@ module Clarity.Service {
         });
     }
 
+    importTrashRecord(entity: any, successCallback: Function, errorCallback: Function) {
+        this.http.post('/api/trash/importTrashRecord', { 'trashes': entity })
+            .success((data) => { this.doCallback(successCallback, data); })
+            .error(() => { this.doCallback(errorCallback, null); });
+    } 
   }
 }
