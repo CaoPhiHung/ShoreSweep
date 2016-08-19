@@ -20,6 +20,5 @@ D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Debug\Newtonsof
 D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Debug\EntityFramework.xml
 D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Debug\EntityFramework.SqlServer.xml
 D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Debug\Newtonsoft.Json.xml
-D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\obj\Debug\ShoreSweep.csprojResolveAssemblyReference.cache
 D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\obj\Debug\Epinion.Clarity.dll
 D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\obj\Debug\Epinion.Clarity.pdb
