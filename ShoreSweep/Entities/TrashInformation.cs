@@ -32,7 +32,7 @@ namespace ShoreSweep
         public string AssignedTo { get; set; }
         public string ModifiedDate { get; set; }
 
-        public void ApplyJson(JObject json)
+        public void ApplyJson(JToken json)
         {
             TrashID = json.Value<long>("trashId");
             Latitude = json.Value<string>("latitude");

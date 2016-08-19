@@ -39,6 +39,7 @@
         <label for="">CSV File <span class="red">*</span></label>
         <div class="input-file-wrapper">
           <input type="file" name="upload" accept="*" onchange="angular.element(this).scope().viewModel.uploadFile(this)" required />
+          <input type='file' accept='*' onchange="angular.element(this).scope().viewModel.openFile(event)">
         </div>
       </div>
 
