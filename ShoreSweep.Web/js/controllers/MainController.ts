@@ -61,7 +61,7 @@ module Clarity.Controller {
         targetEvent: event,
         clickOutsideToClose: true,
         locals: {
-          //trashInfo: trashInfo
+          trashInfo: trashInfo
         }
 
       })

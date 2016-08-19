@@ -44,7 +44,9 @@ var Clarity;
                     templateUrl: '/html/google-map-dialog.html' + '?v=' + VERSION_NUMBER,
                     targetEvent: event,
                     clickOutsideToClose: true,
-                    locals: {}
+                    locals: {
+                        trashInfo: trashInfo
+                    }
                 })
                     .then(function (answer) { }, function () { });
             };
