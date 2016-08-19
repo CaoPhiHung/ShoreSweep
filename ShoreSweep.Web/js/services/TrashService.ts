@@ -7,7 +7,7 @@ module Clarity.Service {
 
     constructor($http: ng.IHttpService) {
       super($http);
-      this.url = '/api/trash';
+      this.url = '/api/trashes';
     }
 
     importCSV(fileUpload, successCallback, errorCallback) {

@@ -108,6 +108,7 @@
     <Content Include="font\fa\fontawesome-webfont.svg" />
     <Content Include="font\hal\icomoon.svg" />
     <Content Include="gulpfile.js" />
+    <Content Include="html\google-map-dialog.html" />
     <Content Include="html\color-dialog.html" />
     <Content Include="html\index.html" />
     <Content Include="html\kiosks-survey.html" />
@@ -149,6 +150,7 @@
     <Content Include="font\roboto\Roboto-ThinItalic.ttf" />
     <TypeScriptCompile Include="js\controllers\IController.ts" />
     <TypeScriptCompile Include="js\helpers\MainHelper.ts" />
+    <TypeScriptCompile Include="js\model\TrashInformationModel.ts" />
     <TypeScriptCompile Include="js\model\UserLogModel.ts" />
     <TypeScriptCompile Include="js\services\BaseService.ts" />
     <TypeScriptCompile Include="js\model\BaseModel.ts" />

@@ -16,7 +16,38 @@ var Clarity;
                 $scope.viewModel = this;
                 this.trashService = new Clarity.Service.TrashService($http);
                 this.mainHelper = new helper.MainHelper();
+                this.initTrashInformationList();
             }
+            MainController.prototype.initTrashInformationList = function () {
+                var _this = this;
+                this.trashService.getAll(function (data) {
+                    _this.trashInformationList = data;
+                }, function (data) { });
+            };
+            MainController.prototype.showGoogleMapDialog = function (trashInfo, event) {
+                var self = this;
+                console.log(trashInfo.images);
+                this.$mdDialog.show({
+                    controller: function ($scope, $mdDialog, trashInfo) {
+                        $scope.trashInfo = trashInfo;
+                        $scope.hide = function () {
+                            $mdDialog.hide();
+                        };
+                        $scope.cancel = function () {
+                            $mdDialog.cancel();
+                        };
+                        $scope.selectColor = function (color) {
+                            console.log(trashInfo);
+                            $mdDialog.hide();
+                        };
+                    },
+                    templateUrl: '/html/google-map-dialog.html' + '?v=' + VERSION_NUMBER,
+                    targetEvent: event,
+                    clickOutsideToClose: true,
+                    locals: {}
+                })
+                    .then(function (answer) { }, function () { });
+            };
             MainController.prototype.uploadFile = function (element) {
                 this.errorMessage = '';
                 var self = this;

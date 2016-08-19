@@ -13,7 +13,7 @@ var Clarity;
             __extends(TrashService, _super);
             function TrashService($http) {
                 _super.call(this, $http);
-                this.url = '/api/trash';
+                this.url = '/api/trashes';
             }
             TrashService.prototype.importCSV = function (fileUpload, successCallback, errorCallback) {
                 var _this = this;

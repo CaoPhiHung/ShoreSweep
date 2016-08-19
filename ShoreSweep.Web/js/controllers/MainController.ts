@@ -16,6 +16,7 @@ module Clarity.Controller {
     public errorMessage: string;
     public isImportLoading: boolean;
     public trashService: service.TrashService;
+    public trashInformationList: Array<Model.TrashInformationModel>;
 
     constructor(private $scope,
       public $rootScope: IRootScope,
@@ -25,6 +26,46 @@ module Clarity.Controller {
       $scope.viewModel = this;
       this.trashService = new Service.TrashService($http);
       this.mainHelper = new helper.MainHelper();
+
+      this.initTrashInformationList();
+    }
+
+    initTrashInformationList() {
+      this.trashService.getAll((data) => {
+        this.trashInformationList = data;
+      }, (data) => { });
+    }
+
+    showGoogleMapDialog(trashInfo: Model.TrashInformationModel, event: Event) {
+      var self = this;
+      console.log(trashInfo.images);
+
+      this.$mdDialog.show({
+
+        controller: function ($scope, $mdDialog, trashInfo) {
+          $scope.trashInfo = trashInfo;
+
+          $scope.hide = function () {
+            $mdDialog.hide();
+          };
+          $scope.cancel = function () {
+            $mdDialog.cancel();
+          };
+          $scope.selectColor = function (color) {
+            console.log(trashInfo);
+            $mdDialog.hide();
+          };
+        },
+
+        templateUrl: '/html/google-map-dialog.html' + '?v=' + VERSION_NUMBER,
+        targetEvent: event,
+        clickOutsideToClose: true,
+        locals: {
+          //trashInfo: trashInfo
+        }
+
+      })
+        .then(function (answer) { }, function () { });
     }
 
 
@@ -133,18 +174,6 @@ module Clarity.Controller {
 
     //  })
     //    .then(function (answer) { }, function () { });
-    //}
-
-    //public DialogController($scope, $mdDialog) {
-    //  $scope.hide = function () {
-    //    $mdDialog.hide();
-    //  };
-    //  $scope.cancel = function () {
-    //    $mdDialog.cancel();
-    //  };
-    //  $scope.answer = function (answer) {
-    //    $mdDialog.hide(answer);
-    //  };
     //}
 
    

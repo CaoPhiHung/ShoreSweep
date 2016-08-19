@@ -23,12 +23,14 @@ namespace ShoreSweep
         public string Locality { get; set; }
         public string SubLocality { get; set; }
         public string Description { get; set; }
+        public string Comment { get; set; }
         public Status Status { get; set; }
         public string Url { get; set; }
         public string Images { get; set; }
-        public Size Size { get; set; }
+        public string Size { get; set; }
         public string Type { get; set; }
         public string AssignedTo { get; set; }
+        public string ModifiedDate { get; set; }
 
         public void ApplyJson(JObject json)
         {
@@ -46,14 +48,51 @@ namespace ShoreSweep
             Locality = json.Value<string>("locality");
             SubLocality = json.Value<string>("subLocality");
             Description = json.Value<string>("description");
+            Comment = json.Value<string>("comment");
+            ModifiedDate = json.Value<string>("modifiedDate");
 
-            Status = (Status)json.Value<int>("status");
-            Size = (Size)json.Value<int>("size");
+            Status tempStatus;
+            if (Enum.TryParse<Status>(json.Value<string>("status"), out tempStatus))
+            {
+                Status = tempStatus;
+            }
 
+            Size = json.Value<string>("size");
             Url = json.Value<string>("url");
             Images = json.Value<string>("images");
             Type = json.Value<string>("type");
             AssignedTo = json.Value<string>("assignedTo");
+        }
+
+        public JObject ToJson()
+        {
+            JObject json = new JObject();
+            json["id"] = ID;
+            json["trashId"] = TrashID;
+            json["latitude"] = Latitude;
+            json["longitude"] = Longitude;
+
+            json["continent"] = Continent;
+            json["country"] = Country;
+            json["administrativeArea1"] = AdministrativeArea1;
+            json["administrativeArea2"] = AdministrativeArea2;
+            json["administrativeArea3"] = AdministrativeArea3;
+
+            json["locality"] = Locality;
+            json["subLocality"] = SubLocality;
+            json["description"] = Description;
+            json["comment"] = Comment;
+            json["modifiedDate"] = ModifiedDate;
+
+            json["status"] = Status.ToString();
+            json["size"] = Size;
+
+            json["url"] = Url;
+            json["images"] = Images;
+            json["type"] = Type;
+            json["assignedTo"] = AssignedTo;
+
+            return json;
         }
     }
 }

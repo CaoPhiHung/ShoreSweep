@@ -17,6 +17,12 @@ namespace ShoreSweep.Api
         
         public TrashService() { }
 
+        [Route(HttpVerb.Get, "/trashes")]
+        public RestApiResult GetAll()
+        {
+            var trashInfos = ClarityDB.Instance.TrashInformations;
+            return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = BuildJsonArray(trashInfos) };
+        }
 
         [Route(HttpVerb.Post, "/trash/importCSV")]
         public RestApiResult ImportCSV(IHttpFileCollection httpFileCollection)
@@ -37,5 +43,19 @@ namespace ShoreSweep.Api
 
             return new RestApiResult { StatusCode = HttpStatusCode.OK };
         }
+
+
+        private JArray BuildJsonArray(IEnumerable<TrashInformation> trashInfos)
+        {
+            JArray array = new JArray();
+
+            foreach (TrashInformation trashInfo in trashInfos)
+            {
+                array.Add(trashInfo.ToJson());
+            }
+
+            return array;
+        }
+
     }
 }
