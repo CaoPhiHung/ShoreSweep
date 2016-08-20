@@ -12,7 +12,7 @@ if (jQuery) {
   }
 }
 
-var clarityApp = angular.module('clarityApp', ['ngMaterial', 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap', 'ui.select2', 'ui.sortable'], function ($routeProvider, $httpProvider) {
+var clarityApp = angular.module('clarityApp', ['ngMaterial', 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap', 'ui.select2', 'ui.sortable', 'google-map'], function ($routeProvider, $httpProvider) {
 
   // --- Routes ---
 

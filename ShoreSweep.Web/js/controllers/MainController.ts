@@ -6,11 +6,11 @@
 declare var VERSION_NUMBER;
 
 module Clarity.Controller {
-    import service = Clarity.Service;
-    import helper = Clarity.Helper;
+  import service = Clarity.Service;
+  import helper = Clarity.Helper;
 
-    export class MainController {
-        public mainHelper: helper.MainHelper;
+  export class MainController {
+    public mainHelper: helper.MainHelper;
 
         public excelFileUpload: any;
         public errorMessage: string;
@@ -18,11 +18,12 @@ module Clarity.Controller {
         public trashService: service.TrashService;
         public trashInformationList: Array<Model.TrashInformationModel>;
         public importTrashList: Array<Model.TrashInformationModel>;
+        public showSpinner: boolean;
 
-        constructor(private $scope,
-            public $rootScope: IRootScope,
-            private $http: ng.IHttpService,
-            public $mdDialog: any) {
+      constructor(private $scope,
+      public $rootScope: IRootScope,
+      private $http: ng.IHttpService,
+      public $mdDialog: any) {
 
             $scope.viewModel = this;
             this.trashService = new Service.TrashService($http);
@@ -36,6 +37,7 @@ module Clarity.Controller {
                     this.initFirstImage(data[i]);
                 }
                 this.trashInformationList = data;
+                this.showSpinner = false;
             }, (data) => { });
         }
 
@@ -185,26 +187,26 @@ module Clarity.Controller {
                 //    mapTypeId: google.maps.MapTypeId.ROADMAP
                 //});
 
-                //var infowindow = new google.maps.InfoWindow();
+        //var infowindow = new google.maps.InfoWindow();
 
-                //var marker, i;
+        //var marker, i;
 
-                //for (i = 0; i < locations.length; i++) {
-                //    marker = new google.maps.Marker({
-                //        position: new google.maps.LatLng(locations[i][0], locations[i][1]),
-                //        map: map
-                //    });
+        //for (i = 0; i < locations.length; i++) {
+        //    marker = new google.maps.Marker({
+        //        position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+        //        map: map
+        //    });
 
-                //    google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                //        return function () {
-                //            //infowindow.setContent(locations[i][0]);
-                //            infowindow.open(map, marker);
-                //        }
-                //    })(marker, i));
-                //}
-            };
-            reader.readAsText(input.files[0]);
-        };
+        //    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+        //        return function () {
+        //            //infowindow.setContent(locations[i][0]);
+        //            infowindow.open(map, marker);
+        //        }
+        //    })(marker, i));
+        //}
+      };
+      reader.readAsText(input.files[0]);
+    };
 
         //public deleteKioskLogConfirm(index: number, event: Event) {
         //  var confirm = this.$mdDialog.confirm()

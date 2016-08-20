@@ -1,0 +1,27 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ShoreSweep/bin/Debug
+/ShoreSweep/obj/Debug/Epinion.Clarity.dll
+/ShoreSweep/obj/Debug/Epinion.Clarity.pdb
+/ShoreSweep/obj/Debug/ShoreSweep.csprojResolveAssemblyReference.cache
+/ShoreSweep.Api/bin/Debug
+/ShoreSweep.Api/obj/Debug/Epinion.Clarity.Api.dll
+/ShoreSweep.Api/obj/Debug/Epinion.Clarity.Api.pdb
+/ShoreSweep.Api/obj/Debug/ShoreSweep.Api.csprojResolveAssemblyReference.cache
+/ShoreSweep.IntegrationTests/bin/Debug
+/ShoreSweep.IntegrationTests/obj/Debug/Epinion.Clarity.IntegrationTests.dll
+/ShoreSweep.IntegrationTests/obj/Debug/Epinion.Clarity.IntegrationTests.pdb
+/ShoreSweep.IntegrationTests/obj/Debug/ShoreSweep.IntegrationTests.csprojResolveAssemblyReference.cache
+/ShoreSweep.UnitTests/obj/Debug/Epinion.Clarity.UnitTests.dll
+/ShoreSweep.UnitTests/obj/Debug/Epinion.Clarity.UnitTests.pdb
+/ShoreSweep.UnitTests/obj/Debug/ShoreSweep.UnitTests.csprojResolveAssemblyReference.cache
+/ShoreSweep.UnitTests/bin/Debug
+/ShoreSweep.Web/bin
+/ShoreSweep.Web/obj/Debug/Epinion.Clarity.Web.dll
+/ShoreSweep.Web/obj/Debug/Epinion.Clarity.Web.pdb
+/ShoreSweep.Web/obj/Debug/ShoreSweep.Web.csprojResolveAssemblyReference.cache
+*.js
+*.config
+*.suo

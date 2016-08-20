@@ -58,7 +58,7 @@ div.bg-preload span.img-loading { background: transparent url("/img/loading.gif"
 @media screen and (max-width: 900px) { #kiosksSurvey md-toolbar .sv-header hr { width: 95%; } }
 @media only screen and (min-width: 901px) and (max-width: 1279px) { #kiosksSurvey md-toolbar .sv-header hr { width: 90%; } }
 @media screen and (min-width: 1280px) { #kiosksSurvey md-toolbar .sv-header hr { width: 85%; } }
-#kiosksSurvey md-toolbar .sv-header-note { font-size: 14px; font-style: italic; background: #4d4d4d; padding-left: 24px; padding-right: 24px; height: 60px; line-height: 22px; color: white; }
+#kiosksSurvey md-toolbar .sv-header-note { font-size: 14px; font-style: italic; background: #4d4d4d; padding-left: 24px; padding-right: 24px; height: 100px; line-height: 22px; color: white; }
 #kiosksSurvey md-content { padding: 0; }
 #kiosksSurvey md-content md-card { padding: 0; margin: 0; }
 #kiosksSurvey md-content md-card md-card-content { padding: 0px; }
@@ -226,3 +226,11 @@ label { display: inline; }
 ::-moz-placeholder { font-style: italic; }
 
 :-ms-input-placeholder { font-style: italic; }
+
+.text-overflow { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left !important; padding: 0 4px 0 4px; }
+
+.header { min-height: 100px; }
+
+.progress-bar { padding: 0px !important; }
+
+md-progress-linear { height: 2px !important; }
