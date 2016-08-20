@@ -230,7 +230,7 @@ div.bg-preload {
         background: #4d4d4d;
         padding-left: 24px;
         padding-right: 24px;
-        height: 60px;
+        height: 100px;
         line-height: 22px;
         color: white;
     }
@@ -972,6 +972,26 @@ label {
 :-ms-input-placeholder {  
    font-style: italic; 
 }
+
+.text-overflow{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left !important;
+    padding: 0 4px 0 4px;
+}
+
+.header{
+    min-height: 100px;
+}
+.progress-bar {
+    padding: 0px !important;
+}
+
+md-progress-linear {
+    height: 2px !important;
+}
+
 
 
 

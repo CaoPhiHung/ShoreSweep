@@ -6,10 +6,14 @@
       </div>
     </md-toolbar>
     <md-dialog-content>
+
+      <!--<google-map data-ng-model="trashInfo"></google-map>-->
+
       <div class="md-dialog-content">
         <img data-ng-src="{{trashInfo.images}}" />
       </div>
     </md-dialog-content>
+
     <md-dialog-actions layout="row">
       <md-button ng-click="cancel()">
         <span class="button-label">Cancel</span>
@@ -18,8 +22,6 @@
       <md-button ng-click="selectColor()">
         <span class="button-label">thaotest</span>
       </md-button>
-
-
     </md-dialog-actions>
   </form>
 </md-dialog>
