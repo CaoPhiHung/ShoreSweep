@@ -16,62 +16,64 @@ module Clarity.Controller {
         public errorMessage: string;
         public isImportLoading: boolean;
         public trashService: service.TrashService;
-        public trashes: Model.TrashModel[];
         public trashInformationList: Array<Model.TrashInformationModel>;
+        public importTrashList: Array<Model.TrashInformationModel>;
 
         constructor(private $scope,
             public $rootScope: IRootScope,
             private $http: ng.IHttpService,
             public $mdDialog: any) {
 
-      $scope.viewModel = this;
-      this.trashService = new Service.TrashService($http);
-      this.mainHelper = new helper.MainHelper();
-      this.trashes = [];
-      this.initTrashInformationList();
-    }
-
-    initTrashInformationList() {
-      this.trashService.getAll((data) => {
-        this.trashInformationList = data;
-      }, (data) => { });
-    }
-
-    showGoogleMapDialog(trashInfo: Model.TrashInformationModel, event: Event) {
-      var self = this;
-      console.log(trashInfo.images);
-
-      this.$mdDialog.show({
-
-        controller: function ($scope, $mdDialog, trashInfo) {
-          $scope.trashInfo = trashInfo;
-
-          $scope.hide = function () {
-            $mdDialog.hide();
-          };
-          $scope.cancel = function () {
-            $mdDialog.cancel();
-          };
-          $scope.selectColor = function (color) {
-            console.log(trashInfo);
-            $mdDialog.hide();
-          };
-        },
-
-        templateUrl: '/html/google-map-dialog.html' + '?v=' + VERSION_NUMBER,
-        targetEvent: event,
-        clickOutsideToClose: true,
-        locals: {
-          trashInfo: trashInfo
+            $scope.viewModel = this;
+            this.trashService = new Service.TrashService($http);
+            this.mainHelper = new helper.MainHelper();
+            this.initTrashInformationList();
         }
 
-      })
-        .then(function (answer) { }, function () { });
-    }
+        initTrashInformationList() {
+            this.trashService.getAll((data) => {
+                for (var i = 0; i < data.length; i++){
+                    this.initFirstImage(data[i]);
+                }
+                this.trashInformationList = data;
+            }, (data) => { });
+        }
+
+        showGoogleMapDialog(trashInfo: Model.TrashInformationModel, event: Event) {
+            var self = this;
+            console.log(trashInfo.images);
+
+            this.$mdDialog.show({
+
+                controller: function ($scope, $mdDialog, trashInfo) {
+                    $scope.trashInfo = trashInfo;
+
+                    $scope.hide = function () {
+                        $mdDialog.hide();
+                    };
+                    $scope.cancel = function () {
+                        $mdDialog.cancel();
+                    };
+                    $scope.selectColor = function (color) {
+                        console.log(trashInfo);
+                        $mdDialog.hide();
+                    };
+                },
+
+                templateUrl: '/html/google-map-dialog.html' + '?v=' + VERSION_NUMBER,
+                targetEvent: event,
+                clickOutsideToClose: true,
+                locals: {
+                    trashInfo: trashInfo
+                }
+
+            })
+                .then(function (answer) { }, function () { });
+        }
 
 
-    uploadFile(element) {
-      this.errorMessage = '';
+        uploadFile(element) {
+            this.errorMessage = '';
 
             var self = this;
             this.$scope.$apply(function () {
@@ -104,13 +106,25 @@ module Clarity.Controller {
             //    (data) => {
             //        //this.onImportUserError(data);
             //    });
-            this.trashService.importTrashRecord(this.trashes,
+            this.trashService.importTrashRecord(this.importTrashList,
                 (data) => {
-                    //this.onImportUserSuccess(data);
+                    this.onImportTrashListSuccess(data);
                 },
                 (data) => {
                     //this.onImportUserError(data);
                 });
+        }
+
+        onImportTrashListSuccess(data: Array<Model.TrashInformationModel>) {
+            for (var i = 0; i < data.length; i++) {
+                this.initFirstImage(data[i]);
+                this.trashInformationList.push(data[i]);
+            }
+            alert('Imported ' + data.length + ' records');
+        }
+
+        initFirstImage(trash: Model.TrashInformationModel) {
+            trash.firstImage = trash.images.split(',')[0];
         }
 
         isValidFileType(fileName) {
@@ -141,19 +155,29 @@ module Clarity.Controller {
             var input = event.target;
             var self = this;
             var reader = new FileReader();
+            this.importTrashList = [];
             reader.onload = function () {
 
                 var records = reader.result.split('\n');
-                for (var line = 1; line < records.length; line++) {
+                for (var line = 1; line < /*records.length*/ 10; line++) {
                     var record = records[line].split(';');
-                    var trash = new Model.TrashModel();
-                    trash.id = record[0];
+                    var trash = new Model.TrashInformationModel();
+                    trash.trashId = record[0];
                     trash.latitude = record[1];
-                    trash.longtitude = record[2];
+                    trash.longitude = record[2];
+                    trash.continent = record[3];
+                    trash.country = record[4];
+                    trash.administrativeArea1 = record[5];
+                    trash.administrativeArea2 = record[6];
+                    trash.administrativeArea3 = record[7];
+                    trash.locality = record[8];
+                    trash.subLocality = record[9];
                     trash.description = record[10];
                     trash.status = record[11];
+                    trash.url = record[12];
                     trash.images = record[13];
-                    self.trashes.push(trash);
+                    trash.type = record[14];
+                    self.importTrashList.push(trash);
                 }
                 //var map = new google.maps.Map(document.getElementById('map'), {
                 //    zoom: 10,
@@ -226,9 +250,5 @@ module Clarity.Controller {
         //  })
         //    .then(function (answer) { }, function () { });
         //}
-
-   
-
-
-  }
+    }
 }

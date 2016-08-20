@@ -10,6 +10,7 @@ module Clarity.Model {
     public description: string;
     public status: string;
     public images: string;
+    public firstImage: string;
     public comment: string;
     public assignedTo: string;
 

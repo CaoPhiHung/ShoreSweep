@@ -39,7 +39,7 @@ var config = {
     , 'js/model/KioskLogModel.js'
     , 'js/model/TerminalModel.js'
     , 'js/model/UserLogModel.js'
-    , 'js/model/TrashModel.js'
+    , 'js/model/TrashInformationModel.js'
     
     , 'js/services/IService.js'
     , 'js/services/BaseService.js'

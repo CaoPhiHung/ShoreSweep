@@ -152,7 +152,6 @@
     <TypeScriptCompile Include="js\helpers\MainHelper.ts" />
     <TypeScriptCompile Include="js\model\TrashInformationModel.ts" />
     <TypeScriptCompile Include="js\model\UserLogModel.ts" />
-    <TypeScriptCompile Include="js\model\TrashModel.ts" />
     <TypeScriptCompile Include="js\services\BaseService.ts" />
     <TypeScriptCompile Include="js\model\BaseModel.ts" />
     <TypeScriptCompile Include="js\model\UserModel.ts" />
