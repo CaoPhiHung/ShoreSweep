@@ -10,8 +10,8 @@
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Epinion.Clarity.Web</RootNamespace>
-    <AssemblyName>Epinion.Clarity.Web</AssemblyName>
+    <RootNamespace>ShoreSweep.Web</RootNamespace>
+    <AssemblyName>ShoreSweep.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -261,6 +261,7 @@
     <None Include="Properties\PublishProfiles\Clarity.pubxml" />
     <None Include="Properties\PublishProfiles\Forecourt.pubxml" />
     <Content Include="template\trashList.csv" />
+    <None Include="Properties\PublishProfiles\ShoreSweep.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShoreSweep.Api\ShoreSweep.Api.csproj">

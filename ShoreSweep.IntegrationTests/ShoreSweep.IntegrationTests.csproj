@@ -7,8 +7,8 @@
     <ProjectGuid>{5373AA96-E45E-4797-A1A1-84C36490FBF0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Epinion.Clarity.IntegrationTests</RootNamespace>
-    <AssemblyName>Epinion.Clarity.IntegrationTests</AssemblyName>
+    <RootNamespace>ShoreSweep.IntegrationTests</RootNamespace>
+    <AssemblyName>ShoreSweep.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

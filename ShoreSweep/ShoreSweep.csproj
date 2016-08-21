@@ -7,8 +7,8 @@
     <ProjectGuid>{6F2E7475-1CE0-4569-B24E-81CF1D572EDC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Epinion.Clarity</RootNamespace>
-    <AssemblyName>Epinion.Clarity</AssemblyName>
+    <RootNamespace>ShoreSweep</RootNamespace>
+    <AssemblyName>ShoreSweep</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
