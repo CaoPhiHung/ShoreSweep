@@ -71,7 +71,13 @@
           <div flex="10" class="md-cell border-right">
             <input type="text" class="comment" data-ng-model="trashInfo.comment" placeholder="Comment" />
           </div>
-          <div flex="10" class="md-cell border-right">{{trashInfo.assignedTo}}</div>
+          <div flex="10" class="md-cell border-right"><!--{{trashInfo.assignedTo}}-->
+            <select name="status" data-ng-model="trashInfo.assignedTo" style="width: 90%;height: 50px;border-radius: 10px; border: 1px solid #dddddd;">
+              <option value="0">Cristian</option>
+              <option value="1">Mary</option>
+              <option value="2">David</option>
+            </select>
+          </div>
 
         </div>       
       </md-card-content>

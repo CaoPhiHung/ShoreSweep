@@ -26,6 +26,11 @@ ngGoogleMap.directive('googleMap', function () {
                 map: map,
                 title: scope.ngModel.description
             });
+            //fix error only load right at first time
+            google.maps.event.addListenerOnce(map, 'idle', function () {
+                google.maps.event.trigger(map, 'resize');
+                map.setCenter(new google.maps.LatLng(scope.ngModel.latitude, scope.ngModel.longitude));
+            });
 
         }
     }

@@ -1,4 +1,4 @@
-﻿<md-dialog aria-label="Colours" id="color-dialog" ng-cloak style="width: 600px; height: 600px;">
+﻿<md-dialog aria-label="Colours" id="color-dialog" ng-cloak style="width: 800px; height: 570px; max-height: 100%">
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
@@ -6,15 +6,27 @@
       </div>
     </md-toolbar>
     <md-dialog-content>
-
       <div class="md-dialog-content">
-        <google-map style="height: 300px; width: 400px" ng-model="trashInfo"></google-map>
-      </div>
+        <google-map style="height: 300px; width: 500px; float: left" ng-model="trashInfo"></google-map>
 
-      <div class="md-dialog-content">
-        <img data-ng-src="{{trashInfo.images}}" />
+        <div style="padding-left: 20px;width: 235px;float: left;">
+          <div style="font-weight: bold;font-size: 25px;text-align: center;text-transform: uppercase;">{{trashInfo.status}}</div>
+          <div style="font-size: 16px;">Latitude: {{trashInfo.latitude}}</div>
+          <div style="font-size: 16px;">Longitude: {{trashInfo.longitude}}</div>
+          <div style="font-size: 16px;">Area: {{trashInfo.administrativeArea1}}</div>
+          <div style="font-size: 16px;">Section: {{trashInfo.secton}}</div>
+          <div style="font-size: 16px;">Assignee: {{trashInfo.assignTo}}</div>
+        </div>
       </div>
-
+      <div style="padding-left: 24px;">
+        <div style="clear: both;font-size: 16px;">Description: {{trashInfo.description}}</div>
+        <div style="font-size: 16px;">Type: {{trashInfo.type}}</div>
+      </div>
+      <div class="md-dialog-content" style="padding-top: 10px">
+        <img data-ng-src="{{trashInfo.images}}" style="width: 240px" />
+        <img data-ng-src="{{trashInfo.images}}" style="width: 240px" />
+        <img data-ng-src="{{trashInfo.images}}" style="width: 240px" />
+      </div>
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
