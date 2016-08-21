@@ -1,0 +1,13 @@
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Release\Conjurer.dll
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Release\EntityFramework.dll
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Release\EntityFramework.SqlServer.dll
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Release\Newtonsoft.Json.dll
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Release\EntityFramework.xml
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Release\EntityFramework.SqlServer.xml
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Release\Newtonsoft.Json.xml
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\obj\Release\ShoreSweep.csprojResolveAssemblyReference.cache
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Release\ShoreSweep.dll.config
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Release\ShoreSweep.dll
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Release\ShoreSweep.pdb
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\obj\Release\ShoreSweep.dll
+D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\obj\Release\ShoreSweep.pdb
