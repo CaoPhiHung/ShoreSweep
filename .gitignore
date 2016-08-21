@@ -25,3 +25,14 @@
 /.vs/ShoreSweep/v14
 /ShoreSweep/ShoreSweep.csproj.user
 /ShoreSweep.Web/Properties/PublishProfiles
+*.dll
+*.xml
+*.pdb
+*.config
+*.txt
+*.cache
+*.cache
+*.user
+*.force
+*.js
+*.pubxml
