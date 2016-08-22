@@ -15,10 +15,13 @@ module Clarity.Controller {
     public excelFileUpload: any;
     public errorMessage: string;
     public isImportLoading: boolean;
+    public showSpinner: boolean;
+
     public trashService: service.TrashService;
+    public userService: service.UserService;
+
     public trashInformationList: Array<Model.TrashInformationModel>;
     public importTrashList: Array<Model.TrashInformationModel>;
-    public showSpinner: boolean;
 
     constructor(private $scope,
       public $rootScope: IRootScope,
@@ -27,6 +30,7 @@ module Clarity.Controller {
 
       $scope.viewModel = this;
       this.trashService = new Service.TrashService($http);
+      this.userService = new Service.UserService($http);
       this.mainHelper = new helper.MainHelper();
       this.initTrashInformationList();
     }
@@ -72,7 +76,6 @@ module Clarity.Controller {
       })
         .then(function (answer) { }, function () { });
     }
-
 
     uploadFile(element) {
       this.errorMessage = '';
@@ -207,49 +210,20 @@ module Clarity.Controller {
       reader.readAsText(input.files[0]);
     };
 
-    //public deleteKioskLogConfirm(index: number, event: Event) {
-    //  var confirm = this.$mdDialog.confirm()
-    //    .clickOutsideToClose(true)
-    //    .title('Would you like to delete your kiosk log?')
-    //    .targetEvent(event)
-    //    .ok('OK')
-    //    .cancel('Cancel');
+    addAdmin() {
+      var admin = new Model.UserModel();
+      admin.firstName = 'Hung';
+      admin.lastName = 'Cao';
+      admin.username = 'phihung';
+      admin.password = 'Test1234';
+      this.userService.create(admin, function () { }, this.$rootScope.onError);
+    }
 
-    //  var self = this;
-    //  this.$mdDialog.show(confirm).then(function () {
-    //    //self.deleteKioskLog(index);
-    //  }, function () { });
-    //}
+    addAssignee() {
+      var assignee = new Model.AssigneeModel();
+      assignee.username = 'Hung';
+      this.userService.createAssigne(assignee, function () { }, this.$rootScope.onError);
+    }
 
-    //public showColorDialog(kioskLog: Model.KioskLogModel, event: Event) {
-    //  var self = this;
-
-    //  this.$mdDialog.show({
-
-    //    controller: function ($scope, $mdDialog, kioskLog) {
-    //      $scope.defaultColors = self.$scope.viewModel.defaultColors;
-
-    //      $scope.hide = function () {
-    //        $mdDialog.hide();
-    //      };
-    //      $scope.cancel = function () {
-    //        $mdDialog.cancel();
-    //      };
-    //      $scope.selectColor = function (color) {
-    //        kioskLog.color = color;
-    //        $mdDialog.hide();
-    //      };
-    //    },
-
-    //    templateUrl: '/html/color-dialog.html' + '?v=' + VERSION_NUMBER,
-    //    targetEvent: event,
-    //    clickOutsideToClose: true,
-    //    locals: {
-    //      kioskLog: kioskLog
-    //    }
-
-    //  })
-    //    .then(function (answer) { }, function () { });
-    //}
   }
 }

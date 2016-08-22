@@ -83,6 +83,7 @@
     <Compile Include="Entities\Enums\Size.cs" />
     <Compile Include="Entities\Enums\Status.cs" />
     <Compile Include="Entities\TrashInformation.cs" />
+    <Compile Include="Entities\Assignee.cs" />
     <Compile Include="IPasswordHash.cs" />
     <Compile Include="PasswordHash.cs" />
     <Compile Include="Entities\ClarityDB.cs" />

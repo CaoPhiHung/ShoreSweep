@@ -26,11 +26,6 @@ module Clarity.Service {
       this.http.post(this.url + 'login', user)
         .success((data, status) => {
           var currentUser = data[0];
-          currentUser.terminalId = user.terminalId;
-          currentUser.locationId = user.locationId;
-          currentUser.numberOfCounter = user.numberOfCounter;
-          currentUser.shift = user.shift;
-          currentUser.loginTime = user.loginTime;
           currentUser.isAuthenticated = true;
           this.cookieStore.put('user', currentUser);
           this.doCallback(successCallback, data[0], status);

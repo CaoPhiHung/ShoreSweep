@@ -13,6 +13,7 @@ namespace ShoreSweep.UnitTests
         public bool SaveChangesCalled;
 
         public virtual IDbSet<User> Users { get; set; }
+        public virtual IDbSet<Assignee> Assignees { get; set; }
         public virtual IDbSet<TrashInformation> TrashInformations { get; set; }
         //public virtual IDbSet<Location> Location { get; set; }
         //public virtual IDbSet<KioskLog> KioskLogs { get; set; }

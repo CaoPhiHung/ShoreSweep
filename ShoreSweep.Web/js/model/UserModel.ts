@@ -2,7 +2,7 @@
 
 module Clarity.Model {
 
-  export class UserModel extends Clarity.Model.BaseModel {
+  export class UserModel extends Model.BaseModel {
     public firstName: string;
     public lastName: string;
     public username: string;
@@ -14,5 +14,9 @@ module Clarity.Model {
     public userLogId: number;
     public loginTime: string;
     public role: string;
+  }
+
+  export class AssigneeModel extends Model.BaseModel {
+    public username: string;
   }
 }
