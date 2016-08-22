@@ -23,3 +23,4 @@ D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\bin\Release\EntityFramework.Sql
 D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\bin\Release\Newtonsoft.Json.xml
 D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\obj\Release\ShoreSweep.dll
 D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\obj\Release\ShoreSweep.pdb
+D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\obj\Release\ShoreSweep.csprojResolveAssemblyReference.cache

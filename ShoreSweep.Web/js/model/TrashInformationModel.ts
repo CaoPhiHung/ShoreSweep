@@ -25,7 +25,9 @@ module Clarity.Model {
     public url: string;
     public size: string;
     public type: string;   
-    public section: string;    
+    public section: string;
+
+    public isSelected: boolean;
   }
 
 }

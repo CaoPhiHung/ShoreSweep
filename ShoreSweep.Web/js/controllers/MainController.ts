@@ -163,7 +163,7 @@ module Clarity.Controller {
       reader.onload = function () {
 
         var records = reader.result.split('\n');
-        for (var line = 1; line < records.length; line++) {
+        for (var line = 1; line < 10 /*records.length*/; line++) {
           var record = records[line].split(';');
           var trash = new Model.TrashInformationModel();
           trash.trashId = record[0];
@@ -180,32 +180,11 @@ module Clarity.Controller {
           trash.status = record[11];
           trash.url = record[12];
           trash.images = record[13];
-          trash.type = record[14];
+          trash.size = record[14];
+          trash.type = record[15];
           self.importTrashList.push(trash);
         }
-        //var map = new google.maps.Map(document.getElementById('map'), {
-        //    zoom: 10,
-        //    center: new google.maps.LatLng(locations[0][0], locations[0][1]),
-        //    mapTypeId: google.maps.MapTypeId.ROADMAP
-        //});
 
-        //var infowindow = new google.maps.InfoWindow();
-
-        //var marker, i;
-
-        //for (i = 0; i < locations.length; i++) {
-        //    marker = new google.maps.Marker({
-        //        position: new google.maps.LatLng(locations[i][0], locations[i][1]),
-        //        map: map
-        //    });
-
-        //    google.maps.event.addListener(marker, 'click', (function (marker, i) {
-        //        return function () {
-        //            //infowindow.setContent(locations[i][0]);
-        //            infowindow.open(map, marker);
-        //        }
-        //    })(marker, i));
-        //}
       };
       reader.readAsText(input.files[0]);
     };
@@ -223,6 +202,22 @@ module Clarity.Controller {
       var assignee = new Model.AssigneeModel();
       assignee.username = 'Hung';
       this.userService.createAssigne(assignee, function () { }, this.$rootScope.onError);
+    }
+
+    updateRecord() {
+      var trashList = [];
+      for (var i = 0; i < this.trashInformationList.length; i++){
+        if (this.trashInformationList[i].isSelected) {
+          trashList.push(this.trashInformationList[i]);
+        }
+      }
+      this.trashService.uploadTrashRecord(trashList,
+        (data) => {
+          //this.onImportTrashListSuccess(data);
+        },
+        (data) => {
+          //this.onImportUserError(data);
+        });
     }
 
   }
