@@ -24,7 +24,8 @@ module Clarity.Model {
     public subLocality: string;      
     public url: string;
     public size: string;
-    public type: string;    
+    public type: string;   
+    public section: string;    
   }
 
 }

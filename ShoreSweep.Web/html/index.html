@@ -39,12 +39,15 @@
         <div layout="row" layout-align="center center" class="md-row sv-header-type">
           <div flex="5" class="md-cell border-right"></div>
           <div flex="5" class="md-cell border-right">ID</div>
-          <div flex="15" class="md-cell border-right">Trashout ID</div>
+          <!--<div flex="15" class="md-cell border-right">Trashout ID</div>
           <div flex="10" class="md-cell border-right">Latitude</div>
-          <div flex="10" class="md-cell border-right">Longitude</div>
+          <div flex="10" class="md-cell border-right">Longitude</div>-->
           <div flex="15" class="md-cell border-right">Description</div>
           <div flex="10" class="md-cell border-right">Status</div>
           <div flex="10" class="md-cell border-right">Picture</div>
+          <div flex="10" class="md-cell border-right">Size</div>
+          <div flex="10" class="md-cell border-right">Types</div>
+          <div flex="10" class="md-cell border-right">Section</div>
           <div flex="10" class="md-cell border-right">Comment</div>
           <div flex="10" class="md-cell border-right">Assignee</div>
         </div>
@@ -54,9 +57,9 @@
             <md-checkbox data-ng-model="trashInfo.isSelected"></md-checkbox>
           </div>
           <div flex="5" class="md-cell border-right">{{trashInfo.id}}</div>
-          <div flex="15" class="md-cell border-right">{{trashInfo.trashId}}</div>
+          <!--<div flex="15" class="md-cell border-right">{{trashInfo.trashId}}</div>
           <div flex="10" class="md-cell border-right">{{trashInfo.latitude.substring(0, 14)}}</div>
-          <div flex="10" class="md-cell border-right">{{trashInfo.longitude.substring(0, 14)}}</div>
+          <div flex="10" class="md-cell border-right">{{trashInfo.longitude.substring(0, 14)}}</div>-->
           <div flex="15" class="md-cell border-right text-overflow">{{trashInfo.description}}</div>
           <div flex="10" class="md-cell border-right">
             <select name="status" data-ng-model="trashInfo.status" style="width: 90%;height: 50px;border-radius: 10px; border: 1px solid #dddddd;">
@@ -68,6 +71,9 @@
           <div flex="10" class="md-cell border-right" data-ng-click="viewModel.showGoogleMapDialog(trashInfo, $event)" style="cursor: pointer;">
             <img data-ng-src="{{trashInfo.imageList[0]}}" style="width:80%; height: 80%" />
           </div>
+          <div flex="10" class="md-cell border-right">{{trashInfo.size}}</div>
+          <div flex="10" class="md-cell border-right">{{trashInfo.type}}</div>
+          <div flex="10" class="md-cell border-right">{{trashInfo.section}}</div>
           <div flex="10" class="md-cell border-right">
             <input type="text" class="comment" data-ng-model="trashInfo.comment" placeholder="Comment" />
           </div>
