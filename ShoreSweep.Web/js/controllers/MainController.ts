@@ -126,7 +126,7 @@ module Clarity.Controller {
     }
 
     initFirstImage(trash: Model.TrashInformationModel) {
-      trash.firstImage = trash.images.split(',')[0];
+      trash.imageList = trash.images.split(',');
     }
 
     isValidFileType(fileName) {
