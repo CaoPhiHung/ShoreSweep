@@ -25,5 +25,11 @@ module Clarity.Service {
             .success((data) => { this.doCallback(successCallback, data); })
             .error(() => { this.doCallback(errorCallback, null); });
     } 
+
+    uploadTrashRecord(entity: any, successCallback: Function, errorCallback: Function) {
+      this.http.post('/api/trash/uploadTrashRecord', { 'trashes': entity })
+        .success((data) => { this.doCallback(successCallback, data); })
+        .error(() => { this.doCallback(errorCallback, null); });
+    }
   }
 }

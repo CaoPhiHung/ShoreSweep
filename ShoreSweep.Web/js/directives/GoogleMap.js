@@ -24,13 +24,23 @@ ngGoogleMap.directive('googleMap', function () {
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(scope.ngModel.latitude, scope.ngModel.longitude),
                 map: map,
-                title: scope.ngModel.description
+                label: scope.ngModel.id + '',
+                title: scope.ngModel.id + '-' + scope.ngModel.size
             });
+            
             //fix error only load right at first time
             google.maps.event.addListenerOnce(map, 'idle', function () {
-                google.maps.event.trigger(map, 'resize');
-                map.setCenter(new google.maps.LatLng(scope.ngModel.latitude, scope.ngModel.longitude));
+              google.maps.event.trigger(map, 'resize');
+              map.setCenter(new google.maps.LatLng(scope.ngModel.latitude, scope.ngModel.longitude));
             });
+
+            google.maps.event.addListener(marker, 'click', (function (marker) {
+              return function () {
+                var infowindow = new google.maps.InfoWindow();
+                infowindow.setContent(scope.ngModel.id + '-' + scope.ngModel.size);
+                infowindow.open(map, marker);
+              }
+            })(marker));
 
         }
     }

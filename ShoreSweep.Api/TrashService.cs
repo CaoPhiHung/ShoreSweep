@@ -42,6 +42,7 @@ namespace ShoreSweep.Api
                 TrashInformation oldTrash = ClarityDB.Instance.TrashInformations.FirstOrDefault(x => x.TrashID == newTrash.TrashID);
                 if (oldTrash == null)
                 {
+                    newTrash.ModifiedDate = DateTime.Now;
                     trashList.Add(newTrash);
                     ClarityDB.Instance.TrashInformations.Add(newTrash);
                 }
@@ -51,6 +52,30 @@ namespace ShoreSweep.Api
             return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = BuildJsonArray(trashList) };
         }
 
+        [Route(HttpVerb.Post, "/trash/uploadTrashRecord")]
+        public RestApiResult UploadTrashRecord(JObject json)
+        {
+            if (json == null)
+            {
+                return new RestApiResult { StatusCode = HttpStatusCode.BadRequest };
+            }
+            var trashes = json.Value<JArray>("trashes");
+
+            foreach (var trash in trashes)
+            {
+                var id = trash.Value<long>("trashId");
+                TrashInformation oldTrash = ClarityDB.Instance.TrashInformations.FirstOrDefault(x => x.TrashID == id);
+                if (oldTrash == null)
+                {
+                    return new RestApiResult { StatusCode = HttpStatusCode.BadRequest };
+                }
+                oldTrash.ModifiedDate = DateTime.Now;
+                oldTrash.ApplyJson(trash);
+            }
+
+            ClarityDB.Instance.SaveChanges();
+            return new RestApiResult { StatusCode = HttpStatusCode.OK};
+        }
 
         private JArray BuildJsonArray(IEnumerable<TrashInformation> trashInfos)
         {

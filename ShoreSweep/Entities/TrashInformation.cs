@@ -30,7 +30,7 @@ namespace ShoreSweep
         public string Size { get; set; }
         public string Type { get; set; }
         public string AssignedTo { get; set; }
-        public string ModifiedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
 
         public void ApplyJson(JToken json)
         {
@@ -49,7 +49,7 @@ namespace ShoreSweep
             SubLocality = json.Value<string>("subLocality");
             Description = json.Value<string>("description");
             Comment = json.Value<string>("comment");
-            ModifiedDate = json.Value<string>("modifiedDate");
+            //ModifiedDate = json.Value<DateTime>("modifiedDate");
 
             Status tempStatus;
             if (Enum.TryParse<Status>(json.Value<string>("status"), out tempStatus))
