@@ -110,6 +110,7 @@
     <Content Include="gulpfile.js" />
     <Content Include="html\google-map-dialog.html" />
     <Content Include="html\color-dialog.html" />
+    <Content Include="html\map-and-trash.html" />
     <Content Include="html\index.html" />
     <Content Include="html\kiosks-survey.html" />
     <Content Include="html\not-authorized.html" />
@@ -134,6 +135,7 @@
     <Content Include="img\logo-incite.png" />
     <Content Include="js\all.min.js" />
     <Content Include="js\clarity-app.js" />
+    <TypeScriptCompile Include="js\controllers\MapController.ts" />
     <TypeScriptCompile Include="js\controllers\MainController.ts" />
     <TypeScriptCompile Include="js\controllers\authentication\LoginController.ts" />
     <TypeScriptCompile Include="js\controllers\authentication\LogoutController.ts" />

@@ -47,6 +47,11 @@ var clarityApp = angular.module('clarityApp', ['ngMaterial', 'ngAnimate', 'ngCoo
       controller: '',
       access: 'share'
     })
+    .when('/show_map_and_trash', {
+        templateUrl: '/html/map-and-trash.html' + '?v=' + VERSION_NUMBER,
+        controller: 'MapController',
+        access: 'authorized'
+    })
     .otherwise({ redirectTo: '/' });
 });
 
@@ -118,6 +123,7 @@ clarityApp.service('trashService', Clarity.Service.TrashService);
 clarityApp.controller('LoginController', Clarity.Controller.LoginController);
 clarityApp.controller('LogoutController', Clarity.Controller.LogoutController);
 clarityApp.controller('MainController', Clarity.Controller.MainController);
+clarityApp.controller('MapController', Clarity.Controller.MapController);
 
 clarityApp.run(function ($rootScope, $routeParams, $location, authenticationService, $http, $cookieStore, $window) {
 

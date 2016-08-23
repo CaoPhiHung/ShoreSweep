@@ -26,6 +26,18 @@ module Clarity.Model {
     public size: string;
     public type: string;   
     public section: string;    
+
+    public isSelected: boolean;
+  }
+
+  export class Coordinate {
+    public longitude: string;
+    public latitude: string;
+
+    constructor(longitude: string, latitude: string) {
+      this.longitude = longitude;
+      this.latitude = latitude;
+    }
   }
 
 }

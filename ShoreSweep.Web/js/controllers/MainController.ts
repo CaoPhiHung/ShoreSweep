@@ -26,6 +26,7 @@ module Clarity.Controller {
     constructor(private $scope,
       public $rootScope: IRootScope,
       private $http: ng.IHttpService,
+      public $location: ng.ILocationService,
       public $mdDialog: any) {
 
       $scope.viewModel = this;
@@ -223,6 +224,18 @@ module Clarity.Controller {
       var assignee = new Model.AssigneeModel();
       assignee.username = 'Hung';
       this.userService.createAssigne(assignee, function () { }, this.$rootScope.onError);
+    }
+
+    showMapAndTrash() {
+      this.$rootScope.selectedTrashInfoList = [];
+      for (var i = 0; i < this.trashInformationList.length; i++) {
+        var trashInfo = this.trashInformationList[i];
+        if (trashInfo.isSelected) {
+          this.$rootScope.selectedTrashInfoList.push(trashInfo);
+        }
+      }
+
+      this.$location.path('/show_map_and_trash');
     }
 
   }

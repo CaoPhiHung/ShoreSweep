@@ -1,4 +1,7 @@
 ﻿<div id="kiosksSurvey" layout="column" layout-sm="column" layout-wrap>
+  <div class="progress-bar" data-ng-style="{'opacity': viewModel.showSpinner ? '1':'0'}">
+    <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+  </div>
 
   <md-toolbar class="header">
     <div layout="row" layout-align="center center" class="sv-header">
@@ -8,7 +11,7 @@
         </div>
       </div>
       <div flex="70">
-        <div layout="row" layout-align="center center" class="sv-header-note">
+        <div layout="row" layout-align="center center" class="sv-header-import">
           <div class="eachInput clearfix">
             <label for="">CSV File <span class="red">*</span></label>
             <div class="input-file-wrapper">
@@ -17,10 +20,13 @@
           </div>
 
           <div class="tpl-submit clearfix">
-            <a href="/template/trashList.csv"><b><i class="download-excel-template"> Trash.csv </i></b></a>
-            <button type="button" data-ng-click="viewModel.importCSVFile()" class="b-f-submit">Import</button>
-            <button type="button" data-ng-click="viewModel.addAssignee()">Add Assignee</button>
-            <button type="button" data-ng-click="viewModel.addAdmin()">Add Admin</button>
+            <!--<a href="/template/trashList.csv"><b><i class="download-excel-template"> Trash.csv </i></b></a>-->
+            <md-button class="md-raised md-primary" data-ng-click="viewModel.importCSVFile()">Import</md-button>
+            <md-button class="md-raised md-primary" data-ng-click="viewModel.addAssignee()">Add Assignee</md-button>
+            <md-button class="md-raised md-primary" data-ng-click="viewModel.addAdmin()">Add Admin</md-button>
+            <!--<button type="button" data-ng-click="viewModel.importCSVFile()" class="b-f-submit">Import</button>-->
+            <!--<button type="button" data-ng-click="viewModel.addAssignee()">Add Assignee</button>
+            <button type="button" data-ng-click="viewModel.addAdmin()">Add Admin</button>-->
           </div>
         </div>
       </div>      
@@ -30,27 +36,28 @@
         </span>
       </div>
     </div>
-  </md-toolbar>
+  
+    <div layout="row" layout-align="center center" class="sv-header-action">
+      <div flex="20">
+        <md-button class="md-raised md-primary btn" data-ng-click="viewModel.showMapAndTrash()">Show Map & Trash</md-button>
+      </div>
+      <div flex="80"></div>
+    </div>
+</md-toolbar>
 
   <md-content flex layout-padding>
-    <div class="progress-bar" data-ng-style="{'opacity': viewModel.showSpinner ? '1':'0'}">
-      <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-    </div>
     <md-card>
       <md-card-content>
         <div layout="row" layout-align="center center" class="md-row sv-header-type">
           <div flex="5" class="md-cell border-right"></div>
           <div flex="5" class="md-cell border-right">ID</div>
-          <!--<div flex="15" class="md-cell border-right">Trashout ID</div>
-          <div flex="10" class="md-cell border-right">Latitude</div>
-          <div flex="10" class="md-cell border-right">Longitude</div>-->
           <div flex="15" class="md-cell border-right">Description</div>
           <div flex="10" class="md-cell border-right">Status</div>
           <div flex="10" class="md-cell border-right">Picture</div>
           <div flex="10" class="md-cell border-right">Size</div>
-          <div flex="10" class="md-cell border-right">Types</div>
+          <div flex="10" class="md-cell border-right">Type</div>
           <div flex="10" class="md-cell border-right">Section</div>
-          <div flex="10" class="md-cell border-right">Comment</div>
+          <div flex="15" class="md-cell border-right">Comment</div>
           <div flex="10" class="md-cell border-right">Assignee</div>
         </div>
 
@@ -59,9 +66,6 @@
             <md-checkbox data-ng-model="trashInfo.isSelected"></md-checkbox>
           </div>
           <div flex="5" class="md-cell border-right">{{trashInfo.id}}</div>
-          <!--<div flex="15" class="md-cell border-right">{{trashInfo.trashId}}</div>
-          <div flex="10" class="md-cell border-right">{{trashInfo.latitude.substring(0, 14)}}</div>
-          <div flex="10" class="md-cell border-right">{{trashInfo.longitude.substring(0, 14)}}</div>-->
           <div flex="15" class="md-cell border-right text-overflow">{{trashInfo.description}}</div>
           <div flex="10" class="md-cell border-right">
             <select name="status" data-ng-model="trashInfo.status" style="width: 90%;height: 50px;border-radius: 10px; border: 1px solid #dddddd;">
@@ -76,7 +80,7 @@
           <div flex="10" class="md-cell border-right">{{trashInfo.size}}</div>
           <div flex="10" class="md-cell border-right">{{trashInfo.type}}</div>
           <div flex="10" class="md-cell border-right">{{trashInfo.section}}</div>
-          <div flex="10" class="md-cell border-right">
+          <div flex="15" class="md-cell border-right">
             <input type="text" class="comment" data-ng-model="trashInfo.comment" placeholder="Comment" />
           </div>
           <div flex="10" class="md-cell border-right"><!--{{trashInfo.assignedTo}}-->
@@ -91,7 +95,6 @@
       </md-card-content>
     </md-card>
   </md-content>
-
 </div>
 
 

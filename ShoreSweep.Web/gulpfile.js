@@ -55,6 +55,7 @@ var config = {
     , 'js/controllers/authentication/LoginController.js'
     , 'js/controllers/authentication/LogoutController.js'
     , 'js/controllers/MainController.js'
+    , 'js/controllers/MapController.js'
     , 'js/directives/GoogleMap.js'
 
     // controllers, services written with TypeScript must be placed before clarity-app.js

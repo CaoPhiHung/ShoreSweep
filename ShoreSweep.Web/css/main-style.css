@@ -40,7 +40,7 @@ div.bg-preload { display: none; position: fixed; z-index: 500; width: 100%; heig
 div.bg-preload span.img-loading { background: transparent url("/img/loading.gif") 0 0 no-repeat; width: 33px; height: 33px; margin-left: -16px; margin-top: -16px; left: 50%; top: 50%; text-indent: -9999px; position: fixed; z-index: 600; }
 
 #kiosksSurvey { height: 100%; }
-#kiosksSurvey md-toolbar .sv-header { background-color: #333333; padding: 24px; }
+#kiosksSurvey md-toolbar .sv-header { background-color: #333333; padding: 30px; }
 #kiosksSurvey md-toolbar .sv-header strong { color: white; }
 @media screen and (max-width: 900px) { #kiosksSurvey md-toolbar .sv-header strong { font-size: 14px; line-height: normal; } }
 @media only screen and (min-width: 901px) and (max-width: 1279px) { #kiosksSurvey md-toolbar .sv-header strong { font-size: 16px; } }
@@ -58,7 +58,8 @@ div.bg-preload span.img-loading { background: transparent url("/img/loading.gif"
 @media screen and (max-width: 900px) { #kiosksSurvey md-toolbar .sv-header hr { width: 95%; } }
 @media only screen and (min-width: 901px) and (max-width: 1279px) { #kiosksSurvey md-toolbar .sv-header hr { width: 90%; } }
 @media screen and (min-width: 1280px) { #kiosksSurvey md-toolbar .sv-header hr { width: 85%; } }
-#kiosksSurvey md-toolbar .sv-header-note { font-size: 14px; font-style: italic; background: #4d4d4d; padding-left: 24px; padding-right: 24px; height: 100px; line-height: 22px; color: white; }
+#kiosksSurvey md-toolbar .sv-header-import { font-size: 14px; color: white; }
+#kiosksSurvey md-toolbar .sv-header-action { background: #4d4d4d; color: white; padding: 4px; }
 #kiosksSurvey md-content { padding: 0; }
 #kiosksSurvey md-content md-card { padding: 0; margin: 0; }
 #kiosksSurvey md-content md-card md-card-content { padding: 0px; }
@@ -234,3 +235,23 @@ label { display: inline; }
 .progress-bar { padding: 0px !important; }
 
 md-progress-linear { height: 2px !important; }
+
+.btn { width: 180px; }
+
+.main-color { color: #da5c0c; }
+
+md-checkbox.md-checked .md-ink-ripple { color: #da5c0c; }
+
+md-checkbox.md-checked ._md-icon { background-color: #da5c0c; }
+
+.md-button.md-primary.md-raised { background-color: #16719d; }
+
+.md-button.md-primary.md-raised:not([disabled]):hover { background-color: #076ea1; }
+
+md-checkbox:last-of-type { margin-left: 5px !important; }
+
+.title { font-size: 25px; font-weight: bold; text-transform: uppercase; }
+
+.text-info { font-size: 16px; }
+
+.img-report { width: 90%; height: 100px; }

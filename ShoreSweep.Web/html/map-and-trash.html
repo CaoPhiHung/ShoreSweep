@@ -1,0 +1,54 @@
+﻿<div id="mapAndTrash" layout="column" layout-sm="column" layout-wrap style="background: #e5e5e5">
+  <div class="progress-bar" data-ng-style="{'opacity': viewModel.showSpinner ? '1':'0'}">
+    <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+  </div>
+
+  <div layout="column" layout-align="center" data-ng-repeat="trashInfo in viewModel.selectedTrashInformationList">
+    <div layout="row" layout-align="center">
+      <div flex="20"></div>
+      <div flex="30">
+        <span class="title">{{trashInfo.size}}{{trashInfo.id}}</span>
+        <google-map style="height: 200px; width: 350px;" ng-model="trashInfo"></google-map>
+      </div>
+      <div flex="30">
+        <div class="title">{{trashInfo.status}}</div>
+        <div class="text-info">Latitude: {{trashInfo.latitude}}</div>
+        <div class="text-info">Longitude: {{trashInfo.longitude}}</div>
+        <div class="text-info">Area: {{trashInfo.administrativeArea1}}</div>
+        <div class="text-info">Section: {{trashInfo.secton}}</div>
+        <div class="text-info">Assignee: {{trashInfo.assignTo}}</div>
+      </div>
+      <div flex="20"></div>
+    </div>
+    <div layout="row" layout-align="center">
+      <div flex="20"></div>
+      <div flex="60">
+        <div class="text-info">Description: {{trashInfo.description}}</div>
+        <div class="text-info">Type: {{trashInfo.type}}</div>
+      </div>
+      <div flex="20"></div>
+    </div>
+
+    <div layout="row" layout-align="center">
+      <div flex="20"></div>
+      <div flex="60" layout="row" layout-align="center">
+        <div flex="25">
+          <img class="img-report" data-ng-if="trashInfo.imageList[0] != null" data-ng-src="trashInfo.imageList[0]" />
+        </div>
+        <div flex="25">
+          <img class="img-report" data-ng-if="trashInfo.imageList[1] != null" data-ng-src="trashInfo.imageList[1]" />
+        </div>
+        <div flex="25">
+          <img class="img-report" data-ng-if="trashInfo.imageList[2] != null" data-ng-src="trashInfo.imageList[2]" />
+        </div>
+        <div flex="25">
+          <img class="img-report" data-ng-if="trashInfo.imageList[3] != null" data-ng-src="trashInfo.imageList[3]" />
+        </div>
+      </div>
+      <div flex="20"></div>
+    </div>
+
+  </div>
+</div>
+
+
