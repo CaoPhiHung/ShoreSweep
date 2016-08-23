@@ -45,13 +45,13 @@
     </div>
 </md-toolbar>
 
-  <pagination total-items="viewModel.trashInformationList.length" items-per-page="viewModel.itemsPerPage" page="viewModel.currentPage" boundary-links="true"
-              max-size="viewModel.maxPageSize" rotate="false"></pagination>
+  <!--<pagination total-items="viewModel.trashInformationList.length" items-per-page="viewModel.itemsPerPage" page="viewModel.currentPage" boundary-links="true"
+              max-size="viewModel.maxPageSize" rotate="false"></pagination>-->
 
-  <div class="col col-3">
+  <div>
     <strong>
       Show
-      <select ui-select2 class="select" data-ng-model="viewModel.itemsPerPage" data-ng-change="viewModel.itemsPerPageChanged()">
+      <select class="select" data-ng-model="viewModel.itemsPerPage" data-ng-change="viewModel.itemsPerPageChanged(viewModel.itemsPerPage)" style="margin: 5px ;width: 60px;height: 50px;border-radius: 10px; border: 1px solid #dddddd;">
         <option value="5">5</option>
         <option value="10">10</option>
         <option value="20">20</option>
@@ -61,6 +61,17 @@
       </select>
       users / page
     </strong>
+
+    <div style="float:right;margin-right: 60px" data-ng-if="viewModel.numPages > 1">
+      <div class="button-div" style="margin-right:10px">
+        <button class="next-button" type="button" title="Next" data-ng-if="viewModel.currentPage  < viewModel.numPages" data-ng-click="viewModel.goToNextPage()">Next</button>
+      </div>
+      <div style="float: right;"><span class="section-number">{{viewModel.getPageNumber()}} / {{ viewModel.numPages }}</span></div>
+      <div class="button-div">
+        <button class="previous-button" type="button" title="Previous" data-ng-click="viewModel.goToPreviousPage()" data-ng-if="viewModel.currentPage > 1">Back</button>
+      </div>
+    </div>
+
   </div>
 
   <md-content flex layout-padding>

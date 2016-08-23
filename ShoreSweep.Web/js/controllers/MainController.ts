@@ -19,6 +19,7 @@ module Clarity.Controller {
     public currentPage: number;
     public itemsPerPage: number;
     public maxPageSize: number;
+    public numPages: number;
 
     public trashService: service.TrashService;
     public userService: service.UserService;
@@ -40,6 +41,7 @@ module Clarity.Controller {
       this.itemsPerPage = 5;
       this.currentPage = 1;
       this.maxPageSize = 5;
+
     }
 
     initTrashInformationList() {
@@ -49,6 +51,7 @@ module Clarity.Controller {
           this.initFirstImage(data[i]);
         }
         this.trashInformationList = data;
+        this.numPages = Math.ceil(this.trashInformationList.length / this.itemsPerPage);
         this.showSpinner = false;
       }, (data) => { });
     }
@@ -213,7 +216,7 @@ module Clarity.Controller {
 
     updateRecord() {
       var trashList = [];
-      for (var i = 0; i < this.trashInformationList.length; i++){
+      for (var i = 0; i < this.trashInformationList.length; i++) {
         if (this.trashInformationList[i].isSelected) {
           trashList.push(this.trashInformationList[i]);
         }
@@ -239,9 +242,24 @@ module Clarity.Controller {
       this.$location.path('/show_map_and_trash');
     }
 
-    itemsPerPageChanged() {
+    itemsPerPageChanged(itemsPerPage) {
       this.currentPage = 1;
+      this.numPages = Math.ceil(this.trashInformationList.length / itemsPerPage);
+      return this.currentPage;
     }
 
+    goToNextPage() {
+      this.currentPage += 1;
+      return this.currentPage;
+    }
+
+    getPageNumber = function () {
+      return this.currentPage;
+    }
+
+    goToPreviousPage() {
+      this.currentPage -= 1;
+      return this.currentPage;
+    }
   }
 }
