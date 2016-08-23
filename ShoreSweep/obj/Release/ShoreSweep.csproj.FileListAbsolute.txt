@@ -11,16 +11,3 @@ D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Release\ShoreSw
 D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\bin\Release\ShoreSweep.pdb
 D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\obj\Release\ShoreSweep.dll
 D:\Huynh_Quoc_Thao\Projects\Freelancer\ShoreSweep\ShoreSweep\obj\Release\ShoreSweep.pdb
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\bin\Release\ShoreSweep.dll.config
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\bin\Release\ShoreSweep.dll
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\bin\Release\ShoreSweep.pdb
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\bin\Release\Conjurer.dll
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\bin\Release\EntityFramework.dll
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\bin\Release\EntityFramework.SqlServer.dll
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\bin\Release\Newtonsoft.Json.dll
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\bin\Release\EntityFramework.xml
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\bin\Release\EntityFramework.SqlServer.xml
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\bin\Release\Newtonsoft.Json.xml
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\obj\Release\ShoreSweep.dll
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\obj\Release\ShoreSweep.pdb
-D:\Users\cphung\Workspaces\ShoreSweep\ShoreSweep\obj\Release\ShoreSweep.csprojResolveAssemblyReference.cache

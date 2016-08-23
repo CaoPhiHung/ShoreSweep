@@ -16,6 +16,9 @@ module Clarity.Controller {
     public errorMessage: string;
     public isImportLoading: boolean;
     public showSpinner: boolean;
+    public currentPage: number;
+    public itemsPerPage: number;
+    public maxPageSize: number;
 
     public trashService: service.TrashService;
     public userService: service.UserService;
@@ -34,6 +37,9 @@ module Clarity.Controller {
       this.userService = new Service.UserService($http);
       this.mainHelper = new helper.MainHelper();
       this.initTrashInformationList();
+      this.itemsPerPage = 5;
+      this.currentPage = 1;
+      this.maxPageSize = 5;
     }
 
     initTrashInformationList() {
@@ -231,6 +237,10 @@ module Clarity.Controller {
       }
 
       this.$location.path('/show_map_and_trash');
+    }
+
+    itemsPerPageChanged() {
+      this.currentPage = 1;
     }
 
   }
