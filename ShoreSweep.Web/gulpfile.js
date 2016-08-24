@@ -40,6 +40,7 @@ var config = {
     , 'js/model/TerminalModel.js'
     , 'js/model/UserLogModel.js'
     , 'js/model/TrashInformationModel.js'
+    , 'js/model/PolygonModel.js'
     
     , 'js/services/IService.js'
     , 'js/services/BaseService.js'
@@ -50,6 +51,7 @@ var config = {
     , 'js/services/UserService.js'
     , 'js/services/UserLogService.js'
     , 'js/services/TrashService.js'
+    , 'js/services/PolygonService.js'
 
     , 'js/controllers/IController.js'
     , 'js/controllers/authentication/LoginController.js'

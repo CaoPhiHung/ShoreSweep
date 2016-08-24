@@ -17,5 +17,13 @@ module Clarity.Service {
           this.doCallback(errorCallback, data, status);
         });
     }
+
+    getAllAssigne(successCallback: Function, errorCallback: Function) {
+      this.http.get(this.url + '/assignee')
+        .success((data) => { this.doCallback(successCallback, data); })
+        .error((data, status) => {
+          this.doCallback(errorCallback, data, status);
+        });
+    }
   }
 }

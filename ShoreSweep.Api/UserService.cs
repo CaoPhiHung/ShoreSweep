@@ -21,51 +21,70 @@ namespace ShoreSweep.Api
             return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = BuildJsonArray(users) };
         }
 
-    [Route(HttpVerb.Post, "/user")]
-    public RestApiResult Create(JObject json)
-    {
-      if (json == null)
-        return new RestApiResult { StatusCode = HttpStatusCode.BadRequest };
+        [Route(HttpVerb.Get, "/user/assignee")]
+        public RestApiResult GetAllAssignees()
+        {
+            var users = ClarityDB.Instance.Assignees;
 
-      User user = User.FromJson(json);
+            return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = BuildAssigneeJsonArray(users) };
+        }
 
-      if (ClarityDB.Instance.Users.Any(x => x.UserName.ToLower() == user.UserName.ToLower()))
-      {
-        string errorJson = "{ 'error': 'User name exists' }";
-        return new RestApiResult { StatusCode = HttpStatusCode.Conflict, Json = JObject.Parse(errorJson) };
-      }
+        [Route(HttpVerb.Post, "/user")]
+        public RestApiResult Create(JObject json)
+        {
+            if (json == null)
+                return new RestApiResult { StatusCode = HttpStatusCode.BadRequest };
 
-      ClarityDB.Instance.Users.Add(user);
-      ClarityDB.Instance.SaveChanges();
+            User user = User.FromJson(json);
 
-      return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = user.ToJson() };
-    }
+            if (ClarityDB.Instance.Users.Any(x => x.UserName.ToLower() == user.UserName.ToLower()))
+            {
+                string errorJson = "{ 'error': 'User name exists' }";
+                return new RestApiResult { StatusCode = HttpStatusCode.Conflict, Json = JObject.Parse(errorJson) };
+            }
 
-    [Route(HttpVerb.Post, "/user/assignee")]
-    public RestApiResult CreateAssignee(JObject json)
-    {
-      if (json == null)
-        return new RestApiResult { StatusCode = HttpStatusCode.BadRequest };
+            ClarityDB.Instance.Users.Add(user);
+            ClarityDB.Instance.SaveChanges();
 
-      Assignee user = Assignee.FromJson(json);
+            return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = user.ToJson() };
+        }
 
-      if (ClarityDB.Instance.Assignees.Any(x => x.UserName.ToLower() == user.UserName.ToLower()))
-      {
-        string errorJson = "{ 'error': 'Assignee name exists' }";
-        return new RestApiResult { StatusCode = HttpStatusCode.Conflict, Json = JObject.Parse(errorJson) };
-      }
+        [Route(HttpVerb.Post, "/user/assignee")]
+        public RestApiResult CreateAssignee(JObject json)
+        {
+            if (json == null)
+                return new RestApiResult { StatusCode = HttpStatusCode.BadRequest };
 
-      ClarityDB.Instance.Assignees.Add(user);
-      ClarityDB.Instance.SaveChanges();
+            Assignee user = Assignee.FromJson(json);
 
-      return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = user.ToJson() };
-    }
+            if (ClarityDB.Instance.Assignees.Any(x => x.UserName.ToLower() == user.UserName.ToLower()))
+            {
+                string errorJson = "{ 'error': 'Assignee name exists' }";
+                return new RestApiResult { StatusCode = HttpStatusCode.Conflict, Json = JObject.Parse(errorJson) };
+            }
 
-    private JArray BuildJsonArray(IEnumerable<User> users)
+            ClarityDB.Instance.Assignees.Add(user);
+            ClarityDB.Instance.SaveChanges();
+
+            return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = user.ToJson() };
+        }
+
+        private JArray BuildJsonArray(IEnumerable<User> users)
         {
             JArray array = new JArray();
 
             foreach (User user in users)
+            {
+                array.Add(user.ToJson());
+            }
+            return array;
+        }
+
+        private JArray BuildAssigneeJsonArray(IEnumerable<Assignee> users)
+        {
+            JArray array = new JArray();
+
+            foreach (Assignee user in users)
             {
                 array.Add(user.ToJson());
             }

@@ -157,12 +157,14 @@
     <TypeScriptCompile Include="js\helpers\MainHelper.ts" />
     <TypeScriptCompile Include="js\model\TrashInformationModel.ts" />
     <TypeScriptCompile Include="js\model\UserLogModel.ts" />
+    <TypeScriptCompile Include="js\model\PolygonModel.ts" />
     <TypeScriptCompile Include="js\services\BaseService.ts" />
     <TypeScriptCompile Include="js\model\BaseModel.ts" />
     <TypeScriptCompile Include="js\model\UserModel.ts" />
     <TypeScriptCompile Include="js\services\AuthenticationService.ts" />
     <TypeScriptCompile Include="js\model\KioskLogModel.ts" />
     <TypeScriptCompile Include="js\model\TerminalModel.ts" />
+    <TypeScriptCompile Include="js\services\PolygonService.ts" />
     <TypeScriptCompile Include="js\services\UserLogService.ts" />
     <TypeScriptCompile Include="js\services\LocationService.ts" />
     <TypeScriptCompile Include="js\services\TrashService.ts" />
@@ -214,6 +216,7 @@
     <Content Include="Robots.txt" />
     <Content Include="spec\controllers\authentication\LoginControllerSpec.js" />
     <Content Include="spec\controllers\authentication\LogoutControllerSpec.js" />
+    <TypeScriptCompile Include="lib\google\google.maps.d.ts" />
     <TypeScriptCompile Include="spec\controllers\authentication\LogoutControllerSpec.ts" />
     <TypeScriptCompile Include="spec\controllers\authentication\LoginControllerSpec.ts" />
     <TypeScriptCompile Include="spec\controllers\MainControllerSpec.ts" />

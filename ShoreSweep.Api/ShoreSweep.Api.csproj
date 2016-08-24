@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="AuthenticationService.cs" />
     <Compile Include="TrashService.cs" />
+    <Compile Include="PolygonService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="Framework\ApiContext.cs" />
     <Compile Include="Framework\AuthenticateAttribute.cs" />

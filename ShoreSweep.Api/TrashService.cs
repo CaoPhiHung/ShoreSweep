@@ -52,8 +52,8 @@ namespace ShoreSweep.Api
             return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = BuildJsonArray(trashList) };
         }
 
-        [Route(HttpVerb.Post, "/trash/uploadTrashRecord")]
-        public RestApiResult UploadTrashRecord(JObject json)
+        [Route(HttpVerb.Post, "/trash/updateTrashRecord")]
+        public RestApiResult UpdateTrashRecord(JObject json)
         {
             if (json == null)
             {

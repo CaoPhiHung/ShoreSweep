@@ -119,11 +119,21 @@ clarityApp.service('locationService', Clarity.Service.LocationService);
 clarityApp.service('userService', Clarity.Service.UserService);
 clarityApp.service('userLogService', Clarity.Service.UserLogService);
 clarityApp.service('trashService', Clarity.Service.TrashService);
+clarityApp.service('polygonService', Clarity.Service.PolygonService);
 
 clarityApp.controller('LoginController', Clarity.Controller.LoginController);
 clarityApp.controller('LogoutController', Clarity.Controller.LogoutController);
 clarityApp.controller('MainController', Clarity.Controller.MainController);
 clarityApp.controller('MapController', Clarity.Controller.MapController);
+
+clarityApp.filter('start', function () {
+  return function (input, start) {
+    if (!input || !input.length) { return; }
+
+    start = +start;
+    return input.slice(start);
+  };
+});
 
 clarityApp.run(function ($rootScope, $routeParams, $location, authenticationService, $http, $cookieStore, $window) {
 
