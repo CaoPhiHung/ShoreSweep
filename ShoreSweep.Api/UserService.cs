@@ -11,7 +11,12 @@ namespace ShoreSweep.Api
 {
     public class UserService
     {
-        public UserService() { }
+        private IPasswordHash passwordHash;
+        public UserService() : this(new PasswordHash()) { }
+        public UserService(IPasswordHash passwordHash)
+        {
+            this.passwordHash = passwordHash;
+        }
 
         [Route(HttpVerb.Get, "/user")]
         public RestApiResult GetAllUsers()
@@ -42,6 +47,9 @@ namespace ShoreSweep.Api
                 string errorJson = "{ 'error': 'User name exists' }";
                 return new RestApiResult { StatusCode = HttpStatusCode.Conflict, Json = JObject.Parse(errorJson) };
             }
+
+            user.Salt = passwordHash.CreateSalt();
+            user.Password = passwordHash.CreatePasswordHash(user.Password, user.Salt);
 
             ClarityDB.Instance.Users.Add(user);
             ClarityDB.Instance.SaveChanges();
