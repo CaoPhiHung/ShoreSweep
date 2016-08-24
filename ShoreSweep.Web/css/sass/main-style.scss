@@ -56,7 +56,7 @@ $background_submit_btn: #54b848;
 $white_color: #ffffff;
 $border_row: #cccccc;
 $background_row: #f7f7f7;
-$background_hover_icon: #e4303c;
+$background_hover_icon: #da5c0c;
 $background_disable: #e1e1e1;
 $background_input_active: #730e43;
 $background_input_inactive: #999999;
@@ -97,6 +97,7 @@ img {
 
 select {
 	background-color: $white_color;
+    outline: none;
 }
 
 /*LOADING*/
@@ -236,7 +237,30 @@ div.bg-preload {
      md-toolbar .sv-header-action {
         background: #4d4d4d;
         color: white;
-        padding: 4px;
+        padding-left: 22px;
+        padding-right: 14px;
+        height: 60px;
+    }
+    md-toolbar .sv-header-paging {
+        background: #707070;
+        font-size: 14px;
+        color: white;
+        padding-left: 30px;
+        padding-right: 30px;
+        height: 60px;
+
+        .input-page{
+            margin: 5px;
+            width: 60px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid #dddddd;
+        }
+
+        .number-page{
+            float: right;
+            font-size: 18px;
+        }
     }
 
 	md-content {
@@ -1033,6 +1057,13 @@ md-checkbox:last-of-type {
     width: 90%;
     height: 100px;
 }
+.ico {
+	cursor: pointer;
+	outline: none;
 
+	&:hover {
+		color: $background_hover_icon;
+	}
+}
 
 

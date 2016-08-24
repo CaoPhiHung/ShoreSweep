@@ -7,7 +7,7 @@
     <div layout="row" layout-align="center center" class="sv-header">
       <div flex="20">
         <div>
-          <img src="../img/lake-lanier-logo.png" style="height:50px;"/>
+          <img src="../img/lake-lanier-logo.png" style="height:50px;" />
         </div>
       </div>
       <div flex="70">
@@ -19,47 +19,78 @@
             </div>
           </div>
 
+          <div class="eachInput clearfix">
+            <label for="">KML File <span class="red">*</span></label>
+            <div class="input-file-wrapper">
+              <input type='file' accept='*' onchange="angular.element(this).scope().viewModel.openKMLFile(event)">
+            </div>
+          </div>
+
           <div class="tpl-submit clearfix">
             <!--<a href="/template/trashList.csv"><b><i class="download-excel-template"> Trash.csv </i></b></a>-->
             <md-button class="md-raised md-primary" data-ng-click="viewModel.importCSVFile()">Import</md-button>
-            <!--<md-button class="md-raised md-primary" data-ng-click="viewModel.addAssignee()">Add Assignee</md-button>
-            <md-button class="md-raised md-primary" data-ng-click="viewModel.addAdmin()">Add Admin</md-button>-->
+            <md-button class="md-raised md-primary" data-ng-click="viewModel.importPolygons()">Import Polygons</md-button>
           </div>
         </div>
-      </div>      
+      </div>
       <div flex="10" data-ng-controller="LogoutController">
         <span class="logout-section">
           <i class="fa fa-sign-out ico-logout" data-ng-click="viewModel.submit()"></i>
         </span>
       </div>
     </div>
-  
-    <div layout="row" layout-align="center center" class="sv-header-action">
-      <div flex="20">
-        <md-button class="md-raised md-primary btn" data-ng-click="viewModel.showMapAndTrash()">Show Map & Trash</md-button>
-      </div>
-      <div flex="75"></div>
 
+    <div layout="row" layout-align="center center" class="sv-header-action">
+      <div flex="95">
+        <md-button class="md-raised md-primary btn" data-ng-click="viewModel.showMapAndTrash()">Show Map & Trash</md-button>
+        <md-button class="md-raised md-primary" data-ng-click="viewModel.updateRecord()">Update Record</md-button>
+      </div>
       <div layout="column" flex="5" layout-align="center right">
         <md-menu>
           <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-            <md-icon md-menu-origin md-svg-src="/img/menu-ico.svg"></md-icon>
+            <!--<md-icon md-menu-origin md-svg-src="/img/menu-ico.svg"></md-icon>-->
+            <i class="fa fa-bars ico" style="font-size: 26px"></i>
           </md-button>
-          <!--<md-button aria-label="Open demo menu" class="md-raised md-primary btn" ng-click="$mdOpenMenu($event)">
-            <!--<md-icon md-menu-origin md-svg-icon="menu:phone"></md-icon>
-          </md-button>-->
           <md-menu-content width="3">
             <md-menu-item>
               <md-button ng-click="viewModel.showAssigneeDialog()"> <span md-menu-align-target>Create Assignee</span></md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button ng-click="viewModel.addAdmin()"> <span md-menu-align-target>Create Admin User</span></md-button>
+              <md-button ng-click="viewModel.showAdminUserDialog()"> <span md-menu-align-target>Create Admin User</span></md-button>
             </md-menu-item>
           </md-menu-content>
         </md-menu>
       </div>
     </div>
-</md-toolbar>
+
+    <div layout="row" layout-align="center center" class="sv-header-paging">
+      <div flex="20">
+        <strong>Show</strong>
+        <select class="input-page" data-ng-model="viewModel.itemsPerPage" data-ng-change="viewModel.itemsPerPageChanged(viewModel.itemsPerPage)">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="{{viewModel.trashInformationList.length}}">All</option>
+        </select>
+        <strong>records / page</strong>
+      </div>
+
+      <div flex="80" data-ng-if="viewModel.numPages > 1">
+        <div class="number-page">
+          <span data-ng-if="viewModel.currentPage > 1">
+            <i class="fa fa-chevron-left ico" data-ng-click="viewModel.goToPreviousPage()"></i>
+          </span> &nbsp;
+          <span class="section-number">{{viewModel.getPageNumber()}} / {{ viewModel.numPages }}</span>
+          &nbsp;
+          <span data-ng-if="viewModel.currentPage < viewModel.numPages">
+            <i class="fa fa-chevron-right ico" data-ng-click="viewModel.goToNextPage()"></i>
+          </span>       
+        </div>
+      </div>
+    </div>
+  </md-toolbar>
 
   <md-content flex layout-padding>
     <md-card>
@@ -77,7 +108,7 @@
           <div flex="10" class="md-cell border-right">Assignee</div>
         </div>
 
-        <div layout="row" layout-align="center center" data-ng-repeat="trashInfo in viewModel.trashInformationList" class="md-row">
+        <div layout="row" layout-align="center center" data-ng-repeat="trashInfo in viewModel.trashInformationList | start: (viewModel.currentPage - 1) * viewModel.itemsPerPage | limitTo: viewModel.itemsPerPage" class="md-row">
           <div flex="5" class="md-cell border-right">
             <md-checkbox data-ng-model="trashInfo.isSelected"></md-checkbox>
           </div>
@@ -95,22 +126,22 @@
           </div>
           <div flex="10" class="md-cell border-right">{{trashInfo.size}}</div>
           <div flex="10" class="md-cell border-right">{{trashInfo.type}}</div>
-          <div flex="10" class="md-cell border-right">{{trashInfo.section}}</div>
+          <div flex="10" class="md-cell border-right">{{viewModel.getSectionName(trashInfo.sectionId)}}</div>
           <div flex="15" class="md-cell border-right">
             <input type="text" class="comment" data-ng-model="trashInfo.comment" placeholder="Comment" />
           </div>
-          <div flex="10" class="md-cell border-right"><!--{{trashInfo.assignedTo}}-->
-            <select name="status" data-ng-model="trashInfo.assignedTo" style="width: 90%;height: 50px;border-radius: 10px; border: 1px solid #dddddd;">
-              <option value="0">Cristian</option>
-              <option value="1">Mary</option>
-              <option value="2">David</option>
+          <div flex="10" class="md-cell border-right">
+            <!--{{trashInfo.assignedTo}}-->
+            <select name="status" data-ng-model="trashInfo.assigneeId" style="width: 90%;height: 50px;border-radius: 10px; border: 1px solid #dddddd;">
+              <option data-ng-repeat="assignee in viewModel.assigneeList" value="{{ assignee.id }}" data-ng-bind="assignee.username"></option>
             </select>
           </div>
-
-        </div>       
+        </div>
       </md-card-content>
     </md-card>
   </md-content>
+
 </div>
+
 
 

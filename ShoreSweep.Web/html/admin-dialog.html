@@ -1,0 +1,38 @@
+﻿<md-dialog aria-label="Admin" id="color-dialog" ng-cloak style="width: 400px; height: 470px; max-height: 100%">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Create Admin</h2>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <md-input-container style="width:100%; margin-bottom: 0px;">
+          <label>First Name</label>
+          <input type="text" data-ng-model="adminUser.firstName" required>
+        </md-input-container>
+        <md-input-container style="width:100%; margin-bottom: 0px;">
+          <label>Last Name</label>
+          <input type="text" data-ng-model="adminUser.lastName" required>
+        </md-input-container>
+        <md-input-container style="width:100%; margin-bottom: 0px;">
+          <label>User Name</label>
+          <input type="text" data-ng-model="adminUser.username" required>
+        </md-input-container>
+        <md-input-container style="width:100%; margin-bottom: 0px;">
+          <label>Password</label>
+          <input type="password" data-ng-model="adminUser.password" required>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancel()">
+        <span class="button-label">Cancel</span>
+      </md-button>
+      <md-button ng-click="create()">
+        <span class="button-label">Create</span>
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

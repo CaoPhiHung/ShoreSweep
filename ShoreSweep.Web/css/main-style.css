@@ -33,7 +33,7 @@ body { background-color: #e5e5e5; position: relative; z-index: 1; font-size: 100
 
 img { vertical-align: middle; }
 
-select { background-color: white; }
+select { background-color: white; outline: none; }
 
 /*LOADING*/
 div.bg-preload { display: none; position: fixed; z-index: 500; width: 100%; height: 100%; left: 0; top: 0; background-color: rgba(255, 255, 255, 0.8); }
@@ -49,7 +49,7 @@ div.bg-preload span.img-loading { background: transparent url("/img/loading.gif"
 #kiosksSurvey md-toolbar .sv-header .ico-btn i { font-size: 32px; color: white; vertical-align: middle; }
 #kiosksSurvey md-toolbar .sv-header .logout-section { float: right; }
 #kiosksSurvey md-toolbar .sv-header .ico-logout { font-size: 26px; line-height: 50px; color: #7f7f7f; cursor: pointer; outline: none; }
-#kiosksSurvey md-toolbar .sv-header .ico-logout:hover { color: #e4303c; }
+#kiosksSurvey md-toolbar .sv-header .ico-logout:hover { color: #da5c0c; }
 #kiosksSurvey md-toolbar .sv-header .label-title { font-size: 14px; color: white; }
 #kiosksSurvey md-toolbar .sv-header .number-type { text-align: right; margin-right: 30px; }
 #kiosksSurvey md-toolbar .sv-header .info-title { color: aqua; font-size: 26px; font-style: italic; font-weight: bold; margin-top: 5px; }
@@ -59,7 +59,10 @@ div.bg-preload span.img-loading { background: transparent url("/img/loading.gif"
 @media only screen and (min-width: 901px) and (max-width: 1279px) { #kiosksSurvey md-toolbar .sv-header hr { width: 90%; } }
 @media screen and (min-width: 1280px) { #kiosksSurvey md-toolbar .sv-header hr { width: 85%; } }
 #kiosksSurvey md-toolbar .sv-header-import { font-size: 14px; color: white; }
-#kiosksSurvey md-toolbar .sv-header-action { background: #4d4d4d; color: white; padding: 4px; }
+#kiosksSurvey md-toolbar .sv-header-action { background: #4d4d4d; color: white; padding-left: 22px; padding-right: 14px; height: 60px; }
+#kiosksSurvey md-toolbar .sv-header-paging { background: #707070; font-size: 14px; color: white; padding-left: 30px; padding-right: 30px; height: 60px; }
+#kiosksSurvey md-toolbar .sv-header-paging .input-page { margin: 5px; width: 60px; height: 40px; border-radius: 10px; border: 1px solid #dddddd; }
+#kiosksSurvey md-toolbar .sv-header-paging .number-page { float: right; font-size: 18px; }
 #kiosksSurvey md-content { padding: 0; }
 #kiosksSurvey md-content md-card { padding: 0; margin: 0; }
 #kiosksSurvey md-content md-card md-card-content { padding: 0px; }
@@ -255,3 +258,6 @@ md-checkbox:last-of-type { margin-left: 5px !important; }
 .text-info { font-size: 16px; }
 
 .img-report { width: 90%; height: 100px; }
+
+.ico { cursor: pointer; outline: none; }
+.ico:hover { color: #da5c0c; }
