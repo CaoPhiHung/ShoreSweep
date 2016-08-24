@@ -14,7 +14,7 @@ ngGoogleMap.directive('googleMap', function () {
       // get map options
       var options = {
         center: new google.maps.LatLng(scope.ngModel.latitude, scope.ngModel.longitude),
-        zoom: 6,
+        zoom: 12,
         mapTypeId: "roadmap"
       };
 
@@ -56,6 +56,13 @@ ngGoogleMap.directive('googleMap', function () {
         });
         polygon.setMap(map);
       }
+
+      //var bounds = new google.maps.LatLngBounds();
+      //for (var i = 0; i < polygonCoords.length; i++) {
+      //  bounds.extend(polygonCoords[i].getPosition());
+      //}
+
+      //map.fitBounds(bounds);
     }
   }
 });
