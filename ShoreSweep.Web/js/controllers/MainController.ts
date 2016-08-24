@@ -2,6 +2,7 @@
 /// <reference path="../../lib/angular/angular-cookies.d.ts" />
 /// <reference path="IController.ts" />
 /// <reference path="../services/AuthenticationService.ts" />
+/// <reference path="../../lib/google/google.maps.d.ts" />
 
 declare var VERSION_NUMBER;
 
@@ -20,12 +21,22 @@ module Clarity.Controller {
     public itemsPerPage: number;
     public maxPageSize: number;
     public numPages: number;
+    public showAdminForm: boolean;
+    public showAssigneeForm: boolean;
+    public assigneeName: string;
+    public adminFirstName: string;
+    public adminLastName: string;
+    public adminUserName: string;
+    public adminPassword: string;
 
     public trashService: service.TrashService;
     public userService: service.UserService;
+    public polygonService: service.PolygonService;
 
     public trashInformationList: Array<Model.TrashInformationModel>;
     public importTrashList: Array<Model.TrashInformationModel>;
+    public polygonList: Array<Model.PolygonModel>;
+    public assigneeList: Array<Model.AssigneeModel>;
 
     constructor(private $scope,
       public $rootScope: IRootScope,
@@ -36,12 +47,18 @@ module Clarity.Controller {
       $scope.viewModel = this;
       this.trashService = new Service.TrashService($http);
       this.userService = new Service.UserService($http);
+      this.polygonService = new Service.PolygonService($http);
+
+      this.polygonList = [];
       this.mainHelper = new helper.MainHelper();
       this.initTrashInformationList();
+      this.initPolygonList();
+      this.initAssigneeList();
       this.itemsPerPage = 5;
       this.currentPage = 1;
       this.maxPageSize = 5;
-
+      this.showAdminForm = false;
+      this.showAssigneeForm = false;
     }
 
     initTrashInformationList() {
@@ -53,6 +70,18 @@ module Clarity.Controller {
         this.trashInformationList = data;
         this.numPages = Math.ceil(this.trashInformationList.length / this.itemsPerPage);
         this.showSpinner = false;
+      }, (data) => { });
+    }
+
+    initPolygonList() {
+      this.polygonService.getAll((data) => {
+        this.polygonList = data;
+      }, (data) => { });
+    }
+
+    initAssigneeList() {
+      this.userService.getAllAssigne((data) => {
+        this.assigneeList = data;
       }, (data) => { });
     }
 
@@ -113,21 +142,57 @@ module Clarity.Controller {
     }
 
     importCSVFile() {
+      var self = this;
       this.isImportLoading = true;
-      //this.trashService.importCSV(this.excelFileUpload,
-      //    (data) => {
-      //        //this.onImportUserSuccess(data);
-      //    },
-      //    (data) => {
-      //        //this.onImportUserError(data);
-      //    });
-      this.trashService.importTrashRecord(this.importTrashList,
-        (data) => {
-          this.onImportTrashListSuccess(data);
-        },
-        (data) => {
-          //this.onImportUserError(data);
+      this.trashService.importCSV(this.excelFileUpload,
+          (data) => {
+              //this.onImportUserSuccess(data);
+          },
+          (data) => {
+          });
+      if (this.importTrashList) {
+        this.trashService.importTrashRecord(this.importTrashList,
+          (data) => {
+            self.onImportTrashListSuccess(data);
+          },
+          (data) => {
+          });
+      } else {
+        alert('Please choose the csv file!!!');
+      }
+    }
+
+    importPolygons() {
+      if (this.polygonList) {
+        var self = this;
+        this.polygonService.importPolygons(this.polygonList, (data) => this.onImportPolygonSuccess(data), function () { });
+      } else {
+        alert('Please choose the kml file!!!');
+      }
+    }
+
+    onImportPolygonSuccess(data: Array<Model.PolygonModel>) {
+      this.polygonList = data;
+      for (var i = 0; i < data.length; i++) {
+        var polygon = new google.maps.Polygon({
+          paths: data[i].coordinates,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
         });
+        for (var j = 0; j < this.trashInformationList.length; j++){
+          var isWithinPolygon = google.maps.geometry.poly.containsLocation(new google.maps.LatLng(this.trashInformationList[j].latitude, this.trashInformationList[j].longitude), polygon);
+          if (isWithinPolygon) {
+            this.trashInformationList[j].sectionId = data[i].id;
+          }
+        }
+      }
+
+      if (this.polygonList && this.trashInformationList) {
+        this.trashService.updateTrashRecord(this.trashInformationList, function () { }, function () { });
+      }
     }
 
     onImportTrashListSuccess(data: Array<Model.TrashInformationModel>) {
@@ -199,19 +264,65 @@ module Clarity.Controller {
       reader.readAsText(input.files[0]);
     };
 
+    openKMLFile(event) {
+      var input = event.target;
+      var self = this;
+      var reader = new FileReader();
+      reader.onload = function () {
+        var parser = new DOMParser();
+        var xmlDoc = parser.parseFromString(reader.result, "text/xml");
+        var placemarks = xmlDoc.getElementsByTagName('Placemark');
+
+        for (var i = 0; i < placemarks.length; i++){
+          var polygon = new Model.PolygonModel();
+          polygon.name = placemarks[i].getElementsByTagName('name')[0].textContent;
+          polygon.coordinates = [];
+
+          var coordinates = placemarks[i].getElementsByTagName('coordinates')[0].textContent.split(',0.0');
+          for (var j = 0; j < coordinates.length; j++){
+            var long = parseFloat(coordinates[j].split(',')[0]);
+            var lat = parseFloat(coordinates[j].split(',')[1]);
+            if (long && lat){
+              var coordinate = new Model.Coordinate(long, lat);
+              polygon.coordinates.push(coordinate);
+            }
+          }
+
+          self.polygonList.push(polygon);
+        }
+      };
+      reader.readAsText(input.files[0]);
+    }
+
     addAdmin() {
+      this.showAdminForm = true;
+    }
+
+    addNewAdmin() {
+      var self = this;
       var admin = new Model.UserModel();
-      admin.firstName = 'Hung';
-      admin.lastName = 'Cao';
-      admin.username = 'phihung';
-      admin.password = 'Test1234';
-      this.userService.create(admin, function () { }, this.$rootScope.onError);
+      admin.firstName = this.adminFirstName;
+      admin.lastName = this.adminLastName;
+      admin.username = this.adminUserName;
+      admin.password = this.adminPassword;
+      this.userService.create(admin, (data) => {
+        self.showAdminForm = false;
+      }
+      , this.$rootScope.onError);
     }
 
     addAssignee() {
+      this.showAssigneeForm = true;
+    }
+
+    addNewAssignee() {
       var assignee = new Model.AssigneeModel();
-      assignee.username = 'Hung';
-      this.userService.createAssigne(assignee, function () { }, this.$rootScope.onError);
+      assignee.username = this.assigneeName;
+      var self = this;
+      this.userService.createAssigne(assignee, (data) => {
+        self.showAssigneeForm = false;
+        self.assigneeList.push(data);
+      }, this.$rootScope.onError);
     }
 
     updateRecord() {
@@ -221,12 +332,11 @@ module Clarity.Controller {
           trashList.push(this.trashInformationList[i]);
         }
       }
-      this.trashService.uploadTrashRecord(trashList,
+      this.trashService.updateTrashRecord(trashList,
         (data) => {
-          //this.onImportTrashListSuccess(data);
+          alert('Updated ' + data.length + ' records');
         },
         (data) => {
-          //this.onImportUserError(data);
         });
     }
 
@@ -261,5 +371,22 @@ module Clarity.Controller {
       this.currentPage -= 1;
       return this.currentPage;
     }
+
+    getSectionName(id) {
+      if (id && this.polygonList) {
+        for (var i = 0; i < this.polygonList.length; i++){
+          if (id == this.polygonList[i].id) {
+            return this.polygonList[i].name;
+          }
+        }
+      }
+      return '';
+    }
+
+    goToMainPage() {
+      this.showAdminForm = false;
+      this.showAssigneeForm = false;
+    }
+
   }
 }

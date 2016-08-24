@@ -13,8 +13,8 @@ namespace ShoreSweep
     public class TrashInformation : Entity
     {
         public long TrashID { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public string Continent { get; set; }
         public string Country { get; set; }
         public string AdministrativeArea1 { get; set; }
@@ -29,14 +29,16 @@ namespace ShoreSweep
         public string Images { get; set; }
         public string Size { get; set; }
         public string Type { get; set; }
-        public string AssignedTo { get; set; }
+        public long? AssigneeID { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public long? SectionID { get; set; }
+
 
         public void ApplyJson(JToken json)
         {
             TrashID = json.Value<long>("trashId");
-            Latitude = json.Value<string>("latitude");
-            Longitude = json.Value<string>("longitude");
+            Latitude = json.Value<double>("latitude");
+            Longitude = json.Value<double>("longitude");
 
             Continent = json.Value<string>("continent");
             Country = json.Value<string>("country");
@@ -61,7 +63,8 @@ namespace ShoreSweep
             Url = json.Value<string>("url");
             Images = json.Value<string>("images");
             Type = json.Value<string>("type");
-            AssignedTo = json.Value<string>("assignedTo");
+            AssigneeID = json.Value<long?>("assigneeId");
+            SectionID = json.Value<long?>("sectionId");
         }
 
         public JObject ToJson()
@@ -90,8 +93,8 @@ namespace ShoreSweep
             json["url"] = Url;
             json["images"] = Images;
             json["type"] = Type;
-            json["assignedTo"] = AssignedTo;
-
+            json["assigneeId"] = AssigneeID;
+            json["sectionId"] = SectionID;
             return json;
         }
     }
