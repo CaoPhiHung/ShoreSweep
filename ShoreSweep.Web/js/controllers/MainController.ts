@@ -52,7 +52,6 @@ module Clarity.Controller {
       this.polygonList = [];
       this.mainHelper = new helper.MainHelper();
       this.initTrashInformationList();
-      this.initPolygonList();
       this.initAssigneeList();
       this.itemsPerPage = 5;
       this.currentPage = 1;
@@ -62,6 +61,7 @@ module Clarity.Controller {
     }
 
     initTrashInformationList() {
+      var self = this;
       this.showSpinner = true;
       this.trashService.getAll((data) => {
         for (var i = 0; i < data.length; i++) {
@@ -69,13 +69,22 @@ module Clarity.Controller {
         }
         this.trashInformationList = data;
         this.numPages = Math.ceil(this.trashInformationList.length / this.itemsPerPage);
+        self.initPolygonList();
         this.showSpinner = false;
       }, (data) => { });
     }
 
     initPolygonList() {
+      var self = this;
       this.polygonService.getAll((data) => {
-        this.polygonList = data;
+        self.polygonList = data;
+        for (var i = 0; i < self.polygonList.length; i++) {
+          for (var j = 0; j < self.trashInformationList.length; j++){
+            if (self.trashInformationList[j].sectionId && self.trashInformationList[j].sectionId == self.polygonList[i].id) {
+              self.trashInformationList[j].polygonCoords = self.polygonList[i].coordinates;
+              }
+            }
+          }
       }, (data) => { });
     }
 

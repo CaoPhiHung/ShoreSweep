@@ -26,8 +26,8 @@ module Clarity.Model {
     public size: string;
     public type: string;
     public sectionId: number;    
-
     public isSelected: boolean;
+    public polygonCoords: any;
   }
 
   export class Coordinate {
