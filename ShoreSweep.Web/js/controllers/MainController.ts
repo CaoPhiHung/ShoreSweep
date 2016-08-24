@@ -328,7 +328,7 @@ module Clarity.Controller {
       var assignee = new Model.AssigneeModel();
       assignee.username = this.assigneeName;
       var self = this;
-      this.userService.createAssigne(assignee, (data) => {
+      this.userService.createAssignee(assignee, (data) => {
         self.showAssigneeForm = false;
         self.assigneeList.push(data);
       }, this.$rootScope.onError);
