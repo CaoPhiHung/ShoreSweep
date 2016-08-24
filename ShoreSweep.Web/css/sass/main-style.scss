@@ -255,6 +255,7 @@ div.bg-preload {
             height: 40px;
             border-radius: 10px;
             border: 1px solid #dddddd;
+            text-align-last: center;
         }
 
         .number-page{
@@ -1064,6 +1065,13 @@ md-checkbox:last-of-type {
 	&:hover {
 		color: $background_hover_icon;
 	}
+}
+select.field{
+    width: 90%;
+    height: 50px;
+    border-radius: 10px; 
+    border: 1px solid #dddddd;
+    text-align-last: center;
 }
 
 

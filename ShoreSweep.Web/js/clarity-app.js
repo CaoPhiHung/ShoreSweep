@@ -12,7 +12,7 @@ if (jQuery) {
   }
 }
 
-var clarityApp = angular.module('clarityApp', ['ngMaterial', 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap', 'ui.select2', 'ui.sortable', 'google-map'], function ($routeProvider, $httpProvider) {
+var clarityApp = angular.module('clarityApp', ['ngMaterial', 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap', 'ui.select2', 'ui.sortable', 'google-map','convert-to-number'], function ($routeProvider, $httpProvider) {
 
   // --- Routes ---
 
@@ -137,60 +137,60 @@ clarityApp.filter('start', function () {
 
 clarityApp.run(function ($rootScope, $routeParams, $location, authenticationService, $http, $cookieStore, $window) {
 
-  $rootScope.$on("$routeChangeStart", function (event, next, current) {
-    $rootScope.error = null;
+    $rootScope.$on("$routeChangeStart", function (event, next, current) {
+        $rootScope.error = null;
 
-    if (next.access != 'public' && next.access != 'share' && !authenticationService.isAuthenticated()) {
-        $rootScope.returnUrl = $location.path();
-        $location.path('/login');
+        if (next.access != 'public' && next.access != 'share' && !authenticationService.isAuthenticated()) {
+            $rootScope.returnUrl = $location.path();
+            $location.path('/login');
+        }
+        else {
+            $rootScope.user = $cookieStore.get('user');
+        }
+    });
+
+    $rootScope.onError = function (error) {
+        if (error == null || error == '') {
+            if ($rootScope.error === 'not_found') {
+                $location.path('/not_found');
+            } else if ($rootScope.error === 'server_error') {
+            }
+        }
+
+        $rootScope.error = error;
+
+        if ($location.path() == "/login" || $location.path() == "/not_found") {
+            var e = jQuery.Event("keydown");
+            e.which = 27;
+            $("input").trigger(e);
+        }
+
+        $rootScope.hideSpinner();
+    };
+
+    $rootScope.getError = function () {
+        return $rootScope.error;
+    };
+
+    $rootScope.showSpinner = function () {
+        $("#bg-preload").show();
+    };
+
+    $rootScope.hideSpinner = function () {
+        $("#bg-preload").hide();
+    };
+
+    $rootScope.clearCache = function ($window) {
+        $rootScope.user = null;
     }
-    else {
-        $rootScope.user = $cookieStore.get('user');
-    }
-  });
 
-  $rootScope.onError = function (error) {
-    if (error == null || error == '') {
-      if ($rootScope.error === 'not_found') {
-        $location.path('/not_found');
-      } else if ($rootScope.error === 'server_error') {
-      }
+    $rootScope.enableElements = function () {
+        if ($rootScope.pendingRequests < 1) {
+            $('.wait-data-loading').removeAttr('disabled');
+        }
     }
 
-    $rootScope.error = error;
-
-    if ($location.path() == "/login" || $location.path() == "/not_found") {
-      var e = jQuery.Event("keydown");
-      e.which = 27;
-      $("input").trigger(e);
+    $rootScope.disableElements = function () {
+        $('.wait-data-loading').attr('disabled', 'disabled');
     }
-
-    $rootScope.hideSpinner();
-  };
-
-  $rootScope.getError = function () {
-    return $rootScope.error;
-  };
-
-  $rootScope.showSpinner = function () {
-    $("#bg-preload").show();
-  };
-
-  $rootScope.hideSpinner = function () {
-    $("#bg-preload").hide();
-  };
-
-  $rootScope.clearCache = function ($window) {
-    $rootScope.user = null;
-  }
-
-  $rootScope.enableElements = function() {
-    if ($rootScope.pendingRequests < 1) {
-      $('.wait-data-loading').removeAttr('disabled');
-    }
-  }
-
-  $rootScope.disableElements = function() {
-    $('.wait-data-loading').attr('disabled', 'disabled');
-  }
 });

@@ -173,6 +173,7 @@
     <TypeScriptCompile Include="js\services\KioskLogService.ts" />
     <TypeScriptCompile Include="js\services\TerminalService.ts" />
     <TypeScriptCompile Include="js\services\UserService.ts" />
+    <Content Include="js\directives\ConvertToNumber.js" />
     <Content Include="js\directives\GoogleMap.js" />
     <Content Include="js\services\IService.ts" />
     <Content Include="lib\angular-material\angular-animate.js" />

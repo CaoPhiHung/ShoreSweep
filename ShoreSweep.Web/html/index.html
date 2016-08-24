@@ -42,8 +42,10 @@
 
     <div layout="row" layout-align="center center" class="sv-header-action">
       <div flex="95">
-        <md-button class="md-raised md-primary btn" data-ng-click="viewModel.showMapAndTrash()">Show Map & Trash</md-button>
-        <md-button class="md-raised md-primary" data-ng-click="viewModel.updateRecord()">Update Record</md-button>
+        <md-button class="md-raised md-primary" data-ng-click="viewModel.showMapAndTrash()"
+            data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Show Map & Trash</md-button>
+        <md-button class="md-raised md-primary" data-ng-click="viewModel.updateRecord()"
+            data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Update Record</md-button>
       </div>
       <div layout="column" flex="5" layout-align="center right">
         <md-menu>
@@ -63,10 +65,11 @@
       </div>
     </div>
 
-    <div layout="row" layout-align="center center" class="sv-header-paging">
+    <div layout="row" layout-align="left center" class="sv-header-paging">
       <div flex="20">
         <strong>Show</strong>
-        <select class="input-page" data-ng-model="viewModel.itemsPerPage" data-ng-change="viewModel.itemsPerPageChanged(viewModel.itemsPerPage)">
+        <select class="input-page" data-ng-model="viewModel.itemsPerPage" convert-to-number
+          data-ng-change="viewModel.itemsPerPageChanged(viewModel.itemsPerPage)">
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="20">20</option>
@@ -115,7 +118,7 @@
           <div flex="5" class="md-cell border-right">{{trashInfo.id}}</div>
           <div flex="15" class="md-cell border-right text-overflow">{{trashInfo.description}}</div>
           <div flex="10" class="md-cell border-right">
-            <select name="status" data-ng-model="trashInfo.status" style="width: 90%;height: 50px;border-radius: 10px; border: 1px solid #dddddd;">
+            <select name="status" class="field" data-ng-model="trashInfo.status">
               <option value="Unconfirmed">Unconfirmed</option>
               <option value="Confirmed">Confirmed</option>
               <option value="Cleaned">Cleaned</option>
@@ -131,8 +134,7 @@
             <input type="text" class="comment" data-ng-model="trashInfo.comment" placeholder="Comment" />
           </div>
           <div flex="10" class="md-cell border-right">
-            <!--{{trashInfo.assignedTo}}-->
-            <select name="status" data-ng-model="trashInfo.assigneeId" style="width: 90%;height: 50px;border-radius: 10px; border: 1px solid #dddddd;">
+            <select name="status" class="field" data-ng-model="trashInfo.assigneeId" convert-to-number>
               <option data-ng-repeat="assignee in viewModel.assigneeList" value="{{ assignee.id }}" data-ng-bind="assignee.username"></option>
             </select>
           </div>

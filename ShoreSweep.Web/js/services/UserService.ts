@@ -18,7 +18,7 @@ module Clarity.Service {
         });
     }
 
-    getAllAssigne(successCallback: Function, errorCallback: Function) {
+    getAllAssignee(successCallback: Function, errorCallback: Function) {
       this.http.get(this.url + '/assignee')
         .success((data) => { this.doCallback(successCallback, data); })
         .error((data, status) => {
