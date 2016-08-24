@@ -22,11 +22,8 @@
           <div class="tpl-submit clearfix">
             <!--<a href="/template/trashList.csv"><b><i class="download-excel-template"> Trash.csv </i></b></a>-->
             <md-button class="md-raised md-primary" data-ng-click="viewModel.importCSVFile()">Import</md-button>
-            <md-button class="md-raised md-primary" data-ng-click="viewModel.addAssignee()">Add Assignee</md-button>
-            <md-button class="md-raised md-primary" data-ng-click="viewModel.addAdmin()">Add Admin</md-button>
-            <!--<button type="button" data-ng-click="viewModel.importCSVFile()" class="b-f-submit">Import</button>-->
-            <!--<button type="button" data-ng-click="viewModel.addAssignee()">Add Assignee</button>
-            <button type="button" data-ng-click="viewModel.addAdmin()">Add Admin</button>-->
+            <!--<md-button class="md-raised md-primary" data-ng-click="viewModel.addAssignee()">Add Assignee</md-button>
+            <md-button class="md-raised md-primary" data-ng-click="viewModel.addAdmin()">Add Admin</md-button>-->
           </div>
         </div>
       </div>      
@@ -41,7 +38,26 @@
       <div flex="20">
         <md-button class="md-raised md-primary btn" data-ng-click="viewModel.showMapAndTrash()">Show Map & Trash</md-button>
       </div>
-      <div flex="80"></div>
+      <div flex="75"></div>
+
+      <div layout="column" flex="5" layout-align="center right">
+        <md-menu>
+          <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+            <md-icon md-menu-origin md-svg-src="/img/menu-ico.svg"></md-icon>
+          </md-button>
+          <!--<md-button aria-label="Open demo menu" class="md-raised md-primary btn" ng-click="$mdOpenMenu($event)">
+            <!--<md-icon md-menu-origin md-svg-icon="menu:phone"></md-icon>
+          </md-button>-->
+          <md-menu-content width="3">
+            <md-menu-item>
+              <md-button ng-click="viewModel.showAssigneeDialog()"> <span md-menu-align-target>Create Assignee</span></md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="viewModel.addAdmin()"> <span md-menu-align-target>Create Admin User</span></md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
     </div>
 </md-toolbar>
 

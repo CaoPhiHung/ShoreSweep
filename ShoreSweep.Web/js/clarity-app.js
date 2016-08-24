@@ -56,7 +56,7 @@ var clarityApp = angular.module('clarityApp', ['ngMaterial', 'ngAnimate', 'ngCoo
 });
 
 
-clarityApp.config(function ($controllerProvider, $provide, $compileProvider, $httpProvider) {
+clarityApp.config(function ($controllerProvider, $provide, $compileProvider, $httpProvider, $mdIconProvider) {
   clarityApp._controller = clarityApp.controller;
 
   clarityApp.controller = function (name, constructor) {

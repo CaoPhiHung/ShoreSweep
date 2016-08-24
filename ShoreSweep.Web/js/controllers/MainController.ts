@@ -202,7 +202,7 @@ module Clarity.Controller {
     addAssignee() {
       var assignee = new Model.AssigneeModel();
       assignee.username = 'Hung';
-      this.userService.createAssigne(assignee, function () { }, this.$rootScope.onError);
+      this.userService.createAssignee(assignee, function () { }, this.$rootScope.onError);
     }
 
     updateRecord() {
@@ -231,6 +231,32 @@ module Clarity.Controller {
       }
 
       this.$location.path('/show_map_and_trash');
+    }
+
+    showAssigneeDialog(event: Event) {
+      var self = this;
+
+      this.$mdDialog.show({
+        controller: function ($scope, $mdDialog) {
+          $scope.assignee = new Model.AssigneeModel();
+          $scope.hide = function () {
+            $mdDialog.hide();
+          };
+          $scope.cancel = function () {
+            $mdDialog.cancel();
+          };
+          $scope.create = function () {
+            self.userService.createAssignee($scope.assignee,
+              (data) => { $mdDialog.hide(); },
+              (data) => { });
+          };
+        },
+
+        templateUrl: '/html/assignee-dialog.html' + '?v=' + VERSION_NUMBER,
+        targetEvent: event,
+        clickOutsideToClose: true
+      })
+        .then(function (answer) { }, function () { });
     }
 
   }
