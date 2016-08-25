@@ -247,7 +247,7 @@ module Clarity.Controller {
       reader.onload = function () {
 
         var records = reader.result.split('\n');
-        for (var line = 1; line < 10 /*records.length*/; line++) {
+        for (var line = 1; line < records.length; line++) {
           var record = records[line].split(';');
           var trash = new Model.TrashInformationModel();
           trash.trashId = record[0];
