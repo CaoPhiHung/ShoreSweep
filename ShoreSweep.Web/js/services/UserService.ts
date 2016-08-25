@@ -10,7 +10,7 @@ module Clarity.Service {
       this.url = '/api/user';
     }
 
-    createAssigne(entity: any, successCallback: Function, errorCallback: Function) {
+    createAssignee(entity: any, successCallback: Function, errorCallback: Function) {
       this.http.post(this.url + '/assignee', entity)
         .success((data) => { this.doCallback(successCallback, data); })
         .error((data, status) => {
@@ -18,7 +18,7 @@ module Clarity.Service {
         });
     }
 
-    getAllAssigne(successCallback: Function, errorCallback: Function) {
+    getAllAssignee(successCallback: Function, errorCallback: Function) {
       this.http.get(this.url + '/assignee')
         .success((data) => { this.doCallback(successCallback, data); })
         .error((data, status) => {

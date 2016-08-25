@@ -21,13 +21,7 @@ module Clarity.Controller {
     public itemsPerPage: number;
     public maxPageSize: number;
     public numPages: number;
-    public showAdminForm: boolean;
-    public showAssigneeForm: boolean;
-    public assigneeName: string;
-    public adminFirstName: string;
-    public adminLastName: string;
-    public adminUserName: string;
-    public adminPassword: string;
+    public pagingOptions: Array<any>;
 
     public trashService: service.TrashService;
     public userService: service.UserService;
@@ -52,12 +46,7 @@ module Clarity.Controller {
       this.polygonList = [];
       this.mainHelper = new helper.MainHelper();
       this.initTrashInformationList();
-      this.initAssigneeList();
-      this.itemsPerPage = 5;
-      this.currentPage = 1;
-      this.maxPageSize = 5;
-      this.showAdminForm = false;
-      this.showAssigneeForm = false;
+      this.initAssigneeList();      
     }
 
     initTrashInformationList() {
@@ -68,8 +57,8 @@ module Clarity.Controller {
           this.initFirstImage(data[i]);
         }
         this.trashInformationList = data;
-        this.numPages = Math.ceil(this.trashInformationList.length / this.itemsPerPage);
-        self.initPolygonList();
+        this.initPolygonList();
+        this.initPaging();
         this.showSpinner = false;
       }, (data) => { });
     }
@@ -89,9 +78,16 @@ module Clarity.Controller {
     }
 
     initAssigneeList() {
-      this.userService.getAllAssigne((data) => {
+      this.userService.getAllAssignee((data) => {
         this.assigneeList = data;
       }, (data) => { });
+    }
+
+    initPaging() {
+      this.itemsPerPage = 5;
+      this.currentPage = 1;
+      this.maxPageSize = 5;
+      this.numPages = Math.ceil(this.trashInformationList.length / this.itemsPerPage);
     }
 
     showGoogleMapDialog(trashInfo: Model.TrashInformationModel, event: Event) {
@@ -123,31 +119,6 @@ module Clarity.Controller {
 
       })
         .then(function (answer) { }, function () { });
-    }
-
-    uploadFile(element) {
-      this.errorMessage = '';
-
-      var self = this;
-      this.$scope.$apply(function () {
-        if (element != null
-          && element.files.length > 0
-          && element.files[0] != null
-          && self.isValidFileType(element.files[0].name)
-          && self.checkFileSize(element.files[0].size)) {
-
-          var fd = new FormData();
-
-          fd.append('file', element.files[0]);
-          self.excelFileUpload = fd;
-
-          var reader = new FileReader();
-          reader.onload = function () {
-            self.$scope.$apply();
-          };
-          reader.readAsDataURL(element.files[0]);
-        }
-      });
     }
 
     importCSVFile() {
@@ -216,28 +187,28 @@ module Clarity.Controller {
       trash.imageList = trash.images.split(',');
     }
 
-    isValidFileType(fileName) {
-      if (fileName != null) {
-        var fileNameParts = fileName.split('.');
-        if (fileNameParts.length > 1) {
-          var fileNameExtension = fileNameParts[fileNameParts.length - 1];
-          if (fileNameExtension.toLowerCase() === 'csv') {
-            return true;
-          }
-        }
-      }
+    //isValidFileType(fileName) {
+    //  if (fileName != null) {
+    //    var fileNameParts = fileName.split('.');
+    //    if (fileNameParts.length > 1) {
+    //      var fileNameExtension = fileNameParts[fileNameParts.length - 1];
+    //      if (fileNameExtension.toLowerCase() === 'csv') {
+    //        return true;
+    //      }
+    //    }
+    //  }
 
-      this.errorMessage = 'File format is not supported. Please upload a csv file.';
-      return false;
-    }
+    //  this.errorMessage = 'File format is not supported. Please upload a csv file.';
+    //  return false;
+    //}
 
-    checkFileSize(size) {
-      if (size > 20971520) {
-        this.errorMessage = 'File size exceeds 20MB limit.';
-        return false;
-      }
-      return true;
-    }
+    //checkFileSize(size) {
+    //  if (size > 20971520) {
+    //    this.errorMessage = 'File size exceeds 20MB limit.';
+    //    return false;
+    //  }
+    //  return true;
+    //}
 
     openFile(event) {
       var input = event.target;
@@ -303,37 +274,6 @@ module Clarity.Controller {
       reader.readAsText(input.files[0]);
     }
 
-    addAdmin() {
-      this.showAdminForm = true;
-    }
-
-    addNewAdmin() {
-      var self = this;
-      var admin = new Model.UserModel();
-      admin.firstName = this.adminFirstName;
-      admin.lastName = this.adminLastName;
-      admin.username = this.adminUserName;
-      admin.password = this.adminPassword;
-      this.userService.create(admin, (data) => {
-        self.showAdminForm = false;
-      }
-      , this.$rootScope.onError);
-    }
-
-    addAssignee() {
-      this.showAssigneeForm = true;
-    }
-
-    addNewAssignee() {
-      var assignee = new Model.AssigneeModel();
-      assignee.username = this.assigneeName;
-      var self = this;
-      this.userService.createAssigne(assignee, (data) => {
-        self.showAssigneeForm = false;
-        self.assigneeList.push(data);
-      }, this.$rootScope.onError);
-    }
-
     updateRecord() {
       var trashList = [];
       for (var i = 0; i < this.trashInformationList.length; i++) {
@@ -347,6 +287,17 @@ module Clarity.Controller {
         },
         (data) => {
         });
+    }
+
+    enableUpdateOrShowMap() {
+      if (this.trashInformationList != null && this.trashInformationList.length > 0) {
+        for (var i = 0; i < this.trashInformationList.length; i++) {
+          if (this.trashInformationList[i].isSelected) {
+            return true;
+          }
+        }
+      }
+      return false;
     }
 
     showMapAndTrash() {
@@ -392,9 +343,53 @@ module Clarity.Controller {
       return '';
     }
 
-    goToMainPage() {
-      this.showAdminForm = false;
-      this.showAssigneeForm = false;
+    showAssigneeDialog(event: Event) {
+      var self = this;
+      this.$mdDialog.show({
+        controller: function ($scope, $mdDialog) {
+          $scope.assignee = new Model.AssigneeModel();
+          $scope.cancel = function () {
+            $mdDialog.cancel();
+          };
+          $scope.create = function () {
+            self.userService.createAssignee($scope.assignee,
+              (data) => {
+                self.assigneeList.push(data);
+                $mdDialog.hide();
+              },
+              (data) => { });
+          };
+        },
+
+        templateUrl: '/html/assignee-dialog.html' + '?v=' + VERSION_NUMBER,
+        targetEvent: event,
+        clickOutsideToClose: false
+      })
+        .then(function (answer) { }, function () { });
+    }
+
+    showAdminUserDialog(event: Event) {
+      var self = this;
+      this.$mdDialog.show({
+        controller: function ($scope, $mdDialog) {
+          $scope.adminUser = new Model.UserModel();
+          $scope.cancel = function () {
+            $mdDialog.cancel();
+          };
+          $scope.create = function () {
+            self.userService.create($scope.adminUser,
+            (data) => {
+              $mdDialog.hide();
+            },
+            (data) => { });
+          };
+        },
+
+        templateUrl: '/html/admin-dialog.html' + '?v=' + VERSION_NUMBER,
+        targetEvent: event,
+        clickOutsideToClose: false
+      })
+        .then(function (answer) { }, function () { });
     }
 
   }

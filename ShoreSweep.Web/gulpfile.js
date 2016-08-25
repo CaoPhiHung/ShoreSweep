@@ -59,6 +59,7 @@ var config = {
     , 'js/controllers/MainController.js'
     , 'js/controllers/MapController.js'
     , 'js/directives/GoogleMap.js'
+    , 'js/directives/ConvertToNumber.js'
 
     // controllers, services written with TypeScript must be placed before clarity-app.js
     , 'js/clarity-app.js'

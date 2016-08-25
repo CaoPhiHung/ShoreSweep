@@ -108,6 +108,8 @@
     <Content Include="font\fa\fontawesome-webfont.svg" />
     <Content Include="font\hal\icomoon.svg" />
     <Content Include="gulpfile.js" />
+    <Content Include="html\admin-dialog.html" />
+    <Content Include="html\assignee-dialog.html" />
     <Content Include="html\google-map-dialog.html" />
     <Content Include="html\color-dialog.html" />
     <Content Include="html\map-and-trash.html" />
@@ -125,6 +127,7 @@
     <Content Include="html\login.html" />
     <Content Include="html\pre-loading.html" />
     <Content Include="html\user.html" />
+    <Content Include="img\menu-ico.svg" />
     <Content Include="img\lake-lanier-logo.png" />
     <Content Include="img\shore_sweep.jpg" />
     <Content Include="img\check-ico.png" />
@@ -170,6 +173,7 @@
     <TypeScriptCompile Include="js\services\KioskLogService.ts" />
     <TypeScriptCompile Include="js\services\TerminalService.ts" />
     <TypeScriptCompile Include="js\services\UserService.ts" />
+    <Content Include="js\directives\ConvertToNumber.js" />
     <Content Include="js\directives\GoogleMap.js" />
     <Content Include="js\services\IService.ts" />
     <Content Include="lib\angular-material\angular-animate.js" />
