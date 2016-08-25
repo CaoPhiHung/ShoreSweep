@@ -31,9 +31,11 @@
 /ShoreSweep.Web/obj/Release
 
 /.vs
-/ShoreSweep/.vs/config/applicationhost.config
-/ShoreSweep/ShoreSweep.csproj.user
+/.vs/config/applicationhost.config
+/ShoreSweep.csproj.user
 /ShoreSweep.Web/Properties/PublishProfiles
+
+
 *.dll
 *.xml
 *.pdb

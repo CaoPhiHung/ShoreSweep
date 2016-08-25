@@ -113,7 +113,7 @@
 
         <div layout="row" layout-align="center center" data-ng-repeat="trashInfo in viewModel.trashInformationList | start: (viewModel.currentPage - 1) * viewModel.itemsPerPage | limitTo: viewModel.itemsPerPage" class="md-row">
           <div flex="5" class="md-cell border-right">
-            <md-checkbox data-ng-model="trashInfo.isSelected"></md-checkbox>
+            <md-checkbox data-ng-model="trashInfo.isSelected" aria-label="selected"></md-checkbox>
           </div>
           <div flex="5" class="md-cell border-right">{{trashInfo.id}}</div>
           <div flex="15" class="md-cell border-right text-overflow">{{trashInfo.description}}</div>
