@@ -5,31 +5,9 @@
 
 	<md-toolbar class="header">
 		<div layout="row" layout-align="center center" class="sv-header">
-			<div flex="20">
+			<div flex="90">
 				<div>
 					<img src="../img/lake-lanier-logo.png" style="height:50px;" />
-				</div>
-			</div>
-			<div flex="70">
-				<div layout="row" layout-align="center center" class="sv-header-import">
-					<!--<div class="eachInput clearfix">
-						<label for="">CSV File <span class="red">*</span></label>
-						<div class="input-file-wrapper">
-							<input type='file' accept='.csv' onchange="angular.element(this).scope().viewModel.openFile(event)">
-						</div>
-					</div>-->
-
-					<!--<div class="eachInput clearfix">
-						<label for="">KML File <span class="red">*</span></label>
-						<div class="input-file-wrapper">
-							<input type='file' accept='.kml' onchange="angular.element(this).scope().viewModel.openKMLFile(event)">
-						</div>
-					</div>
-
-					<div class="tpl-submit clearfix">
-						<md-button class="md-raised md-primary" data-ng-click="viewModel.importCSVFile()">Import</md-button>
-						<md-button class="md-raised md-primary" data-ng-click="viewModel.importPolygons()">Import Polygons</md-button>
-					</div>-->
 				</div>
 			</div>
 			<div flex="10" data-ng-controller="LogoutController">
@@ -117,7 +95,10 @@
 		<md-card>
 			<md-card-content>
 				<div layout="row" layout-align="center center" class="md-row sv-header-type">
-					<div flex="5" class="md-cell border-right"></div>
+					<div flex="5" class="md-cell border-right">
+            <md-checkbox class="select-all" data-ng-model="viewModel.selectedAll" aria-label="selectedAll"
+              data-ng-change="viewModel.onchangeSelectedAll()"></md-checkbox>
+          </div>
 					<div flex="5" class="md-cell border-right">ID</div>
 					<div flex="15" class="md-cell border-right">Description</div>
 					<div flex="10" class="md-cell border-right">Status</div>

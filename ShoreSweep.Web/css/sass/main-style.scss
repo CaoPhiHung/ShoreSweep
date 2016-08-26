@@ -1028,6 +1028,9 @@ md-progress-linear {
 .main-color{
     color: $main-color;
 }
+md-checkbox.select-all ._md-icon{
+    border-color: #ffffff;
+}
 md-checkbox.md-checked .md-ink-ripple {
     color: $main-color;
 }
