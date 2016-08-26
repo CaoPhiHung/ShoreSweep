@@ -1,62 +1,53 @@
-﻿<div id="mapAndTrash" layout="column" layout-sm="column" layout-wrap style="background: #e5e5e5">
-  <div class="progress-bar" data-ng-style="{'opacity': viewModel.showSpinner ? '1':'0'}">
-    <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-  </div>
-
-  <div layout="column" layout-align="center">
-    <div layout="row" layout-align="center">
-      <div flex="20"></div>
-      <div flex="60">
-        <google-map style="height: 400px; width: 550px;" ng-markers="viewModel.markers"></google-map>
-      </div>
-      <div flex="20"></div>
+﻿<div id="mapAndTrash">
+  <div id="summary-page" class="trash-info-section">
+    <div class="title">{{viewModel.selectedTrashInformationList.length}} Records Selected</div>
+    <google-map class="trash-info-map-summary" ng-markers="viewModel.markers"></google-map>
+    <div style="overflow-x:auto; margin-top:20px;">
+      <table cellpadding="0" cellspacing="0" style="table-layout: fixed">
+        <thead>
+          <tr>
+            <th style="width: 50px">ID</th>
+            <th>Section</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-ng-repeat="trashInfo in viewModel.selectedTrashInformationList">
+            <td align="center"><b>{{trashInfo.id}}</b></td>
+            <td>{{trashInfo.section}}</td>
+            <td>{{trashInfo.description}}</td>
+            <td>{{trashInfo.type}}</td>
+            <td>{{trashInfo.latitude}}</td>
+            <td>{{trashInfo.longitude}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  
-  <div class="break-page" layout="column" layout-align="center" data-ng-repeat="trashInfo in viewModel.selectedTrashInformationList">
-    <div layout="row" layout-align="center">
-      <div flex="20"></div>
-      <div flex="30">
-        <span class="title">{{trashInfo.size}}{{trashInfo.id}}</span>
-        <google-map style="height: 200px; width: 350px;" ng-model="trashInfo"></google-map>
+  <div class="trash-info-section" data-ng-class="{'break-page': $index % 2 == 0}" data-ng-repeat="trashInfo in viewModel.selectedTrashInformationList">
+    <div class="col-md-6">
+      <div class="title">{{trashInfo.size}}{{trashInfo.id}}</div>
+      <google-map class="trash-info-map" ng-model="trashInfo"></google-map>
+      <div class="text-info">Description: {{trashInfo.description}}</div>
+      <div class="text-info">Type: {{trashInfo.type}}</div>
+      <div>
+        <div class="img-trash-info" data-ng-repeat="image in trashInfo.imageList">
+          <img class="img-report" data-ng-src="{{image}}" />
+        </div>
       </div>
-      <div flex="30">
-        <div class="title">{{trashInfo.status}}</div>
-        <div class="text-info">Latitude: {{trashInfo.latitude}}</div>
-        <div class="text-info">Longitude: {{trashInfo.longitude}}</div>
-        <div class="text-info">Area: {{trashInfo.administrativeArea1}}</div>
-        <div class="text-info">Section: {{trashInfo.sectonId}}</div>
-        <div class="text-info">Assignee: {{trashInfo.assigneeId}}</div>
-      </div>
-      <div flex="20"></div>
     </div>
-    <div layout="row" layout-align="center">
-      <div flex="20"></div>
-      <div flex="60">
-        <div class="text-info">Description: {{trashInfo.description}}</div>
-        <div class="text-info">Type: {{trashInfo.type}}</div>
-      </div>
-      <div flex="20"></div>
-    </div>
-    <div layout="row" layout-align="center">
-      <div flex="20"></div>
-      <div flex="60" layout="row" layout-align="center">
-        <div flex="25">
-          <img class="img-report" data-ng-if="trashInfo.imageList[0] != null" data-ng-src="trashInfo.imageList[0]" />
-        </div>
-        <div flex="25">
-          <img class="img-report" data-ng-if="trashInfo.imageList[1] != null" data-ng-src="trashInfo.imageList[1]" />
-        </div>
-        <div flex="25">
-          <img class="img-report" data-ng-if="trashInfo.imageList[2] != null" data-ng-src="trashInfo.imageList[2]" />
-        </div>
-        <div flex="25">
-          <img class="img-report" data-ng-if="trashInfo.imageList[3] != null" data-ng-src="trashInfo.imageList[3]" />
-        </div>
-      </div>
-      <div flex="20"></div>
+
+    <div class="col-md-4 trash-info-title">
+      <div class="title">{{trashInfo.status}}</div>
+      <div class="text-info">Latitude: {{trashInfo.latitude}}</div>
+      <div class="text-info">Longitude: {{trashInfo.longitude}}</div>
+      <div class="text-info">Area: {{trashInfo.administrativeArea1}}</div>
+      <div class="text-info">Section: {{trashInfo.sectionName}}</div>
+      <div class="text-info">Assignee: {{trashInfo.assigneeName}}</div>
     </div>
   </div>
-
 </div>

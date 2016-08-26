@@ -71,7 +71,7 @@ $larg-screen: 1280px;
 
 /*PAGE*/
 body {
-    background-color: #e5e5e5;
+    /*background-color: #e5e5e5;*/
     position: relative;
     z-index: 1;
     font-size: 100%;
@@ -1048,6 +1048,7 @@ md-checkbox:last-of-type {
     font-size: 25px;
     font-weight: bold;
     text-transform: uppercase;
+    margin-bottom: 5px;
 }
 
 .text-info{
@@ -1094,3 +1095,74 @@ select.field{
     font-size: 16px;
 }
 
+
+//#mapAndTrash{
+    .col-md-2{
+        width: 20%;
+        float: left;
+    }
+    .col-md-3{
+        width: 20%;
+        float: left;
+    }
+    .col-md-4{
+        width: 40%;
+        float: left;
+    }
+    .col-md-6{
+        width: 60%;
+        float: left;
+    }
+    .col-md-7{
+        width: 60%;
+        float: left;
+    }
+    .col-md-offset-2{
+        margin-left: 20%;
+    }
+    .trash-info-section{
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 30px;
+        clear: left;
+        overflow: hidden;
+    }
+    .trash-info-map{
+        height: 250px;
+        width: 100%;
+    }
+    .trash-info-map-summary{
+        height: 400px;
+        width: 100%;
+    }
+    .trash-info-title{
+        padding-left: 40px;
+    }
+    .img-trash-info{
+        width: 33%;
+        float: left;
+    }
+//}
+
+
+table, th, td {
+   border: 1px solid #cccccc;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+tr:nth-child(even) {background-color: #f2f2f2}
+tr:hover {
+    background-color: #da5c0c;
+    color: #ffffff;
+}
