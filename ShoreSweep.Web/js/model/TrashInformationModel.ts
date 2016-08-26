@@ -18,21 +18,20 @@ module Clarity.Model {
     public comment: string;
     public status: string;
     public url: string;
-    public images: string;
+    public images: Array<string>;
     public size: string;
     public type: string;
     public assigneeId: number;
+		public modifiedDate: Date;
     public sectionId: number;
-    public imageList: Array<string>;    
-    public isSelected: boolean;
-    public polygonCoords: any;
+    
   }
 
   export class TrashInformationViewModel extends TrashInformationModel {
-    
+		public isSelected: boolean;
+    public polygonCoords: any;
     public sectionName: string;
     public assigneeName: string;
-
   }
 
   export class Coordinate {

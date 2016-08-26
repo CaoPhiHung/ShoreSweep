@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Data;
+using Newtonsoft.Json;
 
 namespace ShoreSweep
 {
@@ -51,7 +52,6 @@ namespace ShoreSweep
             SubLocality = json.Value<string>("subLocality");
             Description = json.Value<string>("description");
             Comment = json.Value<string>("comment");
-            //ModifiedDate = json.Value<DateTime>("modifiedDate");
 
             Status tempStatus;
             if (Enum.TryParse<Status>(json.Value<string>("status"), out tempStatus))
@@ -61,8 +61,8 @@ namespace ShoreSweep
 
             Size = json.Value<string>("size");
             Url = json.Value<string>("url");
-            Images = json.Value<string>("images");
-            Type = json.Value<string>("type");
+			Images = JsonConvert.SerializeObject(json["images"]);
+			Type = json.Value<string>("type");
             AssigneeID = json.Value<long?>("assigneeId");
             SectionID = json.Value<long?>("sectionId");
         }
@@ -85,17 +85,18 @@ namespace ShoreSweep
             json["subLocality"] = SubLocality;
             json["description"] = Description;
             json["comment"] = Comment;
-            json["modifiedDate"] = ModifiedDate;
+            json["modifiedDate"] = ModifiedDate.ToString();
 
             json["status"] = Status.ToString();
             json["size"] = Size;
 
             json["url"] = Url;
-            json["images"] = Images;
-            json["type"] = Type;
+			json["images"] = JArray.Parse(Images);
+			json["type"] = Type;
             json["assigneeId"] = AssigneeID;
             json["sectionId"] = SectionID;
             return json;
         }
-    }
+
+	}
 }
