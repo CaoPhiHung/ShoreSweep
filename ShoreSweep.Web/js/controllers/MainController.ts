@@ -30,7 +30,9 @@ module Clarity.Controller {
     public userService: service.UserService;
     public polygonService: service.PolygonService;
 
-    public trashInformationList: Array<Model.TrashInformationModel>;
+    public trashInfoViewModelList: Array<Model.TrashInformationViewModel>;
+		public trashInfoModelList: Array<Model.TrashInformationModel>;
+
     public importTrashList: Array<Model.TrashInformationModel>;
     public polygonList: Array<Model.PolygonModel>;
     public importPolygonList: Array<Model.PolygonModel>;
@@ -50,8 +52,7 @@ module Clarity.Controller {
 
       this.polygonList = [];
       this.mainHelper = new helper.MainHelper();
-      this.initTrashInformationList();
-      this.initAssigneeList();
+      this.initTrashInfoViewModelList();
       this.search = {};
       var self = this;
       this.$scope.$watch('viewModel.searchText', (newVal, oldVal) => {
@@ -79,23 +80,20 @@ module Clarity.Controller {
           default:
             break;
         }
-         
 
-        self.numPages = Math.ceil(filterFilter(this.trashInformationList, self.search).length / self.itemsPerPage);
+        self.numPages = Math.ceil(filterFilter(this.trashInfoViewModelList, self.search).length / self.itemsPerPage);
         self.currentPage = 1;
       }, true);
     }
 
-    initTrashInformationList() {
+    initTrashInfoViewModelList() {
       var self = this;
       this.showSpinner = true;
       this.$rootScope.showSpinner();
       this.trashService.getAll((data) => {
-        for (var i = 0; i < data.length; i++) {
-          self.initFirstImage(data[i]);
-        }
-        self.trashInformationList = data;
+        self.trashInfoViewModelList = data;
         self.initPolygonList();
+				self.initAssigneeList();
         self.initPaging();
         self.showSpinner = false;
         self.$rootScope.hideSpinner();
@@ -107,9 +105,11 @@ module Clarity.Controller {
       this.polygonService.getAll((data) => {
         self.polygonList = data;
         for (var i = 0; i < self.polygonList.length; i++) {
-          for (var j = 0; j < self.trashInformationList.length; j++) {
-            if (self.trashInformationList[j].sectionId && self.trashInformationList[j].sectionId == self.polygonList[i].id) {
-              self.trashInformationList[j].polygonCoords = self.polygonList[i].coordinates;
+          for (var j = 0; j < self.trashInfoViewModelList.length; j++) {
+						var trash = self.trashInfoViewModelList[j];
+            if (trash.sectionId && trash.sectionId == self.polygonList[i].id) {
+							trash.sectionName = self.polygonList[i].name;
+              trash.polygonCoords = self.polygonList[i].coordinates;
             }
           }
         }
@@ -117,8 +117,13 @@ module Clarity.Controller {
     }
 
     initAssigneeList() {
+			var self = this;
       this.userService.getAllAssignee((data) => {
-        this.assigneeList = data;
+        self.assigneeList = data;
+				for (var i = 0; i < self.trashInfoViewModelList.length; i++) {
+					var trash = self.trashInfoViewModelList[i];
+					trash.assigneeName = self.getAssigneeName(trash.assigneeId);
+				}
       }, (data) => { });
     }
 
@@ -126,30 +131,43 @@ module Clarity.Controller {
       this.itemsPerPage = 5;
       this.currentPage = 1;
       this.maxPageSize = 5;
-      this.numPages = Math.ceil(this.trashInformationList.length / this.itemsPerPage);
+      this.numPages = Math.ceil(this.trashInfoViewModelList.length / this.itemsPerPage);
     }
 
-    showGoogleMapDialog(trashInfo: Model.TrashInformationModel, event: Event) {
+		mapTrashInfoViewModelToTrashModel(trashViewInfo: Model.TrashInformationViewModel) {
+
+			var trashInfo = new Model.TrashInformationModel();
+			trashInfo.id = trashViewInfo.id;
+			trashInfo.trashId = trashViewInfo.trashId;
+			trashInfo.latitude = trashViewInfo.latitude;
+			trashInfo.longitude = trashViewInfo.longitude;
+			trashInfo.continent = trashViewInfo.continent;
+			trashInfo.country = trashViewInfo.country;
+			trashInfo.administrativeArea1 = trashViewInfo.administrativeArea1;
+			trashInfo.administrativeArea2 = trashViewInfo.administrativeArea2;
+			trashInfo.administrativeArea3 = trashViewInfo.administrativeArea3;
+			trashInfo.locality = trashViewInfo.locality;
+			trashInfo.subLocality = trashViewInfo.subLocality;
+			trashInfo.description = trashViewInfo.description;
+			trashInfo.comment = trashViewInfo.comment;
+			trashInfo.status = trashViewInfo.status;
+			trashInfo.url = trashViewInfo.url;
+			trashInfo.images = trashViewInfo.images;
+			trashInfo.size = trashViewInfo.size;
+			trashInfo.type = trashViewInfo.type;
+			trashInfo.assigneeId = trashViewInfo.assigneeId;
+			trashInfo.sectionId = trashViewInfo.sectionId;
+				
+			return trashInfo;
+		}
+
+    showGoogleMapDialog(trashInfo: Model.TrashInformationViewModel, event: Event) {
+			trashInfo.assigneeName = this.getAssigneeName(trashInfo.assigneeId);
       var self = this;
-      var trashViewInfo = new Model.TrashInformationViewModel();
-      trashViewInfo.id = trashInfo.id;
-      trashViewInfo.status = trashInfo.status;
-      trashViewInfo.latitude = trashInfo.latitude;
-      trashViewInfo.longitude = trashInfo.longitude;
-      trashViewInfo.administrativeArea1 = trashInfo.administrativeArea1;
-      trashViewInfo.sectionName = this.getSectionName(trashInfo.sectionId);
-      trashViewInfo.assigneeName = this.getAssigneeName(trashInfo.assigneeId);
-      trashViewInfo.description = trashInfo.description;
-      trashViewInfo.type = trashInfo.type;
-      trashViewInfo.imageList = trashInfo.imageList;
-      trashViewInfo.size = trashInfo.size;
-      trashViewInfo.polygonCoords = trashInfo.polygonCoords;
-
-
       this.$mdDialog.show({
 
-        controller: function ($scope, $mdDialog, trashViewInfo) {
-          $scope.trashInfo = trashViewInfo;
+        controller: function ($scope, $mdDialog, trashInfo) {
+          $scope.trashInfo = trashInfo;
 
           $scope.hide = function () {
             $mdDialog.hide();
@@ -167,7 +185,7 @@ module Clarity.Controller {
         targetEvent: event,
         clickOutsideToClose: true,
         locals: {
-          trashViewInfo: trashViewInfo
+          trashInfo: trashInfo
         }
 
       })
@@ -176,13 +194,6 @@ module Clarity.Controller {
 
     importCSVFile() {
       var self = this;
-      //this.isImportLoading = true;
-      //this.trashService.importCSV(this.excelFileUpload,
-      //    (data) => {
-      //        //this.onImportUserSuccess(data);
-      //    },
-      //    (data) => {
-      //    });
       if (this.importTrashList) {
         this.$rootScope.showSpinner();
         this.trashService.importTrashRecord(this.importTrashList,
@@ -196,13 +207,12 @@ module Clarity.Controller {
       }
     }
 
-    onImportTrashListSuccess(data: Array<Model.TrashInformationModel>) {
+    onImportTrashListSuccess(data: Array<Model.TrashInformationViewModel>) {
       for (var i = 0; i < data.length; i++) {
-        this.initFirstImage(data[i]);
-        this.trashInformationList.push(data[i]);
+        this.trashInfoViewModelList.push(data[i]);
       }
       if (data.length > 0) {
-        this.numPages = Math.ceil(this.trashInformationList.length / this.itemsPerPage);
+        this.numPages = Math.ceil(this.trashInfoViewModelList.length / this.itemsPerPage);
         this.currentPage = 1;
         alert('Imported ' + data.length + ' records');
       } else {
@@ -224,7 +234,7 @@ module Clarity.Controller {
 
     onImportPolygonSuccess(data: Array<Model.PolygonModel>) {
       if (data.length > 0) {
-        for (var i = 0; i < data.length; i++){
+        for (var i = 0; i < data.length; i++) {
           this.polygonList.push(data[i]);
         }
         this.updateSectionId();
@@ -244,7 +254,7 @@ module Clarity.Controller {
         });
 
         for (var j = startIndex; j < endIndex; j++) {
-          var trash = this.trashInformationList[j];
+          var trash = this.trashInfoViewModelList[j];
 
           if (trash && trash.latitude && trash.longitude) {
             var latLng = new google.maps.LatLng(trash.latitude, trash.longitude);
@@ -263,12 +273,6 @@ module Clarity.Controller {
       if (updatedList.length > 0) {
         this.trashService.updateTrashRecord(updatedList, function () { }, function () { });
       }
-    }
-
-
-
-    initFirstImage(trash: Model.TrashInformationModel) {
-      trash.imageList = trash.images.split(',');
     }
 
     //isValidFileType(fileName) {
@@ -302,7 +306,7 @@ module Clarity.Controller {
       reader.onload = function () {
 
         var records = reader.result.split('\n');
-        for (var line = 1; line < records.length; line++) {
+        for (var line = 1; line < 10 /*records.length*/; line++) {
           var record = records[line].split(';');
           var trash = new Model.TrashInformationModel();
           trash.trashId = record[0];
@@ -318,7 +322,7 @@ module Clarity.Controller {
           trash.description = record[10];
           trash.status = record[11];
           trash.url = record[12];
-          trash.images = record[13];
+          trash.images = record[13].split(',');
           trash.size = record[14];
           trash.type = record[15];
           self.importTrashList.push(trash);
@@ -360,9 +364,10 @@ module Clarity.Controller {
 
     updateRecord() {
       var trashList = [];
-      for (var i = 0; i < this.trashInformationList.length; i++) {
-        if (this.trashInformationList[i].isSelected) {
-          trashList.push(this.trashInformationList[i]);
+      for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
+				var trash = this.trashInfoViewModelList[i];
+        if (trash.isSelected) {
+          trashList.push(this.mapTrashInfoViewModelToTrashModel(trash));
         }
       }
       this.trashService.updateTrashRecord(trashList,
@@ -374,9 +379,9 @@ module Clarity.Controller {
     }
 
     enableUpdateOrShowMap() {
-      if (this.trashInformationList != null && this.trashInformationList.length > 0) {
-        for (var i = 0; i < this.trashInformationList.length; i++) {
-          if (this.trashInformationList[i].isSelected) {
+      if (this.trashInfoViewModelList != null && this.trashInfoViewModelList.length > 0) {
+        for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
+          if (this.trashInfoViewModelList[i].isSelected) {
             return true;
           }
         }
@@ -384,18 +389,10 @@ module Clarity.Controller {
       return false;
     }
 
-    //enableImportCSV(check = false) {
-    //  return check;
-    //}
-
-    //enableImportPolygons(check = false) {
-    //  return check;
-    //}
-
     showMapAndTrash() {
       var selectedTrashInfoList = [];
-      for (var i = 0; i < this.trashInformationList.length; i++) {
-        var trashInfo = this.trashInformationList[i];
+      for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
+        var trashInfo = this.trashInfoViewModelList[i];
         if (trashInfo.isSelected) {
           selectedTrashInfoList.push(trashInfo);
         }
@@ -406,7 +403,7 @@ module Clarity.Controller {
 
     itemsPerPageChanged(itemsPerPage) {
       this.currentPage = 1;
-      this.numPages = Math.ceil(this.trashInformationList.length / itemsPerPage);
+      this.numPages = Math.ceil(this.trashInfoViewModelList.length / itemsPerPage);
       this.updateSectionId();
       return this.currentPage;
     }
@@ -417,7 +414,7 @@ module Clarity.Controller {
       return this.currentPage;
     }
 
-    getPageNumber = function () {
+    getPageNumber() {
       return this.currentPage;
     }
 
