@@ -306,7 +306,7 @@ module Clarity.Controller {
       reader.onload = function () {
 
         var records = reader.result.split('\n');
-        for (var line = 1; line < 10 /*records.length*/; line++) {
+        for (var line = 1; line < 20 /*records.length*/; line++) {
           var record = records[line].split(';');
           var trash = new Model.TrashInformationModel();
           trash.trashId = record[0];
@@ -322,7 +322,10 @@ module Clarity.Controller {
           trash.description = record[10];
           trash.status = record[11];
           trash.url = record[12];
-          trash.images = record[13].split(',');
+          trash.images = record[13].trim().split(',');
+					if (trash.images[trash.images.length - 1] == '') {
+						trash.images.splice(trash.images.length - 1, 1);
+					}
           trash.size = record[14];
           trash.type = record[15];
           self.importTrashList.push(trash);
@@ -535,5 +538,15 @@ module Clarity.Controller {
         .then(function (answer) { }, function () { });
     }
 
+		updateTrashInfoChange(trashInfo: Model.TrashInformationViewModel, property: any) {
+			var trashList = [];
+			trashList.push(this.mapTrashInfoViewModelToTrashModel(trashInfo));
+			this.trashService.updateTrashRecord(trashList,
+        (data) => {
+          //alert('Updated ' + property + ' Successfully!!!');
+        },
+        (data) => {
+        });
+		}
   }
 }
