@@ -60,7 +60,7 @@ namespace ShoreSweep.Api
                 return new RestApiResult { StatusCode = HttpStatusCode.BadRequest };
             }
             var trashes = json.Value<JArray>("trashes");
-
+            List<TrashInformation> trashList = new List<TrashInformation>();
             foreach (var trash in trashes)
             {
                 var id = trash.Value<long>("trashId");
@@ -71,10 +71,11 @@ namespace ShoreSweep.Api
                 }
                 oldTrash.ModifiedDate = DateTime.Now;
                 oldTrash.ApplyJson(trash);
+                trashList.Add(oldTrash);
             }
 
             ClarityDB.Instance.SaveChanges();
-            return new RestApiResult { StatusCode = HttpStatusCode.OK};
+            return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = BuildJsonArray(trashList) };
         }
 
         private JArray BuildJsonArray(IEnumerable<TrashInformation> trashInfos)

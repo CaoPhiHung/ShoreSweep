@@ -37,7 +37,7 @@ ngGoogleMap.directive('googleMap', function () {
           position: new google.maps.LatLng(scope.ngModel.latitude, scope.ngModel.longitude),
           map: map,
           label: scope.ngModel.id + '',
-          title: scope.ngModel.id + '-' + scope.ngModel.size
+          title: scope.ngModel.description
         });
       }
     
@@ -46,6 +46,9 @@ ngGoogleMap.directive('googleMap', function () {
       google.maps.event.addListenerOnce(map, 'idle', function () {
         google.maps.event.trigger(map, 'resize');
         map.setCenter(center);
+        var infowindow = new google.maps.InfoWindow();
+        infowindow.setContent(scope.ngModel.id + '-' + scope.ngModel.size);
+        infowindow.open(map, marker);
       });
 
       google.maps.event.addListener(marker, 'click', (function (marker) {

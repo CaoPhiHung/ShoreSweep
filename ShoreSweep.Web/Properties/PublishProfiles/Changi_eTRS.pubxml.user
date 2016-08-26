@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\Users\cphung\Workspaces\Deploy</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Users\cphung\Workspaces\Deploy\ShoreSweep_25082016</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Conjurer.dll">
@@ -31,13 +31,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2016 11:37:42</publishTime>
     </File>
     <File Include="bin/ShoreSweep.Api.dll">
-      <publishTime>08/22/2016 00:34:02</publishTime>
+      <publishTime>08/25/2016 22:09:35</publishTime>
     </File>
     <File Include="bin/ShoreSweep.dll">
-      <publishTime>08/22/2016 00:15:42</publishTime>
+      <publishTime>08/24/2016 21:01:29</publishTime>
     </File>
     <File Include="bin/ShoreSweep.Web.dll">
-      <publishTime>08/22/2016 16:15:47</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="css/font-awsome/font-awesome.css">
       <publishTime>08/21/2016 11:37:45</publishTime>
@@ -52,19 +52,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2016 11:37:45</publishTime>
     </File>
     <File Include="css/main-style.css">
-      <publishTime>08/21/2016 11:37:45</publishTime>
+      <publishTime>08/25/2016 10:25:33</publishTime>
     </File>
     <File Include="css/sass/components/_input_select.scss">
       <publishTime>08/21/2016 11:37:45</publishTime>
     </File>
     <File Include="css/sass/main-style.scss">
-      <publishTime>08/21/2016 11:37:45</publishTime>
+      <publishTime>08/25/2016 10:25:33</publishTime>
     </File>
     <File Include="default-editable.html">
-      <publishTime>08/21/2016 11:37:45</publishTime>
+      <publishTime>08/24/2016 17:10:16</publishTime>
     </File>
     <File Include="default.html">
-      <publishTime>08/22/2016 16:15:56</publishTime>
+      <publishTime>08/25/2016 22:09:44</publishTime>
     </File>
     <File Include="font/changi_etrs/icomoon.eot">
       <publishTime>08/21/2016 11:37:45</publishTime>
@@ -145,13 +145,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2016 11:37:45</publishTime>
     </File>
     <File Include="gulpfile.js">
-      <publishTime>08/21/2016 11:37:45</publishTime>
+      <publishTime>08/25/2016 10:25:33</publishTime>
     </File>
     <File Include="html/access-denied.html">
       <publishTime>08/21/2016 11:37:45</publishTime>
     </File>
+    <File Include="html/admin-dialog.html">
+      <publishTime>08/25/2016 10:25:33</publishTime>
+    </File>
     <File Include="html/admin-header.html">
       <publishTime>08/21/2016 11:37:45</publishTime>
+    </File>
+    <File Include="html/assignee-dialog.html">
+      <publishTime>08/25/2016 10:25:33</publishTime>
     </File>
     <File Include="html/color-dialog.html">
       <publishTime>08/21/2016 11:37:45</publishTime>
@@ -160,10 +166,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2016 11:37:45</publishTime>
     </File>
     <File Include="html/google-map-dialog.html">
-      <publishTime>08/22/2016 00:21:44</publishTime>
+      <publishTime>08/25/2016 17:51:24</publishTime>
     </File>
     <File Include="html/index.html">
-      <publishTime>08/22/2016 12:28:07</publishTime>
+      <publishTime>08/25/2016 17:22:43</publishTime>
     </File>
     <File Include="html/kiosks-survey.html">
       <publishTime>08/21/2016 11:37:45</publishTime>
@@ -173,6 +179,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="html/login_form.html">
       <publishTime>08/21/2016 11:37:45</publishTime>
+    </File>
+    <File Include="html/map-and-trash.html">
+      <publishTime>08/24/2016 19:56:22</publishTime>
     </File>
     <File Include="html/modal-form.html">
       <publishTime>08/21/2016 11:37:45</publishTime>
@@ -216,77 +225,92 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="img/logo-incite.png">
       <publishTime>08/21/2016 11:37:45</publishTime>
     </File>
+    <File Include="img/menu-ico.svg">
+      <publishTime>08/25/2016 10:25:33</publishTime>
+    </File>
     <File Include="img/shore_sweep.jpg">
       <publishTime>08/21/2016 11:37:45</publishTime>
     </File>
     <File Include="js/all.min.js">
-      <publishTime>08/22/2016 16:15:56</publishTime>
+      <publishTime>08/25/2016 22:09:44</publishTime>
     </File>
     <File Include="js/clarity-app.js">
-      <publishTime>08/21/2016 11:37:45</publishTime>
+      <publishTime>08/25/2016 10:25:34</publishTime>
     </File>
     <File Include="js/controllers/authentication/LoginController.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/controllers/authentication/LogoutController.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/controllers/IController.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/controllers/MainController.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
+    </File>
+    <File Include="js/controllers/MapController.js">
+      <publishTime>08/25/2016 22:09:36</publishTime>
+    </File>
+    <File Include="js/directives/ConvertToNumber.js">
+      <publishTime>08/25/2016 10:25:34</publishTime>
     </File>
     <File Include="js/directives/GoogleMap.js">
-      <publishTime>08/22/2016 00:21:45</publishTime>
+      <publishTime>08/25/2016 17:54:08</publishTime>
     </File>
     <File Include="js/helpers/MainHelper.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/model/BaseModel.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/model/KioskLogModel.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
+    </File>
+    <File Include="js/model/PolygonModel.js">
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/model/TerminalModel.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/model/TrashInformationModel.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/model/UserLogModel.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/model/UserModel.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/services/AuthenticationService.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/services/BaseService.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/services/IService.ts">
       <publishTime>08/21/2016 11:37:45</publishTime>
     </File>
     <File Include="js/services/KioskLogService.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/services/LocationService.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
+    </File>
+    <File Include="js/services/PolygonService.js">
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/services/TerminalService.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/services/TrashService.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/services/UserLogService.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="js/services/UserService.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="lib/angular-material/angular-animate.js">
       <publishTime>08/21/2016 11:37:45</publishTime>
@@ -424,13 +448,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2016 11:37:57</publishTime>
     </File>
     <File Include="spec/controllers/authentication/LoginControllerSpec.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="spec/controllers/authentication/LogoutControllerSpec.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="spec/controllers/MainControllerSpec.js">
-      <publishTime>08/22/2016 16:15:46</publishTime>
+      <publishTime>08/25/2016 22:09:36</publishTime>
     </File>
     <File Include="spec/runner.html">
       <publishTime>08/21/2016 11:37:57</publishTime>
@@ -448,7 +472,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2016 11:37:57</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/22/2016 16:15:57</publishTime>
+      <publishTime>08/24/2016 21:01:40</publishTime>
     </File>
   </ItemGroup>
 </Project>
