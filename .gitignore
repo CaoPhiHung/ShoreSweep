@@ -30,7 +30,7 @@
 /ShoreSweep.Web/obj/Debug/ShoreSweep.Web.csprojResolveAssemblyReference.cache
 /ShoreSweep.Web/obj/Release
 
-/.vs
+.vs/
 /.vs/config/applicationhost.config
 /ShoreSweep.csproj.user
 /ShoreSweep.Web/Properties/PublishProfiles

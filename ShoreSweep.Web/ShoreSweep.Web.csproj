@@ -108,6 +108,8 @@
     <Content Include="font\fa\fontawesome-webfont.svg" />
     <Content Include="font\hal\icomoon.svg" />
     <Content Include="gulpfile.js" />
+    <Content Include="html\import-kml-dialog.html" />
+    <Content Include="html\import-csv-dialog.html" />
     <Content Include="html\admin-dialog.html" />
     <Content Include="html\assignee-dialog.html" />
     <Content Include="html\google-map-dialog.html" />
