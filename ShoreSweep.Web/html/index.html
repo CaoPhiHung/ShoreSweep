@@ -5,13 +5,9 @@
 
 	<md-toolbar class="header">
 		<div layout="row" layout-align="center center" class="sv-header">
-			<div flex="20">
+			<div flex="90">
 				<div>
 					<img src="../img/lake-lanier-logo.png" style="height:50px;" />
-				</div>
-			</div>
-			<div flex="70">
-				<div layout="row" layout-align="center center" class="sv-header-import">
 				</div>
 			</div>
 			<div flex="10" data-ng-controller="LogoutController">
@@ -99,7 +95,10 @@
 		<md-card>
 			<md-card-content>
 				<div layout="row" layout-align="center center" class="md-row sv-header-type">
-					<div flex="5" class="md-cell border-right"></div>
+					<div flex="5" class="md-cell border-right">
+            <md-checkbox class="select-all" data-ng-model="viewModel.selectedAll" aria-label="selectedAll"
+              data-ng-change="viewModel.onchangeSelectedAll()"></md-checkbox>
+          </div>
 					<div flex="5" class="md-cell border-right">ID</div>
 					<div flex="15" class="md-cell border-right">Description</div>
 					<div flex="10" class="md-cell border-right">Status</div>
@@ -111,7 +110,7 @@
 					<div flex="10" class="md-cell border-right">Assignee</div>
 				</div>
 
-				<div layout="row" layout-align="center center" data-ng-repeat="trashInfo in viewModel.trashInfoViewModelList | filter: viewModel.search | start: (viewModel.currentPage - 1) * viewModel.itemsPerPage | limitTo: viewModel.itemsPerPage" class="md-row">
+				<div layout="row" layout-align="center center" data-ng-repeat="trashInfo in viewModel.trashInformationList | filter: viewModel.search | start: (viewModel.currentPage - 1) * viewModel.itemsPerPage | limitTo: viewModel.itemsPerPage" class="md-row">
 					<div flex="5" class="md-cell border-right">
 						<md-checkbox data-ng-model="trashInfo.isSelected" aria-label="selected"></md-checkbox>
 					</div>
@@ -125,11 +124,11 @@
 						</select>
 					</div>
 					<div flex="10" class="md-cell border-right" data-ng-click="viewModel.showGoogleMapDialog(trashInfo, $event)" style="cursor: pointer;">
-						<img data-ng-src="{{trashInfo.images[0]}}" style="width:80%; height: 80%" />
+						<img data-ng-src="{{trashInfo.imageList[0]}}" style="width:80%; height: 80%" />
 					</div>
 					<div flex="10" class="md-cell border-right">{{trashInfo.size}}</div>
 					<div flex="10" class="md-cell border-right">{{trashInfo.type}}</div>
-					<div flex="10" class="md-cell border-right">{{trashInfo.sectionName}}</div>
+					<div flex="10" class="md-cell border-right">{{viewModel.getSectionName(trashInfo.sectionId)}}</div>
 					<div flex="15" class="md-cell border-right">
 						<input type="text" class="comment" data-ng-model="trashInfo.comment" placeholder="Comment" />
 					</div>

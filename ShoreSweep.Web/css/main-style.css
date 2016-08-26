@@ -243,6 +243,8 @@ md-progress-linear { height: 2px !important; }
 
 .main-color { color: #da5c0c; }
 
+md-checkbox.select-all ._md-icon { border-color: #ffffff; }
+
 md-checkbox.md-checked .md-ink-ripple { color: #da5c0c; }
 
 md-checkbox.md-checked ._md-icon { background-color: #da5c0c; }
