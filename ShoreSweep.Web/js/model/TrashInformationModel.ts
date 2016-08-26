@@ -40,4 +40,18 @@ module Clarity.Model {
     }
   }
 
+  export class Marker {
+    public id: number;
+    public size: string;
+    public longitude: number;
+    public latitude: number;
+
+    constructor(id: number, size: string, longitude: number, latitude: number) {
+      this.id = id;
+      this.size = size;
+      this.longitude = longitude;
+      this.latitude = latitude;
+    }
+  }
+
 }

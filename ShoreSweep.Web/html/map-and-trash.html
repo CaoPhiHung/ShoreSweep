@@ -3,7 +3,19 @@
     <md-progress-linear md-mode="indeterminate"></md-progress-linear>
   </div>
 
-  <div layout="column" layout-align="center" data-ng-repeat="trashInfo in viewModel.selectedTrashInformationList">
+
+  <div layout="column" layout-align="center">
+    <div layout="row" layout-align="center">
+      <div flex="20"></div>
+      <div flex="60">
+        <google-map style="height: 400px; width: 550px;" ng-markers="viewModel.markers"></google-map>
+      </div>
+      <div flex="20"></div>
+    </div>
+  </div>
+
+  
+  <div class="break-page" layout="column" layout-align="center" data-ng-repeat="trashInfo in viewModel.selectedTrashInformationList">
     <div layout="row" layout-align="center">
       <div flex="20"></div>
       <div flex="30">
@@ -28,7 +40,6 @@
       </div>
       <div flex="20"></div>
     </div>
-
     <div layout="row" layout-align="center">
       <div flex="20"></div>
       <div flex="60" layout="row" layout-align="center">
@@ -47,8 +58,6 @@
       </div>
       <div flex="20"></div>
     </div>
-
   </div>
+
 </div>
-
-

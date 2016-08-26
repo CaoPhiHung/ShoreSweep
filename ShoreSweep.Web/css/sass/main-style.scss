@@ -1073,5 +1073,9 @@ select.field{
     border: 1px solid #dddddd;
     text-align-last: center;
 }
+.break-page{
+    page-break-before:always;
+    page-break-inside: avoid;
+}
 
 

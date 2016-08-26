@@ -18,28 +18,39 @@ module Clarity.Controller {
     public userService: service.UserService;
 
     public selectedTrashInformationList: Array<Model.TrashInformationModel>;
-    public coordinates: Array<Model.Coordinate>;
+    //public coordinates: Array<Model.Coordinate>;
+    public markers: Array<Model.Marker>;
 
     constructor(private $scope,
       public $rootScope: IRootScope,
       private $http: ng.IHttpService,
       public $location: ng.ILocationService,
+      public $window: ng.IWindowService,
       public $mdDialog: any) {
 
       $scope.viewModel = this;
       this.trashService = new Service.TrashService($http);
       this.userService = new Service.UserService($http);
       this.mainHelper = new helper.MainHelper();
-
-      this.selectedTrashInformationList = this.$rootScope.selectedTrashInfoList;
-      this.initCoordinates();
+      this.selectedTrashInformationList = angular.fromJson(this.$window.sessionStorage.getItem('selectedTrashInfoList'));
+      //this.initCoordinates();
+      this.initMarkers();
     }
 
-    initCoordinates() {
-      this.coordinates = [];
+    //initCoordinates() {
+    //  this.coordinates = [];
+    //  for (var i = 0; i < this.selectedTrashInformationList.length; i++) {
+    //    var coordinate = new Model.Coordinate(this.selectedTrashInformationList[i].longitude, this.selectedTrashInformationList[i].latitude);
+    //    this.coordinates.push(coordinate);
+    //  }
+    //}
+
+    initMarkers() {
+      this.markers = [];
       for (var i = 0; i < this.selectedTrashInformationList.length; i++) {
-        var coordinate = new Model.Coordinate(this.selectedTrashInformationList[i].longitude, this.selectedTrashInformationList[i].latitude);
-        this.coordinates.push(coordinate);
+        var trashInfo = this.selectedTrashInformationList[i];
+        var marker = new Model.Marker(trashInfo.id, trashInfo.size, trashInfo.longitude, trashInfo.latitude);
+        this.markers.push(marker);
       }
     }
 

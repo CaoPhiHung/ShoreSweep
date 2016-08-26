@@ -36,6 +36,7 @@ module Clarity.Controller {
       public $rootScope: IRootScope,
       private $http: ng.IHttpService,
       public $location: ng.ILocationService,
+      public $window: ng.IWindowService,
       public $mdDialog: any) {
 
       $scope.viewModel = this;
@@ -301,15 +302,15 @@ module Clarity.Controller {
     }
 
     showMapAndTrash() {
-      this.$rootScope.selectedTrashInfoList = [];
+      var selectedTrashInfoList = [];
       for (var i = 0; i < this.trashInformationList.length; i++) {
         var trashInfo = this.trashInformationList[i];
         if (trashInfo.isSelected) {
-          this.$rootScope.selectedTrashInfoList.push(trashInfo);
+          selectedTrashInfoList.push(trashInfo);
         }
       }
-
-      this.$location.path('/show_map_and_trash');
+      this.$window.sessionStorage.setItem('selectedTrashInfoList', angular.toJson(selectedTrashInfoList));
+      this.$window.open('/#/show_map_and_trash');
     }
 
     itemsPerPageChanged(itemsPerPage) {

@@ -263,3 +263,5 @@ md-checkbox:last-of-type { margin-left: 5px !important; }
 .ico:hover { color: #da5c0c; }
 
 select.field { width: 90%; height: 50px; border-radius: 10px; border: 1px solid #dddddd; text-align-last: center; }
+
+.break-page { page-break-before: always; page-break-inside: avoid; }
