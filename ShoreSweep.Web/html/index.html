@@ -40,14 +40,14 @@
 		</div>
 
 		<div layout="row" layout-align="center center" class="sv-header-action">
-			<div flex="95">
+			<div flex="65">
 				<md-button class="md-raised md-primary" data-ng-click="viewModel.showMapAndTrash()"
-									 data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Show Map & Trash</md-button>
+					data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Show Map & Trash</md-button>
 				<md-button class="md-raised md-primary" data-ng-click="viewModel.updateRecord()"
-									 data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Update Record</md-button>
+					data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Update Record</md-button>
 			</div>
-			<div flex="10" class="md-cell border-right">
-				<select name="status" class="field" data-ng-model="viewModel.searchType">
+			<div flex="15">
+				<select name="status" class="select-search-box" data-ng-model="viewModel.searchType">
 					<option value="0">Modified Date</option>
 					<option value="1">Status</option>
 					<option value="2">Size</option>
@@ -56,8 +56,8 @@
 					<option value="5">Assignee</option>
 				</select>
 			</div>
-			<div flex="15" class="md-cell border-right">
-				<input type="text" class="comment" data-ng-model="viewModel.searchText" placeholder="Search text" />
+			<div flex="15">
+				<input type="text" class="search-text" data-ng-model="viewModel.searchText" placeholder="Search text" />
 			</div>
 			<div layout="column" flex="5" layout-align="center right">
 				<md-menu>

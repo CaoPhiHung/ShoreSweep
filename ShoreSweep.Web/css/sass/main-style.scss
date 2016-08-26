@@ -1077,5 +1077,20 @@ select.field{
     page-break-before:always;
     page-break-inside: avoid;
 }
-
+.search-text{
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    font-size: 14px;
+    width: 90%;
+    padding: 5px;
+}
+.select-search-box{
+    width: 90%;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #dddddd;
+    text-align-last: center;
+    font-size: 16px;
+}
 
