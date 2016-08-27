@@ -28,17 +28,28 @@
 									 data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Delete Record</md-button>
 			</div>
 			<div flex="15">
-				<select name="status" class="select-search-box" data-ng-model="viewModel.searchType">
-					<option value="0">Modified Date</option>
-					<option value="1">Status</option>
-					<option value="2">Size</option>
-					<option value="3">Type</option>
-					<option value="4">Section</option>
-					<option value="5">Assignee</option>
+				<select name="status" class="select-search-box" data-ng-model="viewModel.searchType" data-ng-change="viewModel.onSearchTypeChange()">
+					<option value="0">ID</option>
+					<option value="1">Description</option>
+					<option value="2">Comment</option>
+					<option value="3">Status</option>
+					<option value="4">Size</option>
+					<option value="5">Type</option>
+					<option value="6">Section</option>
+					<option value="7">Assignee</option>
 				</select>
 			</div>
-			<div flex="15">
-				<input type="text" class="search-text" data-ng-model="viewModel.searchText" placeholder="Search text" />
+			<div flex="15" data-ng-if="!viewModel.showSearchDropDowList()">
+				<input type="text" class="search-text" data-ng-model="viewModel.searchText" placeholder="Search text"  />
+			</div>
+			<div flex="15" data-ng-if="viewModel.showSearchDropDowList()">
+				<select name="status" class="select-search-box" data-ng-model="viewModel.searchText" >
+					<option data-ng-repeat="status in viewModel.statusList" value="{{ status }}" data-ng-bind="status" data-ng-if="viewModel.searchType == '3'"></option>
+					<option data-ng-repeat="size in viewModel.sizesList" value="{{ size }}" data-ng-bind="size" data-ng-if="viewModel.searchType == '4'"></option>
+					<option data-ng-repeat="type in viewModel.typesList" value="{{ type }}" data-ng-bind="type" data-ng-if="viewModel.searchType == '5'"></option>
+					<option data-ng-repeat="section in viewModel.polygonList" value="{{ section.name }}" data-ng-bind="section.name" data-ng-if="viewModel.searchType == '6'"></option>
+					<option data-ng-repeat="assignee in viewModel.assigneeList" value="{{ assignee.id }}" data-ng-bind="assignee.username" data-ng-if="viewModel.searchType == '7'"></option>
+				</select>
 			</div>
 			<div layout="column" flex="5" layout-align="center right">
 				<md-menu>
@@ -69,11 +80,10 @@
 				<strong>Show</strong>
 				<select class="input-page" data-ng-model="viewModel.itemsPerPage" convert-to-number
 					data-ng-change="viewModel.itemsPerPageChanged(viewModel.itemsPerPage)">
-					<option value="5">5</option>
-					<option value="10">10</option>
-					<option value="20">20</option>
 					<option value="50">50</option>
 					<option value="100">100</option>
+					<option value="150">150</option>
+					<option value="200">200</option>
 					<option value="{{viewModel.trashInfoViewModelList.length}}">All</option>
 				</select>
 				<strong>records / page</strong>

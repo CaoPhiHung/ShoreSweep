@@ -25,6 +25,9 @@ module Clarity.Controller {
     public search: any;
     public searchText: any;
     public searchType: any;
+		public statusList: Array<string>;
+		public sizesList: Array<string>;
+		public typesList: Array<string>;
 
     public trashService: service.TrashService;
     public userService: service.UserService;
@@ -66,28 +69,39 @@ module Clarity.Controller {
       this.isReverse = false;
       this.userName = this.$rootScope.user.username;
 
+			this.statusList = ['Unconfirmed', 'Confirmed', 'Cleaned'];
+			this.sizesList = ['Small', 'Medium', 'Large'];
+			this.typesList = ['Household', 'Automotive', 'Construction', 'Plastic', 'Electronic',
+				'Glass', 'Metal', 'Liquid', 'Dangerous'];
+
       this.search = {};
       var self = this;
       this.$scope.$watch('viewModel.searchText', (newVal, oldVal) => {
         if ((oldVal == newVal) || oldVal == undefined || newVal == undefined || newVal == null)
           return;
         switch (self.searchType) {
-          case '0':
-            self.search = { status: newVal };
+					case '0':
+            self.search = { id: newVal };
             break;
-          case '1':
-            self.search = { status: newVal };
+					case '1':
+            self.search = { description: newVal };
             break;
-          case '2':
-            self.search = { size: newVal };
+					case '2':
+            self.search = { comment: newVal };
             break;
           case '3':
-            self.search = { type: newVal };
+            self.search = { status: newVal };
             break;
           case '4':
-            self.search = { sectionName: newVal };
+            self.search = { size: newVal };
             break;
           case '5':
+            self.search = { type: newVal };
+            break;
+          case '6':
+            self.search = { secionName: newVal };
+            break;
+          case '7':
             self.search = { assigneeName: newVal };
             break;
           default:
@@ -151,7 +165,7 @@ module Clarity.Controller {
     }
 
     initPaging() {
-      this.itemsPerPage = 5;
+      this.itemsPerPage = 50;
       this.currentPage = 1;
       this.maxPageSize = 5;
       this.numPages = Math.ceil(this.trashInfoViewModelList.length / this.itemsPerPage);
@@ -332,7 +346,7 @@ module Clarity.Controller {
       reader.onload = function () {
 
         var records = reader.result.split('\n');
-        for (var line = 1; line < records.length; line++) {
+        for (var line = 1; line < 200 /*records.length*/; line++) {
           var record = records[line].split(';');
           var trash = new Model.TrashInformationModel();
           trash.trashId = record[0];
@@ -644,5 +658,28 @@ module Clarity.Controller {
       this.propertyName = propertyName;
       this.trashInfoViewModelsOnPage = this.$filter('orderBy')(this.trashInfoViewModelList, this.propertyName, this.isReverse);
     }
+
+		showSearchDropDowList() {
+			switch (this.searchType) {
+				case '0':
+				case '1':
+				case '2':
+					return false;
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+				case '7':
+					return true;
+				default:
+					return false;
+			}
+		}
+		
+		onSearchTypeChange() {
+			this.searchText = null;
+			this.search = {};
+		}
+
   }
 }
