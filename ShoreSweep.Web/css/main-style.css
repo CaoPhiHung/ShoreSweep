@@ -268,7 +268,7 @@ select.field { width: 90%; height: 50px; border-radius: 10px; border: 1px solid 
 
 .break-page { page-break-before: always; page-break-inside: avoid; }
 
-.search-text { height: 40px; border-radius: 10px; border: none; font-size: 14px; width: 90%; padding: 5px; }
+.search-text { height: 40px; border-radius: 10px; border: none; font-size: 14px; width: 90%; padding: 5px; outline: none; }
 
 .select-search-box { width: 90%; height: 40px; border-radius: 10px; border: 1px solid #dddddd; text-align-last: center; font-size: 16px; }
 
@@ -303,3 +303,9 @@ th, td { height: 50px; overflow: hidden; text-overflow: ellipsis; white-space: n
 tr:nth-child(even) { background-color: #f2f2f2; }
 
 tr:hover { background-color: #da5c0c; color: #ffffff; }
+
+.pointer { cursor: pointer; outline: none; }
+
+.ico-sort-asc { font-size: 24px; vertical-align: bottom; height: 60px; line-height: 74px; color: #da5c0c; }
+
+.ico-sort-desc { font-size: 24px; vertical-align: bottom; height: 60px; line-height: 52px; color: #da5c0c; }

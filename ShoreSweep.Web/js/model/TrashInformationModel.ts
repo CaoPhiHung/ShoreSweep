@@ -22,9 +22,8 @@ module Clarity.Model {
     public size: string;
     public type: string;
     public assigneeId: number;
-		public modifiedDate: Date;
-    public sectionId: number;
-    
+    public modifiedDate: string;
+    public sectionId: number;    
   }
 
   export class TrashInformationViewModel extends TrashInformationModel {

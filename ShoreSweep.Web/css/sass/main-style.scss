@@ -1088,6 +1088,7 @@ select.field{
     font-size: 14px;
     width: 90%;
     padding: 5px;
+    outline: none;
 }
 .select-search-box{
     width: 90%;
@@ -1168,4 +1169,23 @@ tr:nth-child(even) {background-color: #f2f2f2}
 tr:hover {
     background-color: #da5c0c;
     color: #ffffff;
+}
+
+.pointer{
+    cursor: pointer;
+    outline: none;
+}
+.ico-sort-asc{
+    font-size: 24px;
+    vertical-align: bottom;
+    height: 60px;
+    line-height: 74px;
+    color: #da5c0c;
+}
+.ico-sort-desc{
+    font-size: 24px;
+    vertical-align: bottom;
+    height: 60px;
+    line-height: 52px;
+    color: #da5c0c;
 }

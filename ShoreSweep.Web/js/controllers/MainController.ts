@@ -37,13 +37,19 @@ module Clarity.Controller {
     public polygonList: Array<Model.PolygonModel>;
     public importPolygonList: Array<Model.PolygonModel>;
     public assigneeList: Array<Model.AssigneeModel>;
+    public selectedAll: boolean;
+    public trashInfoViewModelsOnPage: Array<Model.TrashInformationViewModel>;
+    //sorting
+    public propertyName: string;// = 'age';
+    public isReverse: boolean;// = true;
 
     constructor(private $scope,
       public $rootScope: IRootScope,
       private $http: ng.IHttpService,
       public $location: ng.ILocationService,
       public $window: ng.IWindowService,
-      public $mdDialog: any, public filterFilter: any) {
+      public $mdDialog: any,
+      public $filter: ng.IFilterService) {
 
       $scope.viewModel = this;
       this.trashService = new Service.TrashService($http);
@@ -53,6 +59,11 @@ module Clarity.Controller {
       this.polygonList = [];
       this.mainHelper = new helper.MainHelper();
       this.initTrashInfoViewModelList();
+
+      //sorting
+      this.propertyName = 'id';
+      this.isReverse = false;
+
       this.search = {};
       var self = this;
       this.$scope.$watch('viewModel.searchText', (newVal, oldVal) => {
@@ -81,22 +92,23 @@ module Clarity.Controller {
             break;
         }
 
-        self.numPages = Math.ceil(filterFilter(this.trashInfoViewModelList, self.search).length / self.itemsPerPage);
+        self.numPages = Math.ceil($filter('filter')(this.trashInfoViewModelList, newVal).length / self.itemsPerPage);
+        self.trashInfoViewModelsOnPage = $filter('filter')(this.trashInfoViewModelList, newVal);
         self.currentPage = 1;
       }, true);
     }
 
     initTrashInfoViewModelList() {
-      var self = this;
       this.showSpinner = true;
       this.$rootScope.showSpinner();
       this.trashService.getAll((data) => {
-        self.trashInfoViewModelList = data;
-        self.initPolygonList();
-				self.initAssigneeList();
-        self.initPaging();
-        self.showSpinner = false;
-        self.$rootScope.hideSpinner();
+        this.trashInfoViewModelList = data;
+        this.trashInfoViewModelsOnPage = this.trashInfoViewModelList.slice(0);
+        this.initPolygonList();
+				this.initAssigneeList();
+        this.initPaging();
+        this.showSpinner = false;
+        this.$rootScope.hideSpinner();
       }, (data) => { });
     }
 
@@ -594,6 +606,26 @@ module Clarity.Controller {
         },
         (data) => {
         });
-		}
+    }
+
+    onchangeSelectedAll() {
+      var startItem = (this.currentPage - 1) * parseInt(this.itemsPerPage.toString());
+      var endItem = startItem + parseInt(this.itemsPerPage.toString());
+
+      for (var i = startItem; i < endItem; i++) {
+        if (i >= this.trashInfoViewModelsOnPage.length) {
+          break;
+        }
+        this.trashInfoViewModelsOnPage[i].isSelected = this.selectedAll;
+      }
+    }
+
+    sortBy(propertyName: string) {
+      this.isReverse = (propertyName !== null && this.propertyName === propertyName)
+        ? !this.isReverse : false;
+      this.propertyName = propertyName;
+      this.trashInfoViewModelsOnPage = this.$filter('orderBy')(this.trashInfoViewModelList, this.propertyName, this.isReverse);
+    }
+
   }
 }
