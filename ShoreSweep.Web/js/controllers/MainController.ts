@@ -157,7 +157,7 @@ module Clarity.Controller {
 			trashInfo.type = trashViewInfo.type;
 			trashInfo.assigneeId = trashViewInfo.assigneeId;
 			trashInfo.sectionId = trashViewInfo.sectionId;
-				
+
 			return trashInfo;
 		}
 
@@ -365,20 +365,41 @@ module Clarity.Controller {
       reader.readAsText(input.files[0]);
     }
 
-    updateRecord() {
-      var trashList = [];
-      for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
-				var trash = this.trashInfoViewModelList[i];
-        if (trash.isSelected) {
-          trashList.push(this.mapTrashInfoViewModelToTrashModel(trash));
-        }
-      }
-      this.trashService.updateTrashRecord(trashList,
-        (data) => {
-          alert('Updated ' + data.length + ' new records!!!');
+    updateRecord(event: Event) {
+
+			var self = this;
+      this.$mdDialog.show({
+        controller: function ($scope, $mdDialog) {
+					$scope.trashInfo = new Model.TrashInformationModel();
+					$scope.viewModel = self;
+          $scope.cancel = function () {
+            $mdDialog.cancel();
+          };
+          $scope.update = function () {
+						var trashList = [];
+						for (var i = 0; i < self.trashInfoViewModelList.length; i++) {
+							var trash = self.trashInfoViewModelList[i];
+							if (trash.isSelected) {
+								trash.status = $scope.trashInfo.status;
+								trash.assigneeId = $scope.trashInfo.assigneeId;
+								trashList.push(self.mapTrashInfoViewModelToTrashModel(trash));
+							}
+						}
+						self.trashService.updateTrashRecord(trashList,
+							(data) => {
+								alert('Updated ' + data.length + ' new records!!!');
+								$mdDialog.hide();
+							},
+							(data) => {
+							});
+          };
         },
-        (data) => {
-        });
+
+        templateUrl: '/html/update-record-dialog.html' + '?v=' + VERSION_NUMBER,
+        targetEvent: event,
+        clickOutsideToClose: false
+      })
+        .then(function (answer) { }, function () { });
     }
 
     enableUpdateOrShowMap() {
@@ -484,6 +505,7 @@ module Clarity.Controller {
           };
           $scope.import = function () {
             self.importCSVFile();
+						$mdDialog.hide();
           };
         },
 
@@ -504,6 +526,7 @@ module Clarity.Controller {
           };
           $scope.import = function () {
             self.importPolygons();
+						$mdDialog.hide();
           };
         },
 
@@ -538,7 +561,7 @@ module Clarity.Controller {
         .then(function (answer) { }, function () { });
     }
 
-		updateTrashInfoChange(trashInfo: Model.TrashInformationViewModel, property: any) {
+		updateTrashInfoChange(trashInfo: Model.TrashInformationViewModel) {
 			var trashList = [];
 			trashList.push(this.mapTrashInfoViewModelToTrashModel(trashInfo));
 			this.trashService.updateTrashRecord(trashList,
