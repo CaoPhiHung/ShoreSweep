@@ -22,7 +22,7 @@ module Clarity.Model {
     public size: string;
     public type: string;
     public assigneeId: number;
-    public modifiedDate: string;
+    public modifiedDate: Date;
     public sectionId: number;    
   }
 
@@ -31,6 +31,7 @@ module Clarity.Model {
     public polygonCoords: any;
     public sectionName: string;
     public assigneeName: string;
+    public formatedModifiedDate: string;
   }
 
   export class Coordinate {
