@@ -1167,7 +1167,7 @@ th, td {
 }
 tr:nth-child(even) {background-color: #f2f2f2}
 tr:hover {
-    background-color: #da5c0c;
+    background-color: $main-color;
     color: #ffffff;
 }
 
@@ -1180,12 +1180,18 @@ tr:hover {
     vertical-align: bottom;
     height: 60px;
     line-height: 74px;
-    color: #da5c0c;
+    color: $main-color;
 }
 .ico-sort-desc{
     font-size: 24px;
     vertical-align: bottom;
     height: 60px;
     line-height: 52px;
-    color: #da5c0c;
+    color: $main-color;
+}
+.login-name{
+    float: right;
+    font-size: 22px;
+    color: $main-color;
+    font-weight: bold;
 }

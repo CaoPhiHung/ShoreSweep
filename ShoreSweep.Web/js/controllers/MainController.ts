@@ -45,6 +45,7 @@ module Clarity.Controller {
     //sorting
     public propertyName: string;// = 'age';
     public isReverse: boolean;// = true;
+    public userName: string;
 
     constructor(private $scope,
       public $rootScope: IRootScope,
@@ -66,6 +67,7 @@ module Clarity.Controller {
       //sorting
       this.propertyName = 'id';
       this.isReverse = false;
+      this.userName = this.$rootScope.user.username;
 
 			this.statusList = ['Unconfirmed', 'Confirmed', 'Cleaned'];
 			this.sizesList = ['Small', 'Medium', 'Large'];
@@ -112,11 +114,20 @@ module Clarity.Controller {
       }, true);
     }
 
+    formatModifiedDate() {
+      for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
+        var trashInfo = this.trashInfoViewModelList[i];
+        trashInfo.modifiedDate = new Date(trashInfo.modifiedDate.toString());
+        trashInfo.formatedModifiedDate = this.mainHelper.formatDateToString(trashInfo.modifiedDate);
+      }
+    }
+
     initTrashInfoViewModelList() {
       this.showSpinner = true;
       this.$rootScope.showSpinner();
       this.trashService.getAll((data) => {
         this.trashInfoViewModelList = data;
+        this.formatModifiedDate();
         this.trashInfoViewModelsOnPage = this.trashInfoViewModelList.slice(0);
         this.initPolygonList();
 				this.initAssigneeList();
@@ -161,7 +172,6 @@ module Clarity.Controller {
     }
 
 		mapTrashInfoViewModelToTrashModel(trashViewInfo: Model.TrashInformationViewModel) {
-
 			var trashInfo = new Model.TrashInformationModel();
 			trashInfo.id = trashViewInfo.id;
 			trashInfo.trashId = trashViewInfo.trashId;
@@ -182,7 +192,7 @@ module Clarity.Controller {
 			trashInfo.size = trashViewInfo.size;
 			trashInfo.type = trashViewInfo.type;
 			trashInfo.assigneeId = trashViewInfo.assigneeId;
-			trashInfo.sectionId = trashViewInfo.sectionId;
+      trashInfo.sectionId = trashViewInfo.sectionId;
 
 			return trashInfo;
 		}

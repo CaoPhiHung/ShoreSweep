@@ -309,3 +309,5 @@ tr:hover { background-color: #da5c0c; color: #ffffff; }
 .ico-sort-asc { font-size: 24px; vertical-align: bottom; height: 60px; line-height: 74px; color: #da5c0c; }
 
 .ico-sort-desc { font-size: 24px; vertical-align: bottom; height: 60px; line-height: 52px; color: #da5c0c; }
+
+.login-name { float: right; font-size: 22px; color: #da5c0c; font-weight: bold; }

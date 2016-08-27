@@ -85,7 +85,7 @@ namespace ShoreSweep
             json["subLocality"] = SubLocality;
             json["description"] = Description;
             json["comment"] = Comment;
-            json["modifiedDate"] = ModifiedDate.ToString();
+            json["modifiedDate"] = ModifiedDate.ToString("MM/dd/yyyy HH:mm:ss");
 
             json["status"] = Status.ToString();
             json["size"] = Size;

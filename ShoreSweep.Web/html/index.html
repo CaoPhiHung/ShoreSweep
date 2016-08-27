@@ -5,12 +5,13 @@
 
 	<md-toolbar class="header">
 		<div layout="row" layout-align="center center" class="sv-header">
-			<div flex="90">
-				<div>
-					<img src="../img/lake-lanier-logo.png" style="height:50px;" />
-				</div>
+			<div flex="55">
+				<img src="../img/lake-lanier-logo.png" style="height:50px;" />
 			</div>
-			<div flex="10" data-ng-controller="LogoutController">
+      <div flex="40" class="text-overflow">
+        <span class="login-name">{{viewModel.userName}}</span>
+      </div>
+			<div flex="5" data-ng-controller="LogoutController">
 				<span class="logout-section">
 					<i class="fa fa-sign-out ico-logout" data-ng-click="viewModel.submit()"></i>
 				</span>
@@ -121,42 +122,14 @@
               <i class="fa" data-ng-class="viewModel.isReverse ? 'fa-sort-desc ico-sort-desc' : 'fa-sort-asc ico-sort-asc'" aria-hidden="true"></i>
             </span>
           </div>
-					<div flex="10" class="md-cell border-right pointer" data-ng-click="viewModel.sortBy('description')">Description&nbsp;
-            <span data-ng-show="viewModel.propertyName === 'description'">
-              <i class="fa" data-ng-class="viewModel.isReverse ? 'fa-sort-desc ico-sort-desc' : 'fa-sort-asc ico-sort-asc'" aria-hidden="true"></i>
-            </span>
-          </div>
-					<div flex="10" class="md-cell border-right pointer" data-ng-click="viewModel.sortBy('status')">Status&nbsp;
-            <span data-ng-show="viewModel.propertyName === 'status'">
-              <i class="fa" data-ng-class="viewModel.isReverse ? 'fa-sort-desc ico-sort-desc' : 'fa-sort-asc ico-sort-asc'" aria-hidden="true"></i>
-            </span>
-          </div>
-					<div flex="10" class="md-cell border-right pointer">Picture</div>
-					<div flex="10" class="md-cell border-right pointer" data-ng-click="viewModel.sortBy('size')">Size&nbsp;
-            <span data-ng-show="viewModel.propertyName === 'size'">
-              <i class="fa" data-ng-class="viewModel.isReverse ? 'fa-sort-desc ico-sort-desc' : 'fa-sort-asc ico-sort-asc'" aria-hidden="true"></i>
-            </span>
-          </div>
-					<div flex="10" class="md-cell border-right pointer" data-ng-click="viewModel.sortBy('type')">Type&nbsp;
-            <span data-ng-show="viewModel.propertyName === 'type'">
-              <i class="fa" data-ng-class="viewModel.isReverse ? 'fa-sort-desc ico-sort-desc' : 'fa-sort-asc ico-sort-asc'" aria-hidden="true"></i>
-            </span>
-          </div>
-					<div flex="10" class="md-cell border-right pointer" data-ng-click="viewModel.sortBy('sectionName')">Section&nbsp;
-            <span data-ng-show="viewModel.propertyName === 'sectionName'">
-              <i class="fa" data-ng-class="viewModel.isReverse ? 'fa-sort-desc ico-sort-desc' : 'fa-sort-asc ico-sort-asc'" aria-hidden="true"></i>
-            </span>           
-          </div>
-					<div flex="10" class="md-cell border-right pointer" data-ng-click="viewModel.sortBy('comment')">Comment&nbsp;
-            <span data-ng-show="viewModel.propertyName === 'comment'">
-              <i class="fa" data-ng-class="viewModel.isReverse ? 'fa-sort-desc ico-sort-desc' : 'fa-sort-asc ico-sort-asc'" aria-hidden="true"></i>
-            </span>   
-          </div>
-					<div flex="10" class="md-cell border-right pointer" data-ng-click="viewModel.sortBy('assigneeName')">Assignee&nbsp;
-            <span data-ng-show="viewModel.propertyName === 'assigneeName'">
-              <i class="fa" data-ng-class="viewModel.isReverse ? 'fa-sort-desc ico-sort-desc' : 'fa-sort-asc ico-sort-asc'" aria-hidden="true"></i>
-            </span>   
-          </div>
+					<div flex="10" class="md-cell border-right">Description</div>
+					<div flex="10" class="md-cell border-right">Status</div>
+					<div flex="10" class="md-cell border-right">Picture</div>
+					<div flex="10" class="md-cell border-right">Size</div>
+					<div flex="10" class="md-cell border-right">Type</div>
+					<div flex="10" class="md-cell border-right">Section</div>
+					<div flex="10" class="md-cell border-right">Comment</div>
+					<div flex="10" class="md-cell border-right">Assignee</div>
 				</div>
 
 				<div layout="row" layout-align="center center"
@@ -165,9 +138,9 @@
 						<md-checkbox data-ng-model="trashInfo.isSelected" aria-label="selected"></md-checkbox>
 					</div>
 					<div flex="5" class="md-cell border-right">{{trashInfo.id}}</div>
-          <div flex="10" class="md-cell border-right text-overflow">
-            <md-tooltip data-ng-if="trashInfo.modifiedDate.length > 0" md-direction="top">{{trashInfo.modifiedDate}}</md-tooltip>
-            {{trashInfo.modifiedDate}}</div>
+          <div flex="10" class="md-cell border-right">
+            <md-tooltip md-direction="top">{{trashInfo.modifiedDate.toString()}}</md-tooltip>
+            {{trashInfo.formatedModifiedDate}}</div>
 					<div flex="10" class="md-cell border-right text-overflow">
             <md-tooltip data-ng-if="trashInfo.description.length > 0" md-direction="top">{{trashInfo.description}}</md-tooltip>
             {{trashInfo.description}}</div>
