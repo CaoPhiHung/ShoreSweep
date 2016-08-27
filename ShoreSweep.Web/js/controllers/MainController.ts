@@ -37,6 +37,8 @@ module Clarity.Controller {
     public polygonList: Array<Model.PolygonModel>;
     public importPolygonList: Array<Model.PolygonModel>;
     public assigneeList: Array<Model.AssigneeModel>;
+    public selectedAll: boolean;
+    public trashInfoViewModelsOnPage: Array<Model.TrashInformationViewModel>;
 
     constructor(private $scope,
       public $rootScope: IRootScope,
@@ -54,6 +56,7 @@ module Clarity.Controller {
       this.mainHelper = new helper.MainHelper();
       this.initTrashInfoViewModelList();
       this.search = {};
+
       var self = this;
       this.$scope.$watch('viewModel.searchText', (newVal, oldVal) => {
         if ((oldVal == newVal) || oldVal == undefined || newVal == undefined || newVal == null)
@@ -81,22 +84,23 @@ module Clarity.Controller {
             break;
         }
 
-        self.numPages = Math.ceil(filterFilter(this.trashInfoViewModelList, self.search).length / self.itemsPerPage);
+        self.numPages = Math.ceil(filterFilter(this.trashInfoViewModelList, newVal).length / self.itemsPerPage);
+        self.trashInfoViewModelsOnPage = filterFilter(this.trashInfoViewModelList, newVal);
         self.currentPage = 1;
       }, true);
     }
 
     initTrashInfoViewModelList() {
-      var self = this;
       this.showSpinner = true;
       this.$rootScope.showSpinner();
       this.trashService.getAll((data) => {
-        self.trashInfoViewModelList = data;
-        self.initPolygonList();
-				self.initAssigneeList();
-        self.initPaging();
-        self.showSpinner = false;
-        self.$rootScope.hideSpinner();
+        this.trashInfoViewModelList = data;
+        this.trashInfoViewModelsOnPage = this.trashInfoViewModelList.slice(0);
+        this.initPolygonList();
+				this.initAssigneeList();
+        this.initPaging();
+        this.showSpinner = false;
+        this.$rootScope.hideSpinner();
       }, (data) => { });
     }
 
@@ -570,6 +574,19 @@ module Clarity.Controller {
         },
         (data) => {
         });
-		}
+    }
+
+    onchangeSelectedAll() {
+      var startItem = (this.currentPage - 1) * parseInt(this.itemsPerPage.toString());
+      var endItem = startItem + parseInt(this.itemsPerPage.toString());
+
+      for (var i = startItem; i < endItem; i++) {
+        if (i >= this.trashInfoViewModelsOnPage.length) {
+          break;
+        }
+        this.trashInfoViewModelsOnPage[i].isSelected = this.selectedAll;
+      }
+    }
+
   }
 }

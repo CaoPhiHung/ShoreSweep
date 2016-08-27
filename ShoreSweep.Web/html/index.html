@@ -139,7 +139,7 @@
 						<input type="text" class="comment" data-ng-model="trashInfo.comment" placeholder="Comment" />
 					</div>
 					<div flex="10" class="md-cell border-right">
-						<select name="status" class="field" data-ng-model="trashInfo.assigneeId" data-ng-change="viewModel.updateTrashInfoChange(trashInfo)"  convert-to-number>
+						<select name="status" class="field" data-ng-model="trashInfo.assigneeId" data-ng-change="viewModel.updateTrashInfoChange(trashInfo)" convert-to-number>
 							<option data-ng-repeat="assignee in viewModel.assigneeList" value="{{ assignee.id }}" data-ng-bind="assignee.username"></option>
 						</select>
 					</div>
