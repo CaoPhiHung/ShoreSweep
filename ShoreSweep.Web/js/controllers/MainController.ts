@@ -157,7 +157,7 @@ module Clarity.Controller {
 			trashInfo.type = trashViewInfo.type;
 			trashInfo.assigneeId = trashViewInfo.assigneeId;
 			trashInfo.sectionId = trashViewInfo.sectionId;
-				
+
 			return trashInfo;
 		}
 
@@ -219,7 +219,7 @@ module Clarity.Controller {
         alert('Do not have any new record!!!');
       }
       this.$rootScope.hideSpinner();
-      this.$mdDialog.cancel();
+
     }
 
     importPolygons() {
@@ -240,7 +240,6 @@ module Clarity.Controller {
         this.updateSectionId();
       }
       this.$rootScope.hideSpinner();
-      this.$mdDialog.cancel();
     }
 
     updateSectionId() {
@@ -307,7 +306,7 @@ module Clarity.Controller {
       reader.onload = function () {
 
         var records = reader.result.split('\n');
-        for (var line = 1; line < 10 /*records.length*/; line++) {
+        for (var line = 1; line < 20 /*records.length*/; line++) {
           var record = records[line].split(';');
           var trash = new Model.TrashInformationModel();
           trash.trashId = record[0];
@@ -323,7 +322,10 @@ module Clarity.Controller {
           trash.description = record[10];
           trash.status = record[11];
           trash.url = record[12];
-          trash.images = record[13].split(',');
+          trash.images = record[13].trim().split(',');
+					if (trash.images[trash.images.length - 1] == '') {
+						trash.images.splice(trash.images.length - 1, 1);
+					}
           trash.size = record[14];
           trash.type = record[15];
           self.importTrashList.push(trash);
@@ -363,20 +365,41 @@ module Clarity.Controller {
       reader.readAsText(input.files[0]);
     }
 
-    updateRecord() {
-      var trashList = [];
-      for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
-				var trash = this.trashInfoViewModelList[i];
-        if (trash.isSelected) {
-          trashList.push(this.mapTrashInfoViewModelToTrashModel(trash));
-        }
-      }
-      this.trashService.updateTrashRecord(trashList,
-        (data) => {
-          alert('Updated ' + data.length + ' new records!!!');
+    updateRecord(event: Event) {
+
+			var self = this;
+      this.$mdDialog.show({
+        controller: function ($scope, $mdDialog) {
+					$scope.trashInfo = new Model.TrashInformationModel();
+					$scope.viewModel = self;
+          $scope.cancel = function () {
+            $mdDialog.cancel();
+          };
+          $scope.update = function () {
+						var trashList = [];
+						for (var i = 0; i < self.trashInfoViewModelList.length; i++) {
+							var trash = self.trashInfoViewModelList[i];
+							if (trash.isSelected) {
+								trash.status = $scope.trashInfo.status;
+								trash.assigneeId = $scope.trashInfo.assigneeId;
+								trashList.push(self.mapTrashInfoViewModelToTrashModel(trash));
+							}
+						}
+						self.trashService.updateTrashRecord(trashList,
+							(data) => {
+								alert('Updated ' + data.length + ' new records!!!');
+								$mdDialog.hide();
+							},
+							(data) => {
+							});
+          };
         },
-        (data) => {
-        });
+
+        templateUrl: '/html/update-record-dialog.html' + '?v=' + VERSION_NUMBER,
+        targetEvent: event,
+        clickOutsideToClose: false
+      })
+        .then(function (answer) { }, function () { });
     }
 
     enableUpdateOrShowMap() {
@@ -391,14 +414,14 @@ module Clarity.Controller {
     }
 
     showMapAndTrash() {
-      var selectedTrashInfoViewModelList = [];
+      var selectedTrashInfoList = [];
       for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
-        var trashInfoViewModel = this.trashInfoViewModelList[i];
-        if (trashInfoViewModel.isSelected) {
-          selectedTrashInfoViewModelList.push(trashInfoViewModel);
+        var trashInfo = this.trashInfoViewModelList[i];
+        if (trashInfo.isSelected) {
+          selectedTrashInfoList.push(trashInfo);
         }
       }
-      this.$window.sessionStorage.setItem('selectedTrashInfoList', angular.toJson(selectedTrashInfoViewModelList));
+      this.$window.sessionStorage.setItem('selectedTrashInfoList', angular.toJson(selectedTrashInfoList));
       this.$window.open('/#/show_map_and_trash');
     }
 
@@ -482,6 +505,7 @@ module Clarity.Controller {
           };
           $scope.import = function () {
             self.importCSVFile();
+						$mdDialog.hide();
           };
         },
 
@@ -502,6 +526,7 @@ module Clarity.Controller {
           };
           $scope.import = function () {
             self.importPolygons();
+						$mdDialog.hide();
           };
         },
 
@@ -535,5 +560,16 @@ module Clarity.Controller {
       })
         .then(function (answer) { }, function () { });
     }
+
+		updateTrashInfoChange(trashInfo: Model.TrashInformationViewModel) {
+			var trashList = [];
+			trashList.push(this.mapTrashInfoViewModelToTrashModel(trashInfo));
+			this.trashService.updateTrashRecord(trashList,
+        (data) => {
+          //alert('Updated ' + property + ' Successfully!!!');
+        },
+        (data) => {
+        });
+		}
   }
 }

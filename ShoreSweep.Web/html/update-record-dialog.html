@@ -1,0 +1,38 @@
+﻿<md-dialog aria-label="Admin" id="color-dialog" ng-cloak style="width: 400px; height: 340px; max-height: 100%">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Update Records</h2>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content" style="height: 250px">
+        <md-input-container style="width:100%; margin-bottom: 0px;">
+					<div flex="10" class="md-cell border-right" style="width: 100%; max-width: 100%">
+						Status
+						<select name="status" class="field" data-ng-model="trashInfo.status">
+							<option value="Unconfirmed">Unconfirmed</option>
+							<option value="Confirmed">Confirmed</option>
+							<option value="Cleaned">Cleaned</option>
+						</select>
+					</div>
+					<div flex="10" class="md-cell border-right" style="width: 100%; max-width: 100%">
+						Assignee
+						<select name="status" class="field" data-ng-model="trashInfo.assigneeId">
+							<option data-ng-repeat="assignee in viewModel.assigneeList" value="{{ assignee.id }}" data-ng-bind="assignee.username"></option>
+						</select>
+					</div>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancel()">
+        <span class="button-label">Cancel</span>
+      </md-button>
+      <md-button ng-click="update()">
+        <span class="button-label">Update</span>
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

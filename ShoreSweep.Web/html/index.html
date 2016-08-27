@@ -21,7 +21,7 @@
 			<div flex="65">
 				<md-button class="md-raised md-primary" data-ng-click="viewModel.showMapAndTrash()"
 					data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Show Map & Trash</md-button>
-				<md-button class="md-raised md-primary" data-ng-click="viewModel.updateRecord()"
+				<md-button class="md-raised md-primary" data-ng-click="viewModel.updateRecord($event)"
 					data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Update Record</md-button>
 			</div>
 			<div flex="15">
@@ -121,7 +121,7 @@
             <md-tooltip data-ng-if="trashInfo.description.length > 0" md-direction="top">{{trashInfo.description}}</md-tooltip>
             {{trashInfo.description}}</div>
 					<div flex="10" class="md-cell border-right">
-						<select name="status" class="field" data-ng-model="trashInfo.status">
+						<select name="status" class="field" data-ng-model="trashInfo.status" data-ng-change="viewModel.updateTrashInfoChange(trashInfo)">
 							<option value="Unconfirmed">Unconfirmed</option>
 							<option value="Confirmed">Confirmed</option>
 							<option value="Cleaned">Cleaned</option>
@@ -134,12 +134,12 @@
 					<div flex="10" class="md-cell border-right text-overflow">
             <md-tooltip data-ng-if="trashInfo.type.length > 0" md-direction="top">{{trashInfo.type}}</md-tooltip>
             {{trashInfo.type}}</div>
-					<div flex="10" class="md-cell border-right">{{viewModel.getSectionName(trashInfo.sectionId)}}</div>
+					<div flex="10" class="md-cell border-right">{{trashInfo.sectionName}}</div>
 					<div flex="10" class="md-cell border-right">
 						<input type="text" class="comment" data-ng-model="trashInfo.comment" placeholder="Comment" />
 					</div>
 					<div flex="10" class="md-cell border-right">
-						<select name="status" class="field" data-ng-model="trashInfo.assigneeId" convert-to-number>
+						<select name="status" class="field" data-ng-model="trashInfo.assigneeId" data-ng-change="viewModel.updateTrashInfoChange(trashInfo)"  convert-to-number>
 							<option data-ng-repeat="assignee in viewModel.assigneeList" value="{{ assignee.id }}" data-ng-bind="assignee.username"></option>
 						</select>
 					</div>
