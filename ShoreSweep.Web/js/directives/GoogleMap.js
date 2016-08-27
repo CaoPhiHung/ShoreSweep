@@ -23,24 +23,25 @@ ngGoogleMap.directive('googleMap', function () {
 
       // create the map + marker
       var map = new google.maps.Map(element[0], options);
+      var bounds = new google.maps.LatLngBounds();
       if (scope.ngMarkers) {
         for (var i = 0; i < scope.ngMarkers.length; i++) {
           var marker = new google.maps.Marker({
             position: new google.maps.LatLng(scope.ngMarkers[i].latitude, scope.ngMarkers[i].longitude),
             map: map,
-            label: scope.ngMarkers[i].id + '',
             title: scope.ngMarkers[i].id + '-' + scope.ngMarkers[i].size
           });
-        }        
+          bounds.extend(marker.getPosition());
+        }
+        map.fitBounds(bounds);
+
       } else {
         var marker = new google.maps.Marker({
           position: new google.maps.LatLng(scope.ngModel.latitude, scope.ngModel.longitude),
           map: map,
-          label: scope.ngModel.id + '',
           title: scope.ngModel.description
         });
       }
-    
 
       //fix error only load right at first time
       google.maps.event.addListenerOnce(map, 'idle', function () {
@@ -48,7 +49,13 @@ ngGoogleMap.directive('googleMap', function () {
         map.setCenter(center);
         var infowindow = new google.maps.InfoWindow();
         if (scope.ngMarkers) {
-          for (var i = 0; i < scope.ngMarkers.length; i++) {
+        	for (var i = 0; i < scope.ngMarkers.length; i++) {
+        		//var marker = new google.maps.Marker({
+        		//	position: new google.maps.LatLng(scope.ngMarkers[i].latitude, scope.ngMarkers[i].longitude),
+        		//	map: map,
+        		//	title: scope.ngMarkers[i].id + '-' + scope.ngMarkers[i].size
+        		//});
+        		//var infowindow1 = new google.maps.InfoWindow();
             infowindow.setContent(scope.ngMarkers[i].id + '-' + scope.ngMarkers[i].size);
             infowindow.open(map, marker);
           }          

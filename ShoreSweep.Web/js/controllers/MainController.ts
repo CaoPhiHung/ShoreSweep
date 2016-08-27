@@ -77,7 +77,7 @@ module Clarity.Controller {
       this.search = {};
       var self = this;
       this.$scope.$watch('viewModel.searchText', (newVal, oldVal) => {
-        if ((oldVal == newVal) || oldVal == undefined || newVal == undefined || newVal == null)
+        if ((oldVal == newVal) || (oldVal == undefined && newVal == undefined) || newVal == null)
           return;
         switch (self.searchType) {
 					case '0':
@@ -99,10 +99,10 @@ module Clarity.Controller {
             self.search = { type: newVal };
             break;
           case '6':
-            self.search = { secionName: newVal };
+            self.search = { sectionName: newVal };
             break;
           case '7':
-            self.search = { assigneeName: newVal };
+            self.search = { assigneeId: newVal };
             break;
           default:
             break;

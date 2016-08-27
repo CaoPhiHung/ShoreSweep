@@ -30,7 +30,7 @@
 
   <div class="trash-info-section" data-ng-class="{'break-page': $index % 2 == 0}" data-ng-repeat="trashInfo in viewModel.selectedTrashInformationList">
     <div class="col-md-6">
-      <div class="title">{{trashInfo.size}}{{trashInfo.id}}</div>
+      <div class="title">{{trashInfo.id}}-{{trashInfo.size}} </div>
       <google-map class="trash-info-map" ng-model="trashInfo"></google-map>
       <div class="text-info">Description: {{trashInfo.description}}</div>
       <div class="text-info">Type: {{trashInfo.type}}</div>
