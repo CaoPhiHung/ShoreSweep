@@ -392,7 +392,6 @@ module Clarity.Controller {
     }
 
     updateRecord(event: Event) {
-
 			var self = this;
       this.$mdDialog.show({
         controller: function ($scope, $mdDialog) {
@@ -407,7 +406,8 @@ module Clarity.Controller {
 							var trash = self.trashInfoViewModelList[i];
 							if (trash.isSelected) {
 								trash.status = $scope.trashInfo.status;
-								trash.assigneeId = $scope.trashInfo.assigneeId;
+                trash.assigneeId = $scope.trashInfo.assigneeId;
+                trash.comment = $scope.trashInfo.comment;
 								trashList.push(self.mapTrashInfoViewModelToTrashModel(trash));
 							}
 						}
