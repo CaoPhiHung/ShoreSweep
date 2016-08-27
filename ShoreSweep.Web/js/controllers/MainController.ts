@@ -225,12 +225,14 @@ module Clarity.Controller {
       }
       if (data.length > 0) {
         this.numPages = Math.ceil(this.trashInfoViewModelList.length / this.itemsPerPage);
+				this.trashInfoViewModelsOnPage = this.trashInfoViewModelList.slice(0);
         this.currentPage = 1;
+				this.updateSectionId();
         alert('Imported ' + data.length + ' records');
       } else {
         alert('Do not have any new record!!!');
+				this.$rootScope.hideSpinner();
       }
-      this.$rootScope.hideSpinner();
 
     }
 
@@ -251,41 +253,43 @@ module Clarity.Controller {
         }
         this.updateSectionId();
       }
-      this.$rootScope.hideSpinner();
     }
 
     updateSectionId() {
-      var startIndex = (this.currentPage - 1) * this.itemsPerPage;
-      var endIndex = this.currentPage * this.itemsPerPage;
       var updatedList = [];
+			if (this.polygonList && this.polygonList.length > 0){
+				for (var i = 0; i < this.polygonList.length; i++) {
+					var checkedPolygon = this.polygonList[i];
+					var polygon = new google.maps.Polygon({
+						paths: checkedPolygon.coordinates
+					});
 
-      for (var i = 0; i < this.polygonList.length; i++) {
-        var checkedPolygon = this.polygonList[i];
-        var polygon = new google.maps.Polygon({
-          paths: checkedPolygon.coordinates
-        });
+					for (var j = 0; j < this.trashInfoViewModelList.length; j++) {
+						var trash = this.trashInfoViewModelList[j];
 
-        for (var j = startIndex; j < endIndex; j++) {
-          var trash = this.trashInfoViewModelList[j];
+						if (trash && trash.latitude && trash.longitude) {
+							var latLng = new google.maps.LatLng(trash.latitude, trash.longitude);
+							var isWithinPolygon = google.maps.geometry.poly.containsLocation(latLng, polygon);
 
-          if (trash && trash.latitude && trash.longitude) {
-            var latLng = new google.maps.LatLng(trash.latitude, trash.longitude);
-            var isWithinPolygon = google.maps.geometry.poly.containsLocation(latLng, polygon);
-
-            if (isWithinPolygon && trash.sectionId != checkedPolygon.id) {
-              trash.sectionId = checkedPolygon.id;
-              trash.polygonCoords = checkedPolygon.coordinates;
-              updatedList.push(trash);
-            }
-          }
-        }
-
-      }
-
-      if (updatedList.length > 0) {
-        this.trashService.updateTrashRecord(updatedList, function () { }, function () { });
-      }
-    }
+							if (isWithinPolygon && trash.sectionId != checkedPolygon.id) {
+								trash.sectionName = checkedPolygon.name;
+								trash.sectionId = checkedPolygon.id;
+								trash.polygonCoords = checkedPolygon.coordinates;
+								updatedList.push(trash);
+							}
+						}
+					}
+				}
+				var self = this;
+				if (updatedList.length > 0) {
+					this.trashService.updateTrashRecord(updatedList, (data) => function (data) {
+						self.$rootScope.hideSpinner();
+					}
+					, function () { });
+				}
+			}
+			this.$rootScope.hideSpinner();
+		}
 
     //isValidFileType(fileName) {
     //  if (fileName != null) {
@@ -422,20 +426,26 @@ module Clarity.Controller {
 					trashList.push(trash.id);
 				}
 			}
-			this.trashService.deleteTrashRecord(trashList,
-				(data) => {
-					alert('Delete ' + data.length + ' new records!!!');
-					for (var i = this.trashInfoViewModelList.length - 1; i > 0; i--){
-						var trash = this.trashInfoViewModelList[i];
-						for (var j = 0; j < data.length; j++){
-							if (data[j].id == trash.id) {
-								this.trashInfoViewModelList.splice(i, 1);
+			if (window.confirm('Are you sure you want to delete ' + trashList.length + ' records')) {
+				var self = this;
+				this.trashService.deleteTrashRecord(trashList,
+					(data) => {
+						for (var i = self.trashInfoViewModelList.length - 1; i >= 0; i--) {
+							var trash = self.trashInfoViewModelList[i];
+							for (var j = 0; j < data.length; j++) {
+								if (data[j].id == trash.id) {
+									self.trashInfoViewModelList.splice(i, 1);
+									break;
+								}
 							}
 						}
-					}
-				},
-				(data) => {
-				});
+						self.numPages = Math.ceil(self.trashInfoViewModelList.length / self.itemsPerPage);
+						self.trashInfoViewModelsOnPage = self.trashInfoViewModelList.slice(0);
+						alert('Delete ' + data.length + ' records!!!');
+					},
+					(data) => {
+					});
+			}
 		}
 
     enableUpdateOrShowMap() {
@@ -464,13 +474,12 @@ module Clarity.Controller {
     itemsPerPageChanged(itemsPerPage) {
       this.currentPage = 1;
       this.numPages = Math.ceil(this.trashInfoViewModelList.length / itemsPerPage);
-      this.updateSectionId();
+			this.trashInfoViewModelsOnPage = this.trashInfoViewModelList.slice(0);
       return this.currentPage;
     }
 
     goToNextPage() {
       this.currentPage += 1;
-      this.updateSectionId();
       return this.currentPage;
     }
 
@@ -480,7 +489,6 @@ module Clarity.Controller {
 
     goToPreviousPage() {
       this.currentPage -= 1;
-      this.updateSectionId();
       return this.currentPage;
     }
 
