@@ -39,13 +39,17 @@ module Clarity.Controller {
     public assigneeList: Array<Model.AssigneeModel>;
     public selectedAll: boolean;
     public trashInfoViewModelsOnPage: Array<Model.TrashInformationViewModel>;
+    //sorting
+    public propertyName: string;// = 'age';
+    public isReverse: boolean;// = true;
 
     constructor(private $scope,
       public $rootScope: IRootScope,
       private $http: ng.IHttpService,
       public $location: ng.ILocationService,
       public $window: ng.IWindowService,
-      public $mdDialog: any, public filterFilter: any) {
+      public $mdDialog: any,
+      public $filter: ng.IFilterService) {
 
       $scope.viewModel = this;
       this.trashService = new Service.TrashService($http);
@@ -55,8 +59,12 @@ module Clarity.Controller {
       this.polygonList = [];
       this.mainHelper = new helper.MainHelper();
       this.initTrashInfoViewModelList();
-      this.search = {};
 
+      //sorting
+      this.propertyName = 'id';
+      this.isReverse = false;
+
+      this.search = {};
       var self = this;
       this.$scope.$watch('viewModel.searchText', (newVal, oldVal) => {
         if ((oldVal == newVal) || oldVal == undefined || newVal == undefined || newVal == null)
@@ -84,8 +92,8 @@ module Clarity.Controller {
             break;
         }
 
-        self.numPages = Math.ceil(filterFilter(this.trashInfoViewModelList, newVal).length / self.itemsPerPage);
-        self.trashInfoViewModelsOnPage = filterFilter(this.trashInfoViewModelList, newVal);
+        self.numPages = Math.ceil($filter('filter')(this.trashInfoViewModelList, newVal).length / self.itemsPerPage);
+        self.trashInfoViewModelsOnPage = $filter('filter')(this.trashInfoViewModelList, newVal);
         self.currentPage = 1;
       }, true);
     }
@@ -586,6 +594,13 @@ module Clarity.Controller {
         }
         this.trashInfoViewModelsOnPage[i].isSelected = this.selectedAll;
       }
+    }
+
+    sortBy(propertyName: string) {
+      this.isReverse = (propertyName !== null && this.propertyName === propertyName)
+        ? !this.isReverse : false;
+      this.propertyName = propertyName;
+      this.trashInfoViewModelsOnPage = this.$filter('orderBy')(this.trashInfoViewModelList, this.propertyName, this.isReverse);
     }
 
   }
