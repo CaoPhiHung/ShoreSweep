@@ -20,7 +20,7 @@ namespace ShoreSweep.Api
         [Route(HttpVerb.Get, "/trashes")]
         public RestApiResult GetAll()
         {
-            var trashInfos = ClarityDB.Instance.TrashInformations;
+            var trashInfos = ClarityDB.Instance.TrashInformations.Where(x => x.IsDisabled == false);
             return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = BuildJsonArray(trashInfos) };
         }
 
@@ -78,7 +78,33 @@ namespace ShoreSweep.Api
             return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = BuildJsonArray(trashList) };
         }
 
-        private JArray BuildJsonArray(IEnumerable<TrashInformation> trashInfos)
+		[Route(HttpVerb.Post, "/trash/deleteTrashRecord")]
+		public RestApiResult DeleteTrashRecord(JObject json)
+		{
+			if (json == null)
+			{
+				return new RestApiResult { StatusCode = HttpStatusCode.BadRequest };
+			}
+			var trashes = json.Value<JArray>("trashes");
+			List<TrashInformation> trashList = new List<TrashInformation>();
+			foreach (int trash in trashes)
+			{
+				
+				TrashInformation oldTrash = ClarityDB.Instance.TrashInformations.FirstOrDefault(x => x.ID == trash);
+				if (oldTrash == null)
+				{
+					return new RestApiResult { StatusCode = HttpStatusCode.BadRequest };
+				}
+				oldTrash.ModifiedDate = DateTime.Now;
+				oldTrash.IsDisabled = true;
+				trashList.Add(oldTrash);
+			}
+
+			ClarityDB.Instance.SaveChanges();
+			return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = BuildJsonArray(trashList) };
+		}
+
+		private JArray BuildJsonArray(IEnumerable<TrashInformation> trashInfos)
         {
             JArray array = new JArray();
 

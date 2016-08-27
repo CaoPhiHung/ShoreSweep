@@ -33,9 +33,9 @@ namespace ShoreSweep
         public long? AssigneeID { get; set; }
         public DateTime ModifiedDate { get; set; }
         public long? SectionID { get; set; }
+		public bool IsDisabled { get; set; }
 
-
-        public void ApplyJson(JToken json)
+		public void ApplyJson(JToken json)
         {
             TrashID = json.Value<long>("trashId");
             Latitude = json.Value<double>("latitude");

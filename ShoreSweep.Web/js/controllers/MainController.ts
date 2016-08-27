@@ -306,7 +306,7 @@ module Clarity.Controller {
       reader.onload = function () {
 
         var records = reader.result.split('\n');
-        for (var line = 1; line < 20 /*records.length*/; line++) {
+        for (var line = 1; line < records.length; line++) {
           var record = records[line].split(';');
           var trash = new Model.TrashInformationModel();
           trash.trashId = record[0];
@@ -401,6 +401,30 @@ module Clarity.Controller {
       })
         .then(function (answer) { }, function () { });
     }
+
+		deleteRecord() {
+			var trashList = [];
+			for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
+				var trash = this.trashInfoViewModelList[i];
+				if (trash.isSelected) {
+					trashList.push(trash.id);
+				}
+			}
+			this.trashService.deleteTrashRecord(trashList,
+				(data) => {
+					alert('Delete ' + data.length + ' new records!!!');
+					for (var i = this.trashInfoViewModelList.length - 1; i > 0; i--){
+						var trash = this.trashInfoViewModelList[i];
+						for (var j = 0; j < data.length; j++){
+							if (data[j].id == trash.id) {
+								this.trashInfoViewModelList.splice(i, 1);
+							}
+						}
+					}
+				},
+				(data) => {
+				});
+		}
 
     enableUpdateOrShowMap() {
       if (this.trashInfoViewModelList != null && this.trashInfoViewModelList.length > 0) {

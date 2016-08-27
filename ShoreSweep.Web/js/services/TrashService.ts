@@ -32,6 +32,12 @@ module Clarity.Service {
         .error(() => { this.doCallback(errorCallback, null); });
     }
 
+		deleteTrashRecord(entity: any, successCallback: Function, errorCallback: Function) {
+      this.http.post('/api/trash/deleteTrashRecord', { 'trashes': entity })
+        .success((data) => { this.doCallback(successCallback, data); })
+        .error(() => { this.doCallback(errorCallback, null); });
+    }
+
 
   }
 }
