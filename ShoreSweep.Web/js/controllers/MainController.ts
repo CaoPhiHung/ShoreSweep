@@ -219,7 +219,7 @@ module Clarity.Controller {
         alert('Do not have any new record!!!');
       }
       this.$rootScope.hideSpinner();
-
+      this.$mdDialog.cancel();
     }
 
     importPolygons() {
@@ -240,6 +240,7 @@ module Clarity.Controller {
         this.updateSectionId();
       }
       this.$rootScope.hideSpinner();
+      this.$mdDialog.cancel();
     }
 
     updateSectionId() {
@@ -390,14 +391,14 @@ module Clarity.Controller {
     }
 
     showMapAndTrash() {
-      var selectedTrashInfoList = [];
+      var selectedTrashInfoViewModelList = [];
       for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
-        var trashInfo = this.trashInfoViewModelList[i];
-        if (trashInfo.isSelected) {
-          selectedTrashInfoList.push(trashInfo);
+        var trashInfoViewModel = this.trashInfoViewModelList[i];
+        if (trashInfoViewModel.isSelected) {
+          selectedTrashInfoViewModelList.push(trashInfoViewModel);
         }
       }
-      this.$window.sessionStorage.setItem('selectedTrashInfoList', angular.toJson(selectedTrashInfoList));
+      this.$window.sessionStorage.setItem('selectedTrashInfoList', angular.toJson(selectedTrashInfoViewModelList));
       this.$window.open('/#/show_map_and_trash');
     }
 
@@ -534,6 +535,5 @@ module Clarity.Controller {
       })
         .then(function (answer) { }, function () { });
     }
-
   }
 }

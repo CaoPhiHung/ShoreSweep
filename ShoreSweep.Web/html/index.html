@@ -100,22 +100,26 @@
               data-ng-change="viewModel.onchangeSelectedAll()"></md-checkbox>
           </div>
 					<div flex="5" class="md-cell border-right">ID</div>
-					<div flex="15" class="md-cell border-right">Description</div>
+          <div flex="10" class="md-cell border-right">Modified Date</div>
+					<div flex="10" class="md-cell border-right">Description</div>
 					<div flex="10" class="md-cell border-right">Status</div>
 					<div flex="10" class="md-cell border-right">Picture</div>
 					<div flex="10" class="md-cell border-right">Size</div>
 					<div flex="10" class="md-cell border-right">Type</div>
 					<div flex="10" class="md-cell border-right">Section</div>
-					<div flex="15" class="md-cell border-right">Comment</div>
+					<div flex="10" class="md-cell border-right">Comment</div>
 					<div flex="10" class="md-cell border-right">Assignee</div>
 				</div>
 
-				<div layout="row" layout-align="center center" data-ng-repeat="trashInfo in viewModel.trashInformationList | filter: viewModel.search | start: (viewModel.currentPage - 1) * viewModel.itemsPerPage | limitTo: viewModel.itemsPerPage" class="md-row">
+				<div layout="row" layout-align="center center" data-ng-repeat="trashInfo in viewModel.trashInfoViewModelList | filter: viewModel.search | start: (viewModel.currentPage - 1) * viewModel.itemsPerPage | limitTo: viewModel.itemsPerPage" class="md-row">
 					<div flex="5" class="md-cell border-right">
 						<md-checkbox data-ng-model="trashInfo.isSelected" aria-label="selected"></md-checkbox>
 					</div>
 					<div flex="5" class="md-cell border-right">{{trashInfo.id}}</div>
-					<div flex="15" class="md-cell border-right text-overflow">{{trashInfo.description}}</div>
+          <div flex="10" class="md-cell border-right text-overflow">{{trashInfo.modifiedDate}}</div>
+					<div flex="10" class="md-cell border-right text-overflow">
+            <md-tooltip data-ng-if="trashInfo.description.length > 0" md-direction="top">{{trashInfo.description}}</md-tooltip>
+            {{trashInfo.description}}</div>
 					<div flex="10" class="md-cell border-right">
 						<select name="status" class="field" data-ng-model="trashInfo.status">
 							<option value="Unconfirmed">Unconfirmed</option>
@@ -124,12 +128,14 @@
 						</select>
 					</div>
 					<div flex="10" class="md-cell border-right" data-ng-click="viewModel.showGoogleMapDialog(trashInfo, $event)" style="cursor: pointer;">
-						<img data-ng-src="{{trashInfo.imageList[0]}}" style="width:80%; height: 80%" />
+						<img data-ng-src="{{trashInfo.images[0]}}" style="width:80%; height: 80%" />
 					</div>
 					<div flex="10" class="md-cell border-right">{{trashInfo.size}}</div>
-					<div flex="10" class="md-cell border-right">{{trashInfo.type}}</div>
+					<div flex="10" class="md-cell border-right text-overflow">
+            <md-tooltip data-ng-if="trashInfo.type.length > 0" md-direction="top">{{trashInfo.type}}</md-tooltip>
+            {{trashInfo.type}}</div>
 					<div flex="10" class="md-cell border-right">{{viewModel.getSectionName(trashInfo.sectionId)}}</div>
-					<div flex="15" class="md-cell border-right">
+					<div flex="10" class="md-cell border-right">
 						<input type="text" class="comment" data-ng-model="trashInfo.comment" placeholder="Comment" />
 					</div>
 					<div flex="10" class="md-cell border-right">
