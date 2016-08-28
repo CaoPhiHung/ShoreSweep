@@ -107,7 +107,7 @@ module Clarity.Controller {
           default:
             break;
         }
-
+        self.clearAllSelected();
         self.numPages = Math.ceil($filter('filter')(this.trashInfoViewModelList, newVal).length / self.itemsPerPage);
         self.trashInfoViewModelsOnPage = $filter('filter')(this.trashInfoViewModelList, newVal);
         self.currentPage = 1;
@@ -613,6 +613,7 @@ module Clarity.Controller {
 
     goToNextPage() {
       this.currentPage += 1;
+      this.clearAllSelected();
       return this.currentPage;
     }
 
@@ -622,6 +623,7 @@ module Clarity.Controller {
 
     goToPreviousPage() {
       this.currentPage -= 1;
+      this.clearAllSelected();
       return this.currentPage;
     }
 
@@ -784,9 +786,18 @@ module Clarity.Controller {
 			}
 		}
 
-		onSearchTypeChange() {
+    onSearchTypeChange() {
+      this.clearAllSelected();
 			this.searchText = null;
 			this.search = {};
-		}
+    }
+
+    clearAllSelected() {
+      this.selectedAll = false;
+      for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
+        this.trashInfoViewModelList[i].isSelected = false;
+      }
+    }
+
   }
 }
