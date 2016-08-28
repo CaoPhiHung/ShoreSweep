@@ -114,11 +114,22 @@ module Clarity.Controller {
       }, true);
     }
 
-    formatModifiedDate() {
-      for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
-        var trashInfo = this.trashInfoViewModelList[i];
-        trashInfo.modifiedDate = new Date(trashInfo.modifiedDate.toString());
-        trashInfo.formatedModifiedDate = this.mainHelper.formatDateToString(trashInfo.modifiedDate);
+    updateModifiedDate(trashInfoViewModelList: Array<Model.TrashInformationViewModel>, trashId?: number, modifiedDate?: Date) {
+      if (trashId && modifiedDate) {//update defined record
+        for (var i = 0; i < trashInfoViewModelList.length; i++) {
+          var trashInfo = trashInfoViewModelList[i];
+          if (trashInfo.id === trashId) {
+            trashInfo.modifiedDate = new Date(modifiedDate.toString());
+            trashInfo.formatedModifiedDate = this.mainHelper.formatDateToString(trashInfo.modifiedDate);
+            break;
+          }
+        }
+      } else {//update all records
+        for (var i = 0; i < trashInfoViewModelList.length; i++) {
+          var trashInfo = trashInfoViewModelList[i];
+          trashInfo.modifiedDate = new Date(trashInfo.modifiedDate.toString());
+          trashInfo.formatedModifiedDate = this.mainHelper.formatDateToString(trashInfo.modifiedDate);
+        }
       }
     }
 
@@ -127,7 +138,7 @@ module Clarity.Controller {
       this.$rootScope.showSpinner();
       this.trashService.getAll((data) => {
         this.trashInfoViewModelList = data;
-        this.formatModifiedDate();
+        this.updateModifiedDate(this.trashInfoViewModelList);
         this.trashInfoViewModelsOnPage = this.trashInfoViewModelList.slice(0);
         this.initPolygonList();
 				this.initAssigneeList();
@@ -315,29 +326,6 @@ module Clarity.Controller {
 			this.$rootScope.hideSpinner();
 		}
 
-    //isValidFileType(fileName) {
-    //  if (fileName != null) {
-    //    var fileNameParts = fileName.split('.');
-    //    if (fileNameParts.length > 1) {
-    //      var fileNameExtension = fileNameParts[fileNameParts.length - 1];
-    //      if (fileNameExtension.toLowerCase() === 'csv') {
-    //        return true;
-    //      }
-    //    }
-    //  }
-
-    //  this.errorMessage = 'File format is not supported. Please upload a csv file.';
-    //  return false;
-    //}
-
-    //checkFileSize(size) {
-    //  if (size > 20971520) {
-    //    this.errorMessage = 'File size exceeds 20MB limit.';
-    //    return false;
-    //  }
-    //  return true;
-    //}
-
     openFile(event) {
       var input = event.target;
       var self = this;
@@ -409,29 +397,35 @@ module Clarity.Controller {
 			var self = this;
       this.$mdDialog.show({
         controller: function ($scope, $mdDialog) {
-					$scope.trashInfo = new Model.TrashInformationModel();
-					$scope.viewModel = self;
+          $scope.trashInfo = new Model.TrashInformationModel();
+          $scope.viewModel = self;
           $scope.cancel = function () {
             $mdDialog.cancel();
           };
           $scope.update = function () {
-						var trashList = [];
-						for (var i = 0; i < self.trashInfoViewModelList.length; i++) {
-							var trash = self.trashInfoViewModelList[i];
-							if (trash.isSelected) {
-								trash.status = $scope.trashInfo.status;
+            var trashList = [];
+            for (var i = 0; i < self.trashInfoViewModelList.length; i++) {
+              var trash = self.trashInfoViewModelList[i];
+              if (trash.isSelected) {
+                trash.status = $scope.trashInfo.status;
                 trash.assigneeId = $scope.trashInfo.assigneeId;
                 trash.comment = $scope.trashInfo.comment;
-								trashList.push(self.mapTrashInfoViewModelToTrashModel(trash));
-							}
-						}
-						self.trashService.updateTrashRecord(trashList,
-							(data) => {
-								alert('Updated ' + data.length + ' new records!!!');
-								$mdDialog.hide();
-							},
-							(data) => {
-							});
+                trashList.push(self.mapTrashInfoViewModelToTrashModel(trash));
+              }
+            }
+            self.trashService.updateTrashRecord(trashList,
+              (data) => {
+                //update modifiedDate
+                for (var i = 0; i < data.length; i++) {
+                  var trashInfo = data[i];
+                  self.updateModifiedDate(self.trashInfoViewModelList, trashInfo.id, trashInfo.modifiedDate);
+                }
+
+                alert('Updated ' + data.length + ' new records!!!');
+                $mdDialog.hide();
+              },
+              (data) => {
+              });
           };
         },
 
@@ -653,8 +647,7 @@ module Clarity.Controller {
     }
 
     sortBy(propertyName: string) {
-      this.isReverse = (propertyName !== null && this.propertyName === propertyName)
-        ? !this.isReverse : false;
+      this.isReverse = (propertyName !== null && this.propertyName === propertyName) ? !this.isReverse : false;
       this.propertyName = propertyName;
       this.trashInfoViewModelsOnPage = this.$filter('orderBy')(this.trashInfoViewModelList, this.propertyName, this.isReverse);
     }
