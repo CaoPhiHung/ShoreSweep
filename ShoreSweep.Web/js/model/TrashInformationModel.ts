@@ -16,11 +16,11 @@ module Clarity.Model {
     public subLocality: string;  
     public description: string;
     public comment: string;
-    public status: string;
+    public status: number;
     public url: string;
     public images: Array<string>;
     public size: string;
-    public type: string;
+    public types: Array<number>;
     public assigneeId: number;
     public modifiedDate: Date;
     public sectionId: number;    
@@ -28,6 +28,7 @@ module Clarity.Model {
 
   export class TrashInformationViewModel extends TrashInformationModel {
 		public isSelected: boolean;
+		public type: string;
     public polygonCoords: any;
     public sectionName: string;
     public assigneeName: string;
@@ -58,4 +59,22 @@ module Clarity.Model {
     }
   }
 
+		export enum Status {
+			Unconfirmed = 0,
+			Confirmed = 1,
+			Cleaned = 2
+		}
+
+		export enum Types {
+			Household = 0,
+			Automotive = 1,
+			Construction = 2,
+			Plastic = 3,
+			Electronic = 4,
+			Glass = 5,
+			Metal = 6,
+			Liquid = 7,
+			Dangerous = 8
+		}
+		
 }

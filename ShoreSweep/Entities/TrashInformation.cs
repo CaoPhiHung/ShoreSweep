@@ -25,7 +25,7 @@ namespace ShoreSweep
         public string SubLocality { get; set; }
         public string Description { get; set; }
         public string Comment { get; set; }
-        public Status Status { get; set; }
+        public long Status { get; set; }
         public string Url { get; set; }
         public string Images { get; set; }
         public string Size { get; set; }
@@ -52,18 +52,12 @@ namespace ShoreSweep
             SubLocality = json.Value<string>("subLocality");
             Description = json.Value<string>("description");
             Comment = json.Value<string>("comment");
-
-            Status tempStatus;
-            if (Enum.TryParse<Status>(json.Value<string>("status"), out tempStatus))
-            {
-                Status = tempStatus;
-            }
-
-            Size = json.Value<string>("size");
+			Status = json.Value<long>("status");
+			Size = json.Value<string>("size");
             Url = json.Value<string>("url");
 			Images = JsonConvert.SerializeObject(json["images"]);
-			Type = json.Value<string>("type");
-            AssigneeID = json.Value<long?>("assigneeId");
+			Type = JsonConvert.SerializeObject(json["types"]);
+			AssigneeID = json.Value<long?>("assigneeId");
             SectionID = json.Value<long?>("sectionId");
         }
 
@@ -87,13 +81,13 @@ namespace ShoreSweep
             json["comment"] = Comment;
             json["modifiedDate"] = ModifiedDate.ToString("MM/dd/yyyy HH:mm:ss");
 
-            json["status"] = Status.ToString();
+            json["status"] = Status;
             json["size"] = Size;
 
             json["url"] = Url;
 			json["images"] = JArray.Parse(Images);
-			json["type"] = Type;
-            json["assigneeId"] = AssigneeID;
+			json["types"] = JArray.Parse(Type);
+			json["assigneeId"] = AssigneeID;
             json["sectionId"] = SectionID;
             return json;
         }

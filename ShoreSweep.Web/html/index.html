@@ -44,7 +44,7 @@
 			</div>
 			<div flex="15" data-ng-if="viewModel.showSearchDropDowList()">
 				<select name="status" class="select-search-box" data-ng-model="viewModel.searchText" >
-					<option data-ng-repeat="status in viewModel.statusList" value="{{ status }}" data-ng-bind="status" data-ng-if="viewModel.searchType == '3'"></option>
+					<option data-ng-repeat="status in viewModel.statusList" value="{{ status }}" data-ng-bind="viewModel.getStatusString(status)" data-ng-if="viewModel.searchType == '3'"></option>
 					<option data-ng-repeat="size in viewModel.sizesList" value="{{ size }}" data-ng-bind="size" data-ng-if="viewModel.searchType == '4'"></option>
 					<option data-ng-repeat="type in viewModel.typesList" value="{{ type }}" data-ng-bind="type" data-ng-if="viewModel.searchType == '5'"></option>
 					<option data-ng-repeat="section in viewModel.polygonList" value="{{ section.name }}" data-ng-bind="section.name" data-ng-if="viewModel.searchType == '6'"></option>
@@ -145,10 +145,10 @@
             <md-tooltip data-ng-if="trashInfo.description.length > 0" md-direction="top">{{trashInfo.description}}</md-tooltip>
             {{trashInfo.description}}</div>
 					<div flex="10" class="md-cell border-right">
-						<select name="status" class="field" data-ng-model="trashInfo.status" data-ng-change="viewModel.updateTrashInfoChange(trashInfo)">
-							<option value="Unconfirmed">Unconfirmed</option>
-							<option value="Confirmed">Confirmed</option>
-							<option value="Cleaned">Cleaned</option>
+						<select name="status" class="field" data-ng-model="trashInfo.status" data-ng-change="viewModel.updateTrashInfoChange(trashInfo)" convert-to-number>
+							<option value="0">Unconfirmed</option>
+							<option value="1">Confirmed</option>
+							<option value="2">Cleaned</option>
 						</select>
 					</div>
 					<div flex="10" class="md-cell border-right" data-ng-click="viewModel.showGoogleMapDialog(trashInfo, $event)" style="cursor: pointer;">

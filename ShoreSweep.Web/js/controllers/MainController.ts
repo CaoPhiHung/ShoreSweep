@@ -25,9 +25,9 @@ module Clarity.Controller {
     public search: any;
     public searchText: any;
     public searchType: any;
-		public statusList: Array<string>;
-		public sizesList: Array<string>;
-		public typesList: Array<string>;
+		public statusList: Array<any>;
+		public sizesList: Array<any>;
+		public typesList: Array<any>;
 
     public trashService: service.TrashService;
     public userService: service.UserService;
@@ -69,7 +69,7 @@ module Clarity.Controller {
       this.isReverse = false;
       this.userName = this.$rootScope.user.username;
 
-			this.statusList = ['Unconfirmed', 'Confirmed', 'Cleaned'];
+			this.statusList = [0, 1, 2];
 			this.sizesList = ['Small', 'Medium', 'Large'];
 			this.typesList = ['Household', 'Automotive', 'Construction', 'Plastic', 'Electronic',
 				'Glass', 'Metal', 'Liquid', 'Dangerous'];
@@ -122,6 +122,25 @@ module Clarity.Controller {
       }
     }
 
+		getTypeString(types) {
+			var type = '';
+			for (var i = 0; i < types.length; i++){
+				if (i == 0) {
+					type = this.getTypeStringFromId(types[i]);
+				} else {
+					type += ', ' + this.getTypeStringFromId(types[i]);
+				}
+			}
+			return type;
+		}
+
+		initTrashInfoType() {
+			for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
+				var trash = this.trashInfoViewModelList[i];
+				trash.type = this.getTypeString(trash.types);
+			}
+		}
+
     initTrashInfoViewModelList() {
       this.showSpinner = true;
       this.$rootScope.showSpinner();
@@ -129,6 +148,7 @@ module Clarity.Controller {
         this.trashInfoViewModelList = data;
         this.formatModifiedDate();
         this.trashInfoViewModelsOnPage = this.trashInfoViewModelList.slice(0);
+				this.initTrashInfoType();
         this.initPolygonList();
 				this.initAssigneeList();
         this.initPaging();
@@ -190,7 +210,7 @@ module Clarity.Controller {
 			trashInfo.url = trashViewInfo.url;
 			trashInfo.images = trashViewInfo.images;
 			trashInfo.size = trashViewInfo.size;
-			trashInfo.type = trashViewInfo.type;
+			trashInfo.types = trashViewInfo.types;
 			trashInfo.assigneeId = trashViewInfo.assigneeId;
       trashInfo.sectionId = trashViewInfo.sectionId;
 
@@ -281,7 +301,7 @@ module Clarity.Controller {
 
     updateSectionId() {
       var updatedList = [];
-			if (this.polygonList && this.polygonList.length > 0){
+			if (this.polygonList && this.polygonList.length > 0) {
 				for (var i = 0; i < this.polygonList.length; i++) {
 					var checkedPolygon = this.polygonList[i];
 					var polygon = new google.maps.Polygon({
@@ -309,7 +329,7 @@ module Clarity.Controller {
 					this.trashService.updateTrashRecord(updatedList, (data) => function (data) {
 						self.$rootScope.hideSpinner();
 					}
-					, function () { });
+						, function () { });
 				}
 			}
 			this.$rootScope.hideSpinner();
@@ -346,7 +366,7 @@ module Clarity.Controller {
       reader.onload = function () {
 
         var records = reader.result.split('\n');
-        for (var line = 1; line < 200 /*records.length*/; line++) {
+        for (var line = 1; line < 100 /*records.length*/; line++) {
           var record = records[line].split(';');
           var trash = new Model.TrashInformationModel();
           trash.trashId = record[0];
@@ -360,19 +380,114 @@ module Clarity.Controller {
           trash.locality = record[8];
           trash.subLocality = record[9];
           trash.description = record[10];
-          trash.status = record[11];
+          trash.status = self.getStatusId(record[11]);
           trash.url = record[12];
           trash.images = record[13].trim().split(',');
 					if (trash.images[trash.images.length - 1] == '') {
 						trash.images.splice(trash.images.length - 1, 1);
 					}
           trash.size = record[14];
-          trash.type = record[15];
+
+          trash.types = self.getTypeList(record[15]);
+
           self.importTrashList.push(trash);
         }
       };
       reader.readAsText(input.files[0]);
     };
+
+		getStatusId(status: string) {
+			switch (status.trim().toUpperCase()) {
+				case 'UNCONFIRMED':
+					return 0;
+				case 'UCONFIRMED':
+					return 1;
+				case 'CLEANED':
+					return 2;
+				default:
+					break;
+			}
+		}
+
+		getStatusString(status) {
+			switch (status) {
+				case 0:
+					return 'UNCONFIRMED';
+				case 1:
+					return 'CONFIRMED';
+				case 2:
+					return 'CLEANED';
+				default:
+					break;
+			}
+		}
+
+    getTypeIdFromString(type: string) {
+			switch (type.trim().toUpperCase()) {
+				case 'HOUSEHOLD':
+					return 0;
+				case 'AUTOMOTIVE':
+					return 1;
+				case 'CONSTRUCTION':
+					return 2;
+				case 'PLASTIC':
+					return 3;
+				case 'ELECTRONIC':
+					return 4;
+				case 'GLASS':
+					return 5;
+				case 'METAL':
+					return 6;
+				case 'LIQUID':
+					return 7;
+				case 'DANGEROUS':
+					return 8;
+
+				default:
+					break;
+			}
+		}
+
+		getTypeStringFromId(typeId) {
+			switch (typeId) {
+				case 0:
+					return 'HOUSEHOLD';
+				case 1:
+					return 'AUTOMOTIVE';
+				case 2:
+					return 'CONSTRUCTION';
+				case 3:
+					return 'PLASTIC';
+				case 4:
+					return 'ELECTRONIC';
+				case 5:
+					return 'GLASS';
+				case 6:
+					return 'METAL';
+				case 7:
+					return 'LIQUID';
+				case 8:
+					return 'DANGEROUS';
+
+				default:
+					break;
+			}
+		}
+
+		getTypeList(types) {
+			var typeList = [];
+			var list = types.trim().split(',');
+			if (list[list.length - 1] == '') {
+				list.splice(list.length - 1, 1);
+			}
+
+			for (var i = 0; i < list.length; i++) {
+				if (list[i] != '') {
+					typeList.push(this.getTypeIdFromString(list[i]));
+				}
+			}
+			return typeList;
+		}
 
     openKMLFile(event) {
       var input = event.target;
@@ -675,11 +790,10 @@ module Clarity.Controller {
 					return false;
 			}
 		}
-		
+
 		onSearchTypeChange() {
 			this.searchText = null;
 			this.search = {};
 		}
-
   }
 }
