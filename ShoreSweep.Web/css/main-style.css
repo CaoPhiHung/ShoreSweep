@@ -122,8 +122,8 @@ div.bg-preload span.img-loading { background: transparent url("/img/loading.gif"
 @media screen and (max-width: 900px) { #kiosksSurvey .sv-form-input.drop-off-select, #kiosksSurvey .sv-form-input.pick-up-select { width: 70%; padding-left: 2px; } }
 @media only screen and (min-width: 901px) and (max-width: 1279px) { #kiosksSurvey .sv-form-input.drop-off-select, #kiosksSurvey .sv-form-input.pick-up-select { width: 98%; padding-left: 0px; } }
 
-#color-dialog md-toolbar, #admin-dialog md-toolbar, #ssignee-dialog md-toolbar, #google-map-dialog md-toolbar, #import-csv-dialog md-toolbar, #import-kml-dialog md-toolbar, #update-records-dialog md-toolbar { background-color: #da5c0c; }
-#color-dialog .button-label, #admin-dialog .button-label, #ssignee-dialog .button-label, #google-map-dialog .button-label, #import-csv-dialog .button-label, #import-kml-dialog .button-label, #update-records-dialog .button-label { color: #da5c0c; font-weight: bold; }
+#color-dialog md-toolbar, #admin-dialog md-toolbar, #assignee-dialog md-toolbar, #google-map-dialog md-toolbar, #import-csv-dialog md-toolbar, #import-kml-dialog md-toolbar, #update-records-dialog md-toolbar { background-color: #da5c0c; }
+#color-dialog .button-label, #admin-dialog .button-label, #assignee-dialog .button-label, #google-map-dialog .button-label, #import-csv-dialog .button-label, #import-kml-dialog .button-label, #update-records-dialog .button-label { color: #da5c0c; font-weight: bold; }
 
 .md-button.md-default-theme.md-primary, .md-button.md-primary { color: #da5c0c; font-weight: bold; }
 
