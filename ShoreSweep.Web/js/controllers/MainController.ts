@@ -108,8 +108,8 @@ module Clarity.Controller {
             break;
         }
 
-        self.numPages = Math.ceil($filter('filter')(this.trashInfoViewModelList, newVal).length / self.itemsPerPage);
-        self.trashInfoViewModelsOnPage = $filter('filter')(this.trashInfoViewModelList, newVal);
+        self.trashInfoViewModelsOnPage = $filter('filter')(this.trashInfoViewModelList, self.search);
+				self.numPages = Math.ceil($filter('filter')(this.trashInfoViewModelList, self.search).length / self.itemsPerPage);
         self.currentPage = 1;
       }, true);
     }
@@ -230,6 +230,7 @@ module Clarity.Controller {
 
     showGoogleMapDialog(trashInfo: Model.TrashInformationViewModel, event: Event) {
 			trashInfo.assigneeName = this.getAssigneeName(trashInfo.assigneeId);
+			trashInfo.statusName = this.getStatusString(trashInfo.status);
       var self = this;
       this.$mdDialog.show({
 
@@ -354,7 +355,7 @@ module Clarity.Controller {
       reader.onload = function () {
 
         var records = reader.result.split('\n');
-        for (var line = 1; line < 100 /*records.length*/; line++) {
+        for (var line = 1; line < records.length; line++) {
           var record = records[line].split(';');
           var trash = new Model.TrashInformationModel();
           trash.trashId = record[0];
@@ -597,6 +598,7 @@ module Clarity.Controller {
       for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
         var trashInfo = this.trashInfoViewModelList[i];
         if (trashInfo.isSelected) {
+					trashInfo.statusName = this.getStatusString(trashInfo.status);
           selectedTrashInfoList.push(trashInfo);
         }
       }
@@ -787,6 +789,8 @@ module Clarity.Controller {
 		onSearchTypeChange() {
 			this.searchText = null;
 			this.search = {};
+			this.numPages = Math.ceil(this.trashInfoViewModelList.length / this.itemsPerPage);
+			
 		}
   }
 }
