@@ -107,9 +107,9 @@ module Clarity.Controller {
           default:
             break;
         }
-
+        self.clearAllSelected();
+        self.numPages = Math.ceil($filter('filter')(this.trashInfoViewModelList, self.search).length / self.itemsPerPage);
         self.trashInfoViewModelsOnPage = $filter('filter')(this.trashInfoViewModelList, self.search);
-				self.numPages = Math.ceil($filter('filter')(this.trashInfoViewModelList, self.search).length / self.itemsPerPage);
         self.currentPage = 1;
       }, true);
     }
@@ -615,6 +615,7 @@ module Clarity.Controller {
 
     goToNextPage() {
       this.currentPage += 1;
+      this.clearAllSelected();
       return this.currentPage;
     }
 
@@ -624,6 +625,7 @@ module Clarity.Controller {
 
     goToPreviousPage() {
       this.currentPage -= 1;
+      this.clearAllSelected();
       return this.currentPage;
     }
 
@@ -786,11 +788,19 @@ module Clarity.Controller {
 			}
 		}
 
-		onSearchTypeChange() {
+    onSearchTypeChange() {
+      this.clearAllSelected();
 			this.searchText = null;
 			this.search = {};
 			this.numPages = Math.ceil(this.trashInfoViewModelList.length / this.itemsPerPage);
-			
-		}
+    }
+
+    clearAllSelected() {
+      this.selectedAll = false;
+      for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
+        this.trashInfoViewModelList[i].isSelected = false;
+      }
+    }
+
   }
 }
