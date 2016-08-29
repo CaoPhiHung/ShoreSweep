@@ -119,7 +119,7 @@ module Clarity.Controller {
         for (var i = 0; i < trashInfoViewModelList.length; i++) {
           var trashInfo = trashInfoViewModelList[i];
           if (trashInfo.id === trashId) {
-            trashInfo.modifiedDate = new Date(modifiedDate.toString());
+            trashInfo.modifiedDate = this.mainHelper.convertToESTTimeZone(new Date(modifiedDate.toString()));
             trashInfo.formatedModifiedDate = this.mainHelper.formatDateToString(trashInfo.modifiedDate);
             break;
           }
@@ -127,7 +127,7 @@ module Clarity.Controller {
       } else {//update all records
         for (var i = 0; i < trashInfoViewModelList.length; i++) {
           var trashInfo = trashInfoViewModelList[i];
-          trashInfo.modifiedDate = new Date(trashInfo.modifiedDate.toString());
+          trashInfo.modifiedDate = this.mainHelper.convertToESTTimeZone(new Date(trashInfo.modifiedDate.toString()));
           trashInfo.formatedModifiedDate = this.mainHelper.formatDateToString(trashInfo.modifiedDate);
         }
       }
@@ -784,7 +784,7 @@ module Clarity.Controller {
 				default:
 					return false;
 			}
-		}
+    }
 
     onSearchTypeChange() {
       this.clearAllSelected();

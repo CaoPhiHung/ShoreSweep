@@ -315,3 +315,5 @@ tr:hover { background-color: #da5c0c; color: #ffffff; }
 #update-records-dialog { /*label{ color: $main-color; font-weight: bold; font-size: 16px;
 }*/ }
 #update-records-dialog md-select { margin: 10px 0 20px 0; }
+
+.two-lines { line-height: 22px !important; padding-top: 8px; }

@@ -138,8 +138,8 @@
 						<md-checkbox data-ng-model="trashInfo.isSelected" aria-label="selected"></md-checkbox>
 					</div>
 					<div flex="5" class="md-cell border-right">{{trashInfo.id}}</div>
-          <div flex="10" class="md-cell border-right">
-            <md-tooltip md-direction="top">{{trashInfo.modifiedDate.toString()}}</md-tooltip>
+          <div flex="10" class="md-cell border-right two-lines">
+            <md-tooltip md-direction="top">{{trashInfo.modifiedDate.toLocaleString()}}</md-tooltip>
             {{trashInfo.formatedModifiedDate}}</div>
 					<div flex="10" class="md-cell border-right text-overflow">
             <md-tooltip data-ng-if="trashInfo.description.length > 0" md-direction="top">{{trashInfo.description}}</md-tooltip>

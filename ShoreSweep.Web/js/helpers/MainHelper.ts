@@ -100,7 +100,21 @@ module Clarity.Helper {
       month = month.length > 1 ? month : '0' + month;
       var day = date.getDate().toString();
       day = day.length > 1 ? day : '0' + day;
-      return month + '/' + day + '/' + year;
+
+      var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+      var minute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+      var second = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+
+      return month + '/' + day + '/' + year + ' ' + hour + ':' + minute + ':' + second;
     }
+
+    public convertToESTTimeZone(date: Date) {
+      var offset = -5.0;
+      var utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+      var ESTDate = new Date(utc + (3600000 * offset));
+
+      return ESTDate;
+    }
+
   }
 }
