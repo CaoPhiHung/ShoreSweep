@@ -38,6 +38,10 @@ module Clarity.Service {
         .error(() => { this.doCallback(errorCallback, null); });
     }
 
-
+		dropRecord(entity: any, successCallback: Function, errorCallback: Function) {
+      this.http.post('/api/dropRecord', { 'trashes': entity })
+        .success((data) => { this.doCallback(successCallback, data); })
+        .error(() => { this.doCallback(errorCallback, null); });
+    }
   }
 }
