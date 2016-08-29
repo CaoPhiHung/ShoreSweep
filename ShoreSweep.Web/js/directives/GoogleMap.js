@@ -75,21 +75,21 @@ ngGoogleMap.directive('googleMap', function () {
       })(marker));
 
       // Define the LatLng coordinates for the polygon's path.
-      if (scope.ngModel) {
-        var polygonCoords = scope.ngModel.polygonCoords;
-        if (polygonCoords) {
-          // Construct the polygon.
-          var polygon = new google.maps.Polygon({
-            paths: polygonCoords,
-            strokeColor: '#FF0000',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#FF0000',
-            fillOpacity: 0.35
-          });
-          polygon.setMap(map);
-        }
-      }
+      //if (scope.ngModel) {
+      //  var polygonCoords = scope.ngModel.polygonCoords;
+      //  if (polygonCoords) {
+      //    // Construct the polygon.
+      //    var polygon = new google.maps.Polygon({
+      //      paths: polygonCoords,
+      //      strokeColor: '#FF0000',
+      //      strokeOpacity: 0.8,
+      //      strokeWeight: 2,
+      //      fillColor: '#FF0000',
+      //      fillOpacity: 0.35
+      //    });
+      //    polygon.setMap(map);
+      //  }
+      //}
     }
   }
 });

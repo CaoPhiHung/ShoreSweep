@@ -25,7 +25,8 @@
 				<md-button class="md-raised md-primary" data-ng-click="viewModel.updateRecord($event)"
 					data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Update Record</md-button>
 				<md-button class="md-raised md-primary" data-ng-click="viewModel.deleteRecord()"
-									 data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Delete Record</md-button>
+					data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Delete Record</md-button>
+                <md-button class="md-raised md-primary" data-ng-click="viewModel.dropRecord()">Drop CSV&KML Table</md-button>
 			</div>
 			<div flex="15">
 				<select name="status" class="select-search-box" data-ng-model="viewModel.searchType" data-ng-change="viewModel.onSearchTypeChange()">
@@ -43,13 +44,16 @@
 				<input type="text" class="search-text" data-ng-model="viewModel.searchText" placeholder="Search text"  />
 			</div>
 			<div flex="15" data-ng-if="viewModel.showSearchDropDowList()">
-				<select name="status" class="select-search-box" data-ng-model="viewModel.searchText" >
+				<select name="status" class="select-search-box" data-ng-model="viewModel.searchText" data-ng-if="viewModel.searchType != '6'">
 					<option data-ng-repeat="status in viewModel.statusList" value="{{ status }}" data-ng-bind="viewModel.getStatusString(status)" data-ng-if="viewModel.searchType == '3'"></option>
 					<option data-ng-repeat="size in viewModel.sizesList" value="{{ size }}" data-ng-bind="size" data-ng-if="viewModel.searchType == '4'"></option>
 					<option data-ng-repeat="type in viewModel.typesList" value="{{ type }}" data-ng-bind="type" data-ng-if="viewModel.searchType == '5'"></option>
-					<option data-ng-repeat="section in viewModel.polygonList" value="{{ section.name }}" data-ng-bind="section.name" data-ng-if="viewModel.searchType == '6'"></option>
 					<option data-ng-repeat="assignee in viewModel.assigneeList" value="{{ assignee.id }}" data-ng-bind="assignee.username" data-ng-if="viewModel.searchType == '7'"></option>
 				</select>
+                <select name="status" class="select-search-box" data-ng-model="viewModel.searchText" data-ng-if="viewModel.searchType == '6'">
+                    <option value="null"> No Section </option>
+                    <option data-ng-repeat="section in viewModel.polygonList" value="{{ section.name }}" data-ng-bind="section.name"></option>
+                </select>
 			</div>
 			<div layout="column" flex="5" layout-align="center right">
 				<md-menu>
@@ -89,7 +93,7 @@
 				<strong>records / page</strong>
 			</div>
 
-			<div flex="80" data-ng-if="viewModel.numPages > 1">
+			<div flex="80" data-ng-if="viewModel.numPages >= 1">
 				<div class="number-page">
 					<span data-ng-if="viewModel.currentPage > 1">
 						<i class="fa fa-chevron-left ico" data-ng-click="viewModel.goToPreviousPage()"></i>

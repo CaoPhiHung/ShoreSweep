@@ -104,7 +104,26 @@ namespace ShoreSweep.Api
 			return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = BuildJsonArray(trashList) };
 		}
 
-		private JArray BuildJsonArray(IEnumerable<TrashInformation> trashInfos)
+        [Route(HttpVerb.Post, "/dropRecord")]
+        public RestApiResult DropRecord(JObject json)
+        {
+            var trashList = ClarityDB.Instance.TrashInformations.Where(x => x.IsDisabled == false || 1 == 1);
+            var polygonList = ClarityDB.Instance.Polygons.Where(x => x.ID == 1 || 1 == 1);
+
+            foreach (TrashInformation trash in trashList)
+            {
+                ClarityDB.Instance.TrashInformations.Remove(trash);
+            }
+            foreach (Polygon polygon in polygonList)
+            {
+                ClarityDB.Instance.Polygons.Remove(polygon);
+            }
+
+            ClarityDB.Instance.SaveChanges();
+            return new RestApiResult { StatusCode = HttpStatusCode.OK };
+        }
+
+        private JArray BuildJsonArray(IEnumerable<TrashInformation> trashInfos)
         {
             JArray array = new JArray();
 

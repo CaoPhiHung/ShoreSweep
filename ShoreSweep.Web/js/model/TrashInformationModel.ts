@@ -30,6 +30,7 @@ module Clarity.Model {
 		public isSelected: boolean;
 		public type: string;
     public polygonCoords: any;
+		public statusName: string;
     public sectionName: string;
     public assigneeName: string;
     public formatedModifiedDate: string;
