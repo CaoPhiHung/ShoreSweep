@@ -288,6 +288,7 @@ module Clarity.Controller {
 				this.trashInfoViewModelsOnPage = this.trashInfoViewModelList.slice(0);
 				this.currentPage = 1;
 				this.updateSectionId();
+				this.updateModifiedDate(this.trashInfoViewModelList);
 				alert('Imported ' + data.length + ' records');
 			} else {
 				alert('Do not have any new record!!!');
@@ -821,12 +822,16 @@ module Clarity.Controller {
 		}
 
 		dropRecord() {
-			this.trashService.dropRecord(this.assigneeList, (data) => {
-				this.polygonList = [];
-				this.trashInfoViewModelList = [];
-				this.numPages = 0;
-				alert('CSV Table and KML Table are cleared!!!!');
-			}, function () { });
+			this.$rootScope.showSpinner();
+			if (window.confirm('Are you sure you want to drop CSV and KML table')) {
+				this.trashService.dropRecord(this.assigneeList, (data) => {
+					this.polygonList = [];
+					this.trashInfoViewModelList = [];
+					this.numPages = 0;
+					alert('CSV Table and KML Table are cleared!!!!');
+					this.$rootScope.hideSpinner();
+				}, function () { });
+			}
 		}
 
 	}
