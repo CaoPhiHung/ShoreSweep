@@ -99,7 +99,7 @@ module Clarity.Controller {
 						self.search = { type: newVal };
 						break;
 					case '6':
-						if (newVal == 'null'){
+						if (newVal == 'null') {
 							self.search = { sectionId: null };
 						} else {
 							self.search = { sectionName: newVal };
@@ -118,24 +118,24 @@ module Clarity.Controller {
 			}, true);
 		}
 
-    updateModifiedDate(trashInfoViewModelList: Array<Model.TrashInformationViewModel>, trashId?: number, modifiedDate?: Date) {
-      if (trashId && modifiedDate) {//update defined record
-        for (var i = 0; i < trashInfoViewModelList.length; i++) {
-          var trashInfo = trashInfoViewModelList[i];
-          if (trashInfo.id === trashId) {
-            trashInfo.modifiedDate = this.mainHelper.convertToESTTimeZone(new Date(modifiedDate.toString()));
-            trashInfo.formatedModifiedDate = this.mainHelper.formatDateToString(trashInfo.modifiedDate);
-            break;
-          }
-        }
-      } else {//update all records
-        for (var i = 0; i < trashInfoViewModelList.length; i++) {
-          var trashInfo = trashInfoViewModelList[i];
-          trashInfo.modifiedDate = this.mainHelper.convertToESTTimeZone(new Date(trashInfo.modifiedDate.toString()));
-          trashInfo.formatedModifiedDate = this.mainHelper.formatDateToString(trashInfo.modifiedDate);
-        }
-      }
-    }
+		updateModifiedDate(trashInfoViewModelList: Array<Model.TrashInformationViewModel>, trashId?: number, modifiedDate?: Date) {
+			if (trashId && modifiedDate) {//update defined record
+				for (var i = 0; i < trashInfoViewModelList.length; i++) {
+					var trashInfo = trashInfoViewModelList[i];
+					if (trashInfo.id === trashId) {
+						trashInfo.modifiedDate = this.mainHelper.convertToESTTimeZone(new Date(modifiedDate.toString()));
+						trashInfo.formatedModifiedDate = this.mainHelper.formatDateToString(trashInfo.modifiedDate);
+						break;
+					}
+				}
+			} else {//update all records
+				for (var i = 0; i < trashInfoViewModelList.length; i++) {
+					var trashInfo = trashInfoViewModelList[i];
+					trashInfo.modifiedDate = this.mainHelper.convertToESTTimeZone(new Date(trashInfo.modifiedDate.toString()));
+					trashInfo.formatedModifiedDate = this.mainHelper.formatDateToString(trashInfo.modifiedDate);
+				}
+			}
+		}
 
 		getTypeString(types) {
 			var type = '';
@@ -528,13 +528,13 @@ module Clarity.Controller {
 						for (var i = 0; i < self.trashInfoViewModelList.length; i++) {
 							var trash = self.trashInfoViewModelList[i];
 							if (trash.isSelected) {
-								if ($scope.trashInfo.status && $scope.trashInfo.status != ''){
+								if ($scope.trashInfo.status && $scope.trashInfo.status != '') {
 									trash.status = $scope.trashInfo.status;
 								}
-								if ($scope.trashInfo.assigneeId){
+								if ($scope.trashInfo.assigneeId) {
 									trash.assigneeId = $scope.trashInfo.assigneeId;
 								}
-								if ($scope.trashInfo.comment){
+								if ($scope.trashInfo.comment) {
 									trash.comment = $scope.trashInfo.comment;
 								}
 								trashList.push(self.mapTrashInfoViewModelToTrashModel(trash));
@@ -805,7 +805,7 @@ module Clarity.Controller {
 				default:
 					return false;
 			}
-    }
+		}
 
 		onSearchTypeChange() {
 			this.clearAllSelected();

@@ -8,9 +8,9 @@
 			<div flex="55">
 				<img src="../img/lake-lanier-logo.png" style="height:50px;" />
 			</div>
-      <div flex="40" class="text-overflow">
-        <span class="login-name">{{viewModel.userName}}</span>
-      </div>
+			<div flex="40" class="text-overflow">
+				<span class="login-name">{{viewModel.userName}}</span>
+			</div>
 			<div flex="5" data-ng-controller="LogoutController">
 				<span class="logout-section">
 					<i class="fa fa-sign-out ico-logout" data-ng-click="viewModel.submit()"></i>
@@ -21,12 +21,12 @@
 		<div layout="row" layout-align="center center" class="sv-header-action">
 			<div flex="65">
 				<md-button class="md-raised md-primary" data-ng-click="viewModel.showMapAndTrash()"
-					data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Show Map & Trash</md-button>
+									 data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Show Map & Trash</md-button>
 				<md-button class="md-raised md-primary" data-ng-click="viewModel.updateRecord($event)"
-					data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Update Record</md-button>
+									 data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Update Record</md-button>
 				<md-button class="md-raised md-primary" data-ng-click="viewModel.deleteRecord()"
-					data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Delete Record</md-button>
-                <md-button class="md-raised md-primary" data-ng-click="viewModel.dropRecord()">Drop CSV&KML Table</md-button>
+									 data-ng-disabled="!viewModel.enableUpdateOrShowMap()">Delete Record</md-button>
+				<md-button class="md-raised md-primary" data-ng-click="viewModel.dropRecord()">Drop CSV&KML Table</md-button>
 			</div>
 			<div flex="15">
 				<select name="status" class="select-search-box" data-ng-model="viewModel.searchType" data-ng-change="viewModel.onSearchTypeChange()">
@@ -41,7 +41,7 @@
 				</select>
 			</div>
 			<div flex="15" data-ng-if="!viewModel.showSearchDropDowList()">
-				<input type="text" class="search-text" data-ng-model="viewModel.searchText" placeholder="Search text"  />
+				<input type="text" class="search-text" data-ng-model="viewModel.searchText" placeholder="Search text" />
 			</div>
 			<div flex="15" data-ng-if="viewModel.showSearchDropDowList()">
 				<select name="status" class="select-search-box" data-ng-model="viewModel.searchText" data-ng-if="viewModel.searchType != '6'">
@@ -50,10 +50,10 @@
 					<option data-ng-repeat="type in viewModel.typesList" value="{{ type }}" data-ng-bind="type" data-ng-if="viewModel.searchType == '5'"></option>
 					<option data-ng-repeat="assignee in viewModel.assigneeList" value="{{ assignee.id }}" data-ng-bind="assignee.username" data-ng-if="viewModel.searchType == '7'"></option>
 				</select>
-                <select name="status" class="select-search-box" data-ng-model="viewModel.searchText" data-ng-if="viewModel.searchType == '6'">
-                    <option value="null"> No Section </option>
-                    <option data-ng-repeat="section in viewModel.polygonList" value="{{ section.name }}" data-ng-bind="section.name"></option>
-                </select>
+				<select name="status" class="select-search-box" data-ng-model="viewModel.searchText" data-ng-if="viewModel.searchType == '6'">
+					<option value="null"> No Section </option>
+					<option data-ng-repeat="section in viewModel.polygonList" value="{{ section.name }}" data-ng-bind="section.name"></option>
+				</select>
 			</div>
 			<div layout="column" flex="5" layout-align="center right">
 				<md-menu>
@@ -83,7 +83,7 @@
 			<div flex="20">
 				<strong>Show</strong>
 				<select class="input-page" data-ng-model="viewModel.itemsPerPage" convert-to-number
-					data-ng-change="viewModel.itemsPerPageChanged(viewModel.itemsPerPage)">
+								data-ng-change="viewModel.itemsPerPageChanged(viewModel.itemsPerPage)">
 					<option value="50">50</option>
 					<option value="100">100</option>
 					<option value="150">150</option>
@@ -113,19 +113,21 @@
 			<md-card-content>
 				<div layout="row" layout-align="center center" class="md-row sv-header-type">
 					<div flex="5" class="md-cell border-right">
-            <md-checkbox class="select-all" data-ng-model="viewModel.selectedAll" aria-label="selectedAll"
-              data-ng-change="viewModel.onchangeSelectedAll()"></md-checkbox>
-          </div>
-					<div flex="5" class="md-cell border-right pointer" data-ng-click="viewModel.sortBy('id')">ID&nbsp;
-            <span data-ng-show="viewModel.propertyName === 'id'">
-              <i class="fa" data-ng-class="viewModel.isReverse ? 'fa-sort-desc ico-sort-desc' : 'fa-sort-asc ico-sort-asc'" aria-hidden="true"></i>
-            </span>
-          </div>
-          <div flex="10" class="md-cell border-right pointer" data-ng-click="viewModel.sortBy('modifiedDate')">Modified Date&nbsp;
-            <span data-ng-show="viewModel.propertyName === 'modifiedDate'" >
-              <i class="fa" data-ng-class="viewModel.isReverse ? 'fa-sort-desc ico-sort-desc' : 'fa-sort-asc ico-sort-asc'" aria-hidden="true"></i>
-            </span>
-          </div>
+						<md-checkbox class="select-all" data-ng-model="viewModel.selectedAll" aria-label="selectedAll"
+												 data-ng-change="viewModel.onchangeSelectedAll()"></md-checkbox>
+					</div>
+					<div flex="5" class="md-cell border-right pointer" data-ng-click="viewModel.sortBy('id')">
+						ID&nbsp;
+						<span data-ng-show="viewModel.propertyName === 'id'">
+							<i class="fa" data-ng-class="viewModel.isReverse ? 'fa-sort-desc ico-sort-desc' : 'fa-sort-asc ico-sort-asc'" aria-hidden="true"></i>
+						</span>
+					</div>
+					<div flex="10" class="md-cell border-right pointer" data-ng-click="viewModel.sortBy('modifiedDate')">
+						Modified Date&nbsp;
+						<span data-ng-show="viewModel.propertyName === 'modifiedDate'">
+							<i class="fa" data-ng-class="viewModel.isReverse ? 'fa-sort-desc ico-sort-desc' : 'fa-sort-asc ico-sort-asc'" aria-hidden="true"></i>
+						</span>
+					</div>
 					<div flex="10" class="md-cell border-right">Description</div>
 					<div flex="10" class="md-cell border-right">Status</div>
 					<div flex="10" class="md-cell border-right">Picture</div>
@@ -137,17 +139,19 @@
 				</div>
 
 				<div layout="row" layout-align="center center"
-             data-ng-repeat="trashInfo in viewModel.trashInfoViewModelList | orderBy: viewModel.propertyName: viewModel.isReverse | filter: viewModel.search | start: (viewModel.currentPage - 1) * viewModel.itemsPerPage | limitTo: viewModel.itemsPerPage" class="md-row">
+						 data-ng-repeat="trashInfo in viewModel.trashInfoViewModelList | orderBy: viewModel.propertyName: viewModel.isReverse | filter: viewModel.search | start: (viewModel.currentPage - 1) * viewModel.itemsPerPage | limitTo: viewModel.itemsPerPage" class="md-row">
 					<div flex="5" class="md-cell border-right">
 						<md-checkbox data-ng-model="trashInfo.isSelected" aria-label="selected"></md-checkbox>
 					</div>
 					<div flex="5" class="md-cell border-right">{{trashInfo.id}}</div>
-          <div flex="10" class="md-cell border-right two-lines">
-            <md-tooltip md-direction="top">{{trashInfo.modifiedDate.toLocaleString()}}</md-tooltip>
-            {{trashInfo.formatedModifiedDate}}</div>
+					<div flex="10" class="md-cell border-right two-lines">
+						<md-tooltip md-direction="top">{{trashInfo.modifiedDate.toLocaleString()}}</md-tooltip>
+						{{trashInfo.formatedModifiedDate}}
+					</div>
 					<div flex="10" class="md-cell border-right text-overflow">
-            <md-tooltip data-ng-if="trashInfo.description.length > 0" md-direction="top">{{trashInfo.description}}</md-tooltip>
-            {{trashInfo.description}}</div>
+						<md-tooltip data-ng-if="trashInfo.description.length > 0" md-direction="top">{{trashInfo.description}}</md-tooltip>
+						{{trashInfo.description}}
+					</div>
 					<div flex="10" class="md-cell border-right">
 						<select name="status" class="field" data-ng-model="trashInfo.status" data-ng-change="viewModel.updateTrashInfoChange(trashInfo)" convert-to-number>
 							<option value="0">Unconfirmed</option>
@@ -160,13 +164,15 @@
 					</div>
 					<div flex="10" class="md-cell border-right">{{trashInfo.size}}</div>
 					<div flex="10" class="md-cell border-right text-overflow">
-            <md-tooltip data-ng-if="trashInfo.type.length > 0" md-direction="top">{{trashInfo.type}}</md-tooltip>
-            {{trashInfo.type}}</div>
+						<md-tooltip data-ng-if="trashInfo.type.length > 0" md-direction="top">{{trashInfo.type}}</md-tooltip>
+						{{trashInfo.type}}
+					</div>
 					<div flex="10" class="md-cell border-right text-overflow">
-            <md-tooltip data-ng-if="trashInfo.sectionName.length > 0" md-direction="top">{{trashInfo.sectionName}}</md-tooltip>
-            {{trashInfo.sectionName}}</div>
+						<md-tooltip data-ng-if="trashInfo.sectionName.length > 0" md-direction="top">{{trashInfo.sectionName}}</md-tooltip>
+						{{trashInfo.sectionName}}
+					</div>
 					<div flex="10" class="md-cell border-right">
-						<input type="text" class="comment" data-ng-model="trashInfo.comment" placeholder="Comment" />
+						<input type="text" class="comment" data-ng-model="trashInfo.comment" data-ng-blur="viewModel.updateTrashInfoChange(trashInfo)" placeholder="Comment" />
 					</div>
 					<div flex="10" class="md-cell border-right">
 						<select name="status" class="field" data-ng-model="trashInfo.assigneeId" data-ng-change="viewModel.updateTrashInfoChange(trashInfo)" convert-to-number>
@@ -179,6 +185,3 @@
 	</md-content>
 
 </div>
-
-
-
