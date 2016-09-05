@@ -41,7 +41,14 @@ namespace ShoreSweep.Api
             {
                 return new RestApiResult { StatusCode = HttpStatusCode.BadRequest };
             }
-            var polygons = json.Value<JArray>("polygons");
+
+			var polygonListOld = ClarityDB.Instance.Polygons.Where(x => x.Name != "" || 1 == 1);
+			foreach (Polygon polygon in polygonListOld)
+			{
+				ClarityDB.Instance.Polygons.Remove(polygon);
+			}
+
+			var polygons = json.Value<JArray>("polygons");
 
             List<Polygon> polygonList = new List<Polygon>();
 
@@ -49,13 +56,9 @@ namespace ShoreSweep.Api
             {
                 Polygon newPolygon = new Polygon();
                 newPolygon.ApplyJson(polygon);
-                Polygon oldPolygon = ClarityDB.Instance.Polygons.FirstOrDefault(x => x.Name == newPolygon.Name);
-                if (oldPolygon == null)
-                {
-                    polygonList.Add(newPolygon);
-                    ClarityDB.Instance.Polygons.Add(newPolygon);
-                }
-            }
+				ClarityDB.Instance.Polygons.Add(newPolygon);
+				polygonList.Add(newPolygon);
+			}
 
             ClarityDB.Instance.SaveChanges();
             return new RestApiResult { StatusCode = HttpStatusCode.OK, Json = BuildJsonArray(polygonList) };

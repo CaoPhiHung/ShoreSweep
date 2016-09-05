@@ -29,7 +29,7 @@ ngGoogleMap.directive('googleMap', function () {
           var marker = new google.maps.Marker({
             position: new google.maps.LatLng(scope.ngMarkers[i].latitude, scope.ngMarkers[i].longitude),
             map: map,
-            title: scope.ngMarkers[i].id + '-' + scope.ngMarkers[i].size
+            title: scope.ngMarkers[i].size[0] + scope.ngMarkers[i].id
           });
           bounds.extend(marker.getPosition());
         }
@@ -56,11 +56,11 @@ ngGoogleMap.directive('googleMap', function () {
         		//	title: scope.ngMarkers[i].id + '-' + scope.ngMarkers[i].size
         		//});
         		//var infowindow1 = new google.maps.InfoWindow();
-            infowindow.setContent(scope.ngMarkers[i].id + '-' + scope.ngMarkers[i].size);
+        		infowindow.setContent(scope.ngMarkers[i].size[0] + scope.ngMarkers[i].id);
             infowindow.open(map, marker);
           }          
         } else {
-          infowindow.setContent(scope.ngModel.id + '-' + scope.ngModel.size);
+        	infowindow.setContent(scope.ngModel.size[0] + scope.ngModel.id);
           infowindow.open(map, marker);
         }        
         
@@ -69,7 +69,7 @@ ngGoogleMap.directive('googleMap', function () {
       google.maps.event.addListener(marker, 'click', (function (marker) {
         return function () {
           var infowindow = new google.maps.InfoWindow();
-          infowindow.setContent(scope.ngModel.id + '-' + scope.ngModel.size);
+          infowindow.setContent(scope.ngModel.size[0] + scope.ngModel.id);
           infowindow.open(map, marker);
         }
       })(marker));
