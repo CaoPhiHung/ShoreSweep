@@ -93,7 +93,11 @@
 				<strong>records / page</strong>
 			</div>
 
-			<div flex="80" data-ng-if="viewModel.numPages >= 1">
+      <div flex="10">
+        <span class="num-of-records">{{viewModel.trashInfoViewModelsOnPage.length}}</span>
+      </div>
+
+			<div flex="70" data-ng-if="viewModel.numPages >= 1">
 				<div class="number-page">
 					<span data-ng-if="viewModel.currentPage > 1">
 						<i class="fa fa-chevron-left ico" data-ng-click="viewModel.goToPreviousPage()"></i>
