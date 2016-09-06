@@ -29,7 +29,7 @@ ngGoogleMap.directive('googleMap', function () {
           var marker = new google.maps.Marker({
             position: new google.maps.LatLng(scope.ngMarkers[i].latitude, scope.ngMarkers[i].longitude),
             map: map,
-            title: scope.ngMarkers[i].id + '-' + scope.ngMarkers[i].size
+            title: scope.ngMarkers[i].customId
           });
           //show title for marker
           var infowindow = new google.maps.InfoWindow();
@@ -39,7 +39,7 @@ ngGoogleMap.directive('googleMap', function () {
           google.maps.event.addListener(marker, 'click', (function (marker) {
             return function () {
               var infowindow = new google.maps.InfoWindow();
-              infowindow.setContent(scope.ngMarkers[i].id.toString());
+              infowindow.setContent(scope.ngMarkers[i].customId);
               infowindow.open(map, marker);
             }
           })(marker));
@@ -58,7 +58,7 @@ ngGoogleMap.directive('googleMap', function () {
         google.maps.event.addListener(marker, 'click', (function (marker) {
           return function () {
             var infowindow = new google.maps.InfoWindow();
-            infowindow.setContent(scope.ngModel.size);
+            infowindow.setContent(scope.ngModel.customId);
             infowindow.open(map, marker);
           }
         })(marker));
@@ -67,10 +67,10 @@ ngGoogleMap.directive('googleMap', function () {
       //fix error only load right at first time
       google.maps.event.addListenerOnce(map, 'idle', function () {
         google.maps.event.trigger(map, 'resize');
-        map.setCenter(center);        
+        //map.setCenter(center);        
         if (!scope.ngMarkers) {
           var infowindow = new google.maps.InfoWindow();
-          infowindow.setContent(scope.ngModel.size);
+          infowindow.setContent(scope.ngModel.customId);
           infowindow.open(map, marker);
         }   
         

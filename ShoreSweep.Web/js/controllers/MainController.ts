@@ -235,7 +235,7 @@ module Clarity.Controller {
 		showGoogleMapDialog(trashInfo: Model.TrashInformationViewModel, event: Event) {
 			trashInfo.assigneeName = this.getAssigneeName(trashInfo.assigneeId);
 			trashInfo.statusName = this.getStatusString(trashInfo.status);
-			trashInfo.id = this.pad(trashInfo.id, 5);
+			trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id, 5);
 			var self = this;
 			this.$mdDialog.show({
 
@@ -627,7 +627,7 @@ module Clarity.Controller {
 				var trashInfo = this.trashInfoViewModelList[i];
 				if (trashInfo.isSelected) {
 					trashInfo.statusName = this.getStatusString(trashInfo.status);
-					trashInfo.id = this.pad(trashInfo.id, 5);
+					trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id, 5);
 					selectedTrashInfoList.push(trashInfo);
 				}
 			}

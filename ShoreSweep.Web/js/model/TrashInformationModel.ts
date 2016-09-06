@@ -27,6 +27,7 @@ module Clarity.Model {
   }
 
   export class TrashInformationViewModel extends TrashInformationModel {
+		public customId: string;
 		public isSelected: boolean;
 		public type: string;
     public polygonCoords: any;
