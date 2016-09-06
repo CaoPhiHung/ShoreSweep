@@ -235,6 +235,7 @@ module Clarity.Controller {
 		showGoogleMapDialog(trashInfo: Model.TrashInformationViewModel, event: Event) {
 			trashInfo.assigneeName = this.getAssigneeName(trashInfo.assigneeId);
 			trashInfo.statusName = this.getStatusString(trashInfo.status);
+			trashInfo.id = this.pad(trashInfo.id, 5);
 			var self = this;
 			this.$mdDialog.show({
 
@@ -309,6 +310,7 @@ module Clarity.Controller {
 
 		onImportPolygonSuccess(data: Array<Model.PolygonModel>) {
 			if (data.length > 0) {
+				this.polygonList = [];
 				for (var i = 0; i < data.length; i++) {
 					this.polygonList.push(data[i]);
 				}
@@ -625,6 +627,7 @@ module Clarity.Controller {
 				var trashInfo = this.trashInfoViewModelList[i];
 				if (trashInfo.isSelected) {
 					trashInfo.statusName = this.getStatusString(trashInfo.status);
+					trashInfo.id = this.pad(trashInfo.id, 5);
 					selectedTrashInfoList.push(trashInfo);
 				}
 			}
@@ -833,6 +836,11 @@ module Clarity.Controller {
 					this.$rootScope.hideSpinner();
 				}, function () { });
 			}
+		}
+
+		pad(str, max) {
+			str = str.toString();
+			return str.length < max ? this.pad("0" + str, max) : str;
 		}
 
 	}
