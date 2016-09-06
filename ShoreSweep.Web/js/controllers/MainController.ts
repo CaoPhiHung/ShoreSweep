@@ -811,7 +811,8 @@ module Clarity.Controller {
 			this.clearAllSelected();
 			this.searchText = null;
 			this.search = {};
-			this.numPages = Math.ceil(this.trashInfoViewModelList.length / this.itemsPerPage);
+      this.numPages = Math.ceil(this.trashInfoViewModelList.length / this.itemsPerPage);
+      this.trashInfoViewModelsOnPage = this.trashInfoViewModelList.slice(0);
 		}
 
 		clearAllSelected() {
