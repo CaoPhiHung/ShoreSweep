@@ -27,10 +27,12 @@ ngGoogleMap.directive('googleMap', function () {
 
       if (scope.ngMarkers) {//for map has many markers
         for (var i = 0; i < scope.ngMarkers.length; i++) {
+          var image = '/img/white-transparent.png';
           var marker = new google.maps.Marker({
             position: new google.maps.LatLng(scope.ngMarkers[i].latitude, scope.ngMarkers[i].longitude),
             map: map,
-            title: scope.ngMarkers[i].customId
+            title: scope.ngMarkers[i].customId,
+            icon: image
           });
 
           //show title for marker
