@@ -163,9 +163,9 @@
 							<option value="2">Cleaned</option>
 						</select>
 					</div>
-					<div flex="10" class="md-cell border-right" data-ng-click="viewModel.showGoogleMapDialog(trashInfo, $event)" style="cursor: pointer;">
-						<img data-ng-src="{{trashInfo.images[0]}}" style="width:80%; height: 80%" />
-					</div>
+          <div flex="10" class="md-cell border-right" data-ng-click="viewModel.showMapAndImages(trashInfo)" style="cursor: pointer;">
+            <img data-ng-src="{{trashInfo.images[0]}}" style="width:80%; height: 80%" />
+          </div>
 					<div flex="10" class="md-cell border-right">{{trashInfo.size}}</div>
 					<div flex="10" class="md-cell border-right text-overflow">
 						<md-tooltip data-ng-if="trashInfo.type.length > 0" md-direction="top">{{trashInfo.type}}</md-tooltip>

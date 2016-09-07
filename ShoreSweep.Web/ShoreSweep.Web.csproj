@@ -108,6 +108,7 @@
     <Content Include="font\fa\fontawesome-webfont.svg" />
     <Content Include="font\hal\icomoon.svg" />
     <Content Include="gulpfile.js" />
+    <Content Include="html\map-and-images.html" />
     <Content Include="html\update-record-dialog.html" />
     <Content Include="html\import-kml-dialog.html" />
     <Content Include="html\import-csv-dialog.html" />

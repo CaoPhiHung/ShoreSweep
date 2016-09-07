@@ -261,6 +261,8 @@ md-checkbox:last-of-type { margin-left: 5px !important; }
 
 .img-report { width: 90%; height: 100px; }
 
+.img-map { width: 90%; height: 130px; }
+
 .ico { cursor: pointer; outline: none; }
 .ico:hover { color: #da5c0c; }
 
@@ -274,19 +276,21 @@ select.field { width: 90%; height: 50px; border-radius: 10px; border: 1px solid 
 
 .col-md-2 { width: 20%; float: left; }
 
-.col-md-3 { width: 20%; float: left; }
+.col-md-3 { width: 30%; float: left; }
 
 .col-md-4 { width: 40%; float: left; }
 
 .col-md-6 { width: 60%; float: left; }
 
-.col-md-7 { width: 60%; float: left; }
+.col-md-7 { width: 70%; float: left; }
 
 .col-md-offset-2 { margin-left: 20%; }
 
-.trash-info-section { margin-left: 10%; margin-right: 10%; margin-top: 30px; clear: left; overflow: hidden; }
+.trash-info-section { margin-left: 10%; margin-right: 10%; padding-top: 30px; clear: left; overflow: hidden; }
 
 .trash-info-map { height: 250px; width: 100%; }
+
+.trash-info-map-image { height: 350px; width: 100%; }
 
 .trash-info-map-summary { height: 400px; width: 100%; }
 
