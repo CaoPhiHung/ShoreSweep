@@ -46,7 +46,9 @@
 *.user
 *.force
 *.js
+!markerwithlabel.js
 !gulpfile.js
+!GoogleMap.js
 !clarity-app.js
 *.pubxml
 

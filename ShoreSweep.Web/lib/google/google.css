@@ -1,0 +1,9 @@
+.labels {
+    color: black;
+    background-color: none;
+    font-family:"Lucida Grande", "Arial", sans-serif;
+    font-size: 15px;
+    text-align: center;
+    width: 40px;
+    white-space: nowrap;
+}

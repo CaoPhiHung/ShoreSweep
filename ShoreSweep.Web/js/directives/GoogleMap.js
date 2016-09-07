@@ -21,30 +21,25 @@ ngGoogleMap.directive('googleMap', function () {
         mapTypeId: "roadmap"
       };
 
+      var image = {
+      	url: 'https://www.transparenttextures.com/patterns/asfalt-light.png'
+      };
+
       // create the map + marker
       var map = new google.maps.Map(element[0], options);
       var bounds = new google.maps.LatLngBounds();
 
       if (scope.ngMarkers) {//for map has many markers
         for (var i = 0; i < scope.ngMarkers.length; i++) {
-          var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(scope.ngMarkers[i].latitude, scope.ngMarkers[i].longitude),
-            map: map,
-            title: scope.ngMarkers[i].customId
-          });
 
-          //show title for marker
-          var infowindow = new google.maps.InfoWindow();
-          infowindow.setContent(scope.ngMarkers[i].size[0] + '00' + scope.ngMarkers[i].id);
-          infowindow.open(map, marker);
-          //event click on marker
-          google.maps.event.addListener(marker, 'click', (function (marker) {
-            return function () {
-              var infowindow = new google.maps.InfoWindow();
-              infowindow.setContent(scope.ngMarkers[i].customId);
-              infowindow.open(map, marker);
-            }
-          })(marker));
+          var marker = new MarkerWithLabel({
+          	position: new google.maps.LatLng(scope.ngMarkers[i].latitude, scope.ngMarkers[i].longitude),
+          	map: map,
+          	labelContent: scope.ngMarkers[i].size[0] + '00' + scope.ngMarkers[i].id,
+          	labelClass: "labels", // the CSS class for the label
+          	labelInBackground: false,
+          	icon: image
+          });
 
           bounds.extend(marker.getPosition());
         }
@@ -58,31 +53,19 @@ ngGoogleMap.directive('googleMap', function () {
 
       } else {//for map has 1 marker
 
-        var marker = new google.maps.Marker({
-          position: new google.maps.LatLng(scope.ngModel.latitude, scope.ngModel.longitude),
-          map: map,
-          title: scope.ngModel.description
+        var marker = new MarkerWithLabel({
+        	position: new google.maps.LatLng(scope.ngModel.latitude, scope.ngModel.longitude),
+        	map: map,
+        	labelContent: scope.ngModel.customId,
+        	labelClass: "labels", // the CSS class for the label
+        	labelInBackground: false,
+        	icon: image
         });
-
-        //event click on marker
-        google.maps.event.addListener(marker, 'click', (function (marker) {
-          return function () {
-            var infowindow = new google.maps.InfoWindow();
-            infowindow.setContent(scope.ngModel.customId);
-            infowindow.open(map, marker);
-          }
-        })(marker));
 
       	//fix error only load right at first time
         google.maps.event.addListenerOnce(map, 'idle', function () {
         	google.maps.event.trigger(map, 'resize');
         	map.setCenter(center);
-        	if (!scope.ngMarkers) {
-        		var infowindow = new google.maps.InfoWindow();
-        		infowindow.setContent(scope.ngModel.customId);
-        		infowindow.open(map, marker);
-        	}
-
         });
       }
 
@@ -91,15 +74,6 @@ ngGoogleMap.directive('googleMap', function () {
       	google.maps.event.trigger(map, "resize");
       	map.setCenter(center);
       });
-
-      //google.maps.event.addListener(marker, 'click', (function (marker) {
-      //  return function () {
-      //    var infowindow = new google.maps.InfoWindow();
-      //    infowindow.setContent(scope.ngModel.id + '-' + scope.ngModel.size);
-      //    infowindow.open(map, marker);
-      //  }
-      //})(marker));
-
     }
   }
 });

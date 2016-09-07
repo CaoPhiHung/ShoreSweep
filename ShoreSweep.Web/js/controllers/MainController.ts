@@ -627,7 +627,7 @@ module Clarity.Controller {
 				var trashInfo = this.trashInfoViewModelList[i];
 				if (trashInfo.isSelected) {
 					trashInfo.statusName = this.getStatusString(trashInfo.status);
-					trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id, 5);
+					trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id);
 					selectedTrashInfoList.push(trashInfo);
 				}
 			}
