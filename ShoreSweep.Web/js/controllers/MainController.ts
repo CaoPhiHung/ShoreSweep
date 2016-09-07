@@ -235,7 +235,7 @@ module Clarity.Controller {
 		showGoogleMapDialog(trashInfo: Model.TrashInformationViewModel, event: Event) {
 			trashInfo.assigneeName = this.getAssigneeName(trashInfo.assigneeId);
 			trashInfo.statusName = this.getStatusString(trashInfo.status);
-			trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id, 5);
+			trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id);
 			var self = this;
 			this.$mdDialog.show({
 
@@ -637,8 +637,7 @@ module Clarity.Controller {
 
 		itemsPerPageChanged(itemsPerPage) {
 			this.currentPage = 1;
-			this.numPages = Math.ceil(this.trashInfoViewModelList.length / itemsPerPage);
-			this.trashInfoViewModelsOnPage = this.trashInfoViewModelList.slice(0);
+			this.numPages = Math.ceil(this.trashInfoViewModelsOnPage.length / itemsPerPage);
 			return this.currentPage;
 		}
 
@@ -838,9 +837,9 @@ module Clarity.Controller {
 			}
 		}
 
-		pad(str, max) {
+		pad(str) {
 			str = str.toString();
-			return str.length < max ? this.pad("0" + str, max) : str;
+			return "00" + str;
 		}
 
 	}

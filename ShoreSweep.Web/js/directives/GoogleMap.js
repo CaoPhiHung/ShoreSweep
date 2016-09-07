@@ -24,6 +24,7 @@ ngGoogleMap.directive('googleMap', function () {
       // create the map + marker
       var map = new google.maps.Map(element[0], options);
       var bounds = new google.maps.LatLngBounds();
+
       if (scope.ngMarkers) {//for map has many markers
         for (var i = 0; i < scope.ngMarkers.length; i++) {
           var marker = new google.maps.Marker({
@@ -31,9 +32,10 @@ ngGoogleMap.directive('googleMap', function () {
             map: map,
             title: scope.ngMarkers[i].customId
           });
+
           //show title for marker
           var infowindow = new google.maps.InfoWindow();
-          infowindow.setContent(scope.ngMarkers[i].id.toString());
+          infowindow.setContent(scope.ngMarkers[i].size[0] + '00' + scope.ngMarkers[i].id);
           infowindow.open(map, marker);
           //event click on marker
           google.maps.event.addListener(marker, 'click', (function (marker) {
@@ -48,12 +50,20 @@ ngGoogleMap.directive('googleMap', function () {
         }
         map.fitBounds(bounds);
 
+        google.maps.event.addDomListener(window, "resize", function () {
+        	var center = map.getCenter();
+        	google.maps.event.trigger(map, "resize");
+        	map.setCenter(center);
+        });
+
       } else {//for map has 1 marker
+
         var marker = new google.maps.Marker({
           position: new google.maps.LatLng(scope.ngModel.latitude, scope.ngModel.longitude),
           map: map,
           title: scope.ngModel.description
         });
+
         //event click on marker
         google.maps.event.addListener(marker, 'click', (function (marker) {
           return function () {
@@ -62,18 +72,24 @@ ngGoogleMap.directive('googleMap', function () {
             infowindow.open(map, marker);
           }
         })(marker));
+
+      	//fix error only load right at first time
+        google.maps.event.addListenerOnce(map, 'idle', function () {
+        	google.maps.event.trigger(map, 'resize');
+        	map.setCenter(center);
+        	if (!scope.ngMarkers) {
+        		var infowindow = new google.maps.InfoWindow();
+        		infowindow.setContent(scope.ngModel.customId);
+        		infowindow.open(map, marker);
+        	}
+
+        });
       }
 
-      //fix error only load right at first time
-      google.maps.event.addListenerOnce(map, 'idle', function () {
-        google.maps.event.trigger(map, 'resize');
-        //map.setCenter(center);        
-        if (!scope.ngMarkers) {
-          var infowindow = new google.maps.InfoWindow();
-          infowindow.setContent(scope.ngModel.customId);
-          infowindow.open(map, marker);
-        }   
-        
+      google.maps.event.addDomListener(window, "resize", function () {
+      	var center = map.getCenter();
+      	google.maps.event.trigger(map, "resize");
+      	map.setCenter(center);
       });
 
       //google.maps.event.addListener(marker, 'click', (function (marker) {
