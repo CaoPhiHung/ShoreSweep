@@ -5,7 +5,7 @@
         <h2>Map and Images</h2>
       </div>
     </md-toolbar>
-    <md-dialog-content>
+    <md-dialog-content style="height: 446px;">
       <div class="md-dialog-content">
         <google-map style="height: 250px; width: 500px; float: left" ng-model="trashInfo"></google-map>
 
@@ -24,7 +24,7 @@
       </div>
       <div class="md-dialog-content img-trash-info" style="padding-top: 10px; padding-bottom: 0px;"
         data-ng-repeat="image in trashInfo.images">
-        <img class="img-trash" data-ng-src="{{image}}" style="width: 100%; height: 120px;" />
+        <img class="img-trash" data-ng-src="{{image}}" />
       </div>
     </md-dialog-content>
 

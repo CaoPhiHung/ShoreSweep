@@ -1158,10 +1158,18 @@ select.field{
     float: left;
 }
 
-.img-trash:hover {
-    transform: scale(5);
+.img-trash {
+    width: 100%; 
+    height: 120px;
 }
 
+.img-trash:hover {
+    width: 750px;
+    height: 422px;
+    position: fixed;
+    top: 88px;
+    left: 25px;
+}
 
 table, th, td {
    border: 1px solid #cccccc;
