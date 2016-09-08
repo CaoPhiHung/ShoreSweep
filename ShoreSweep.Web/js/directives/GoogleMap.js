@@ -22,7 +22,7 @@ ngGoogleMap.directive('googleMap', function () {
       };
 
       var image = {
-      	url: 'https://www.transparenttextures.com/patterns/asfalt-light.png'
+      	url: '/img/white-transparent.png'
       };
 
       // create the map + marker
@@ -53,14 +53,24 @@ ngGoogleMap.directive('googleMap', function () {
 
       } else {//for map has 1 marker
 
-        var marker = new MarkerWithLabel({
-        	position: new google.maps.LatLng(scope.ngModel.latitude, scope.ngModel.longitude),
-        	map: map,
-        	labelContent: scope.ngModel.customId,
-        	labelClass: "labels", // the CSS class for the label
-        	labelInBackground: false,
-        	icon: image
-        });
+      	var marker = new google.maps.Marker({
+      		position: new google.maps.LatLng(scope.ngModel.latitude, scope.ngModel.longitude),
+      		map: map,
+      		title: scope.ngModel.description
+      	});
+				
+      	var infowindow = new google.maps.InfoWindow();
+      	infowindow.setContent(scope.ngModel.customId);
+      	infowindow.open(map, marker);
+
+      	//event click on marker
+      	google.maps.event.addListener(marker, 'click', (function (marker) {
+      		return function () {
+      			var infowindow = new google.maps.InfoWindow();
+      			infowindow.setContent(scope.ngModel.customId);
+      			infowindow.open(map, marker);
+      		}
+      	})(marker));
 
       	//fix error only load right at first time
         google.maps.event.addListenerOnce(map, 'idle', function () {
