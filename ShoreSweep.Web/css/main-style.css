@@ -298,6 +298,8 @@ select.field { width: 90%; height: 50px; border-radius: 10px; border: 1px solid 
 
 .img-trash-info { width: 33%; float: left; }
 
+.img-trash:hover { transform: scale(2); }
+
 table, th, td { border: 1px solid #cccccc; }
 
 table { width: 100%; }

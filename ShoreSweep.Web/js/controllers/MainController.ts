@@ -230,7 +230,40 @@ module Clarity.Controller {
 			trashInfo.sectionId = trashViewInfo.sectionId;
 
 			return trashInfo;
-		}
+    }
+
+    showGoogleMapDialog(trashInfo: Model.TrashInformationViewModel, event: Event) {
+      trashInfo.assigneeName = this.getAssigneeName(trashInfo.assigneeId);
+      trashInfo.statusName = this.getStatusString(trashInfo.status);
+      trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id);
+      var self = this;
+      this.$mdDialog.show({
+
+        controller: function ($scope, $mdDialog, trashInfo) {
+          $scope.trashInfo = trashInfo;
+
+          $scope.hide = function () {
+            $mdDialog.hide();
+          };
+          $scope.cancel = function () {
+            $mdDialog.cancel();
+          };
+          $scope.selectColor = function (color) {
+            console.log(trashInfo);
+            $mdDialog.hide();
+          };
+        },
+
+        templateUrl: '/html/google-map-dialog.html' + '?v=' + VERSION_NUMBER,
+        targetEvent: event,
+        clickOutsideToClose: true,
+        locals: {
+          trashInfo: trashInfo
+        }
+
+      })
+        .then(function (answer) { }, function () { });
+    }
 
 		importCSVFile() {
 			var self = this;
