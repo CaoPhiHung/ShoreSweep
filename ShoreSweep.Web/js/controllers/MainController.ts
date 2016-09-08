@@ -321,14 +321,14 @@ module Clarity.Controller {
 		updateSectionId() {
 			var updatedList = [];
 			if (this.polygonList && this.polygonList.length > 0) {
-				for (var i = 0; i < this.polygonList.length; i++) {
-					var checkedPolygon = this.polygonList[i];
-					var polygon = new google.maps.Polygon({
-						paths: checkedPolygon.coordinates
-					});
 
-					for (var j = 0; j < this.trashInfoViewModelList.length; j++) {
-						var trash = this.trashInfoViewModelList[j];
+				for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
+					var trash = this.trashInfoViewModelList[i];
+					for (var j = 0; j < this.polygonList.length; j++) {
+						var checkedPolygon = this.polygonList[j];
+						var polygon = new google.maps.Polygon({
+							paths: checkedPolygon.coordinates
+						});
 
 						if (trash && trash.latitude && trash.longitude) {
 							var latLng = new google.maps.LatLng(trash.latitude, trash.longitude);
@@ -339,10 +339,17 @@ module Clarity.Controller {
 								trash.sectionId = checkedPolygon.id;
 								trash.polygonCoords = checkedPolygon.coordinates;
 								updatedList.push(trash);
+								break;
+							} else if (isWithinPolygon == false && trash.sectionId != checkedPolygon.id) {
+								trash.sectionId = null;
+								trash.sectionName = '';
+								updatedList.push(trash);
 							}
 						}
 					}
 				}
+
+
 				var self = this;
 				if (updatedList.length > 0) {
 					this.trashService.updateTrashRecord(updatedList, (data) => function (data) {
