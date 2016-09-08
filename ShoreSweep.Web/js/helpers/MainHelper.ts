@@ -109,7 +109,7 @@ module Clarity.Helper {
     }
 
     public convertToESTTimeZone(date: Date) {
-      var offset = -5.0;
+      var offset = -8.0;
       var utc = date.getTime() + (date.getTimezoneOffset() * 60000);
       var ESTDate = new Date(utc + (3600000 * offset));
 

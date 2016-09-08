@@ -232,39 +232,6 @@ module Clarity.Controller {
 			return trashInfo;
 		}
 
-		showGoogleMapDialog(trashInfo: Model.TrashInformationViewModel, event: Event) {
-			trashInfo.assigneeName = this.getAssigneeName(trashInfo.assigneeId);
-			trashInfo.statusName = this.getStatusString(trashInfo.status);
-			trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id);
-			var self = this;
-			this.$mdDialog.show({
-
-				controller: function ($scope, $mdDialog, trashInfo) {
-					$scope.trashInfo = trashInfo;
-
-					$scope.hide = function () {
-						$mdDialog.hide();
-					};
-					$scope.cancel = function () {
-						$mdDialog.cancel();
-					};
-					$scope.selectColor = function (color) {
-						console.log(trashInfo);
-						$mdDialog.hide();
-					};
-				},
-
-				templateUrl: '/html/google-map-dialog.html' + '?v=' + VERSION_NUMBER,
-				targetEvent: event,
-				clickOutsideToClose: true,
-				locals: {
-					trashInfo: trashInfo
-				}
-
-			})
-				.then(function (answer) { }, function () { });
-		}
-
 		importCSVFile() {
 			var self = this;
 			if (this.importTrashList) {
@@ -633,7 +600,16 @@ module Clarity.Controller {
 			}
 			this.$window.sessionStorage.setItem('selectedTrashInfoList', angular.toJson(selectedTrashInfoList));
 			this.$window.open('/#/show_map_and_trash');
-		}
+    }
+
+    showMapAndImages(trashInfo: Model.TrashInformationViewModel) {
+      trashInfo.assigneeName = this.getAssigneeName(trashInfo.assigneeId);
+      trashInfo.statusName = this.getStatusString(trashInfo.status);
+      trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id);
+
+      this.$window.sessionStorage.setItem('selectedTrashInfo', angular.toJson(trashInfo));
+      this.$window.open('/#/map_and_images');
+    }
 
 		itemsPerPageChanged(itemsPerPage) {
 			this.currentPage = 1;

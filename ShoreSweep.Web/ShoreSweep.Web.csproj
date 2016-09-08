@@ -108,6 +108,7 @@
     <Content Include="font\fa\fontawesome-webfont.svg" />
     <Content Include="font\hal\icomoon.svg" />
     <Content Include="gulpfile.js" />
+    <Content Include="html\map-and-images.html" />
     <Content Include="html\update-record-dialog.html" />
     <Content Include="html\import-kml-dialog.html" />
     <Content Include="html\import-csv-dialog.html" />
@@ -139,6 +140,7 @@
     <Content Include="img\loading.gif" />
     <Content Include="img\logo-epinion.png" />
     <Content Include="img\logo-incite.png" />
+    <Content Include="img\white-transparent.png" />
     <Content Include="js\all.min.js" />
     <Content Include="js\clarity-app.js" />
     <TypeScriptCompile Include="js\controllers\MapController.ts" />

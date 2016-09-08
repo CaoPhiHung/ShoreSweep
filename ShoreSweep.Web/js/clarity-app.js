@@ -52,6 +52,11 @@ var clarityApp = angular.module('clarityApp', ['ngMaterial', 'ngAnimate', 'ngCoo
         controller: 'MapController',
         access: 'authorized'
     })
+    .when('/map_and_images', {
+      templateUrl: '/html/map-and-images.html' + '?v=' + VERSION_NUMBER,
+      controller: 'MapController',
+      access: 'authorized'
+    })
     .otherwise({ redirectTo: '/' });
 });
 

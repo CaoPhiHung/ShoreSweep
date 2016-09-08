@@ -1,0 +1,23 @@
+﻿<div id="mapAndImages">
+  <div class="trash-info-section">
+    <div class="col-md-7">
+      <google-map class="trash-info-map-image" ng-model="viewModel.selectedTrashInfo"></google-map>
+      <div style="margin-top:4px;" class="text-info">Description: {{viewModel.selectedTrashInfo.description}}</div>
+      <div class="text-info">Type: {{viewModel.selectedTrashInfo.type}}</div>
+      <div style="margin-top:4px;">
+        <div class="img-trash-info" data-ng-repeat="image in viewModel.selectedTrashInfo.images">
+          <img class="img-map" data-ng-src="{{image}}" />
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 trash-info-title">
+      <div class="title">{{viewModel.selectedTrashInfo.statusName}}</div>
+      <div class="text-info">Latitude: {{viewModel.selectedTrashInfo.latitude}}</div>
+      <div class="text-info">Longitude: {{viewModel.selectedTrashInfo.longitude}}</div>
+      <div class="text-info">Area: {{viewModel.selectedTrashInfo.administrativeArea1}}</div>
+      <div class="text-info">Section: {{viewModel.selectedTrashInfo.sectionName}}</div>
+      <div class="text-info">Assignee: {{viewModel.selectedTrashInfo.assigneeName}}</div>
+    </div>
+  </div>
+</div>
