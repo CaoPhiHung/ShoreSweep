@@ -594,27 +594,57 @@ module Clarity.Controller {
 				if (trash.isSelected) {
 					trashList.push(trash.id);
 				}
-			}
-			if (window.confirm('Are you sure you want to delete ' + trashList.length + ' records')) {
-				var self = this;
-				this.trashService.deleteTrashRecord(trashList,
-					(data) => {
-						for (var i = self.trashInfoViewModelList.length - 1; i >= 0; i--) {
-							var trash = self.trashInfoViewModelList[i];
-							for (var j = 0; j < data.length; j++) {
-								if (data[j].id == trash.id) {
-									self.trashInfoViewModelList.splice(i, 1);
-									break;
-								}
-							}
-						}
-						self.numPages = Math.ceil(self.trashInfoViewModelList.length / self.itemsPerPage);
-						self.trashInfoViewModelsOnPage = self.trashInfoViewModelList.slice(0);
-						alert('Delete ' + data.length + ' records!!!');
-					},
-					(data) => {
-					});
-			}
+      }
+
+      var confirm = this.$mdDialog.confirm()
+        .title('Would you like to delete your debt?')
+        .textContent('All of the banks have agreed to forgive you your debts.')
+        .ariaLabel('Lucky day')
+        //.targetEvent(ev)
+        .ok('OK')
+        .cancel('Cancel');
+
+      this.$mdDialog.show(confirm).then(function () {
+        var self = this;
+        this.trashService.deleteTrashRecord(trashList,
+          (data) => {
+            for (var i = self.trashInfoViewModelList.length - 1; i >= 0; i--) {
+              var trash = self.trashInfoViewModelList[i];
+              for (var j = 0; j < data.length; j++) {
+                if (data[j].id == trash.id) {
+                  self.trashInfoViewModelList.splice(i, 1);
+                  break;
+                }
+              }
+            }
+            self.numPages = Math.ceil(self.trashInfoViewModelList.length / self.itemsPerPage);
+            self.trashInfoViewModelsOnPage = self.trashInfoViewModelList.slice(0);
+            alert('Delete ' + data.length + ' records!!!');
+          });
+      }, function () {
+        //$scope.status = 'You decided to keep your debt.';
+        });
+
+			//if (window.confirm('Are you sure you want to delete ' + trashList.length + ' records')) {
+			//	var self = this;
+			//	this.trashService.deleteTrashRecord(trashList,
+			//		(data) => {
+			//			for (var i = self.trashInfoViewModelList.length - 1; i >= 0; i--) {
+			//				var trash = self.trashInfoViewModelList[i];
+			//				for (var j = 0; j < data.length; j++) {
+			//					if (data[j].id == trash.id) {
+			//						self.trashInfoViewModelList.splice(i, 1);
+			//						break;
+			//					}
+			//				}
+			//			}
+			//			self.numPages = Math.ceil(self.trashInfoViewModelList.length / self.itemsPerPage);
+			//			self.trashInfoViewModelsOnPage = self.trashInfoViewModelList.slice(0);
+			//			alert('Delete ' + data.length + ' records!!!');
+			//		},
+			//		(data) => {
+			//		});
+			//}
 		}
 
 		enableUpdateOrShowMap() {
