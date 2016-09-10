@@ -1,4 +1,4 @@
-﻿<md-dialog aria-label="Assignee" id="assignee-dialog" ng-cloak style="width: 350px; height: 240px; max-height: 100%">
+﻿<md-dialog aria-label="Assignee" id="assignee-dialog" ng-cloak style="width: 350px; max-height: 100%">
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
@@ -6,7 +6,10 @@
       </div>
     </md-toolbar>
     <md-dialog-content>
-      <div class="md-dialog-content">
+      <div class="md-dialog-content" style="padding-bottom: 10px">
+        <div class="dialog-error-message" data-ng-if="errorMessage.length > 0">
+          {{errorMessage}}
+        </div>
         <md-input-container style="width:100%; margin-bottom: 0px;">
           <label>User Name</label>
           <input data-ng-model="assignee.username" required>

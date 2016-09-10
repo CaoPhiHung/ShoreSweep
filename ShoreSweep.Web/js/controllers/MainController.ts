@@ -278,7 +278,7 @@ module Clarity.Controller {
 					(data) => {
 					});
 			} else {
-				alert('Please choose the csv file!!!');
+        alert('Please choose the csv file!!!');
 			}
 		}
 
@@ -293,13 +293,12 @@ module Clarity.Controller {
 				this.trashInfoViewModelsOnPage = this.trashInfoViewModelList.slice(0);
 				this.currentPage = 1;
 				this.updateSectionId();
-				this.updateModifiedDate(this.trashInfoViewModelList);
-				alert('Imported ' + data.length + ' records');
-			} else {
-				alert('Do not have any new record!!!');
+        this.updateModifiedDate(this.trashInfoViewModelList);
+        this.showResultDialog('Imported ' + data.length + ' records', event);
+      } else {
+        this.showResultDialog('Do not have any new record', event);
 				this.$rootScope.hideSpinner();
 			}
-
 		}
 
 		importPolygons() {
@@ -560,9 +559,7 @@ module Clarity.Controller {
 									var trashInfo = data[i];
 									self.updateModifiedDate(self.trashInfoViewModelList, trashInfo.id, trashInfo.modifiedDate);
 								}
-
-								alert('Updated ' + data.length + ' new records!!!');
-								$mdDialog.hide();
+                self.showResultDialog('Updated ' + data.length + ' new records', event);
 							},
 							(data) => {
 							});
@@ -591,36 +588,44 @@ module Clarity.Controller {
 				});
 		}
 
-		deleteRecord() {
-			var trashList = [];
-			for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
-				var trash = this.trashInfoViewModelList[i];
-				if (trash.isSelected) {
-					trashList.push(trash.id);
-				}
-			}
-			if (window.confirm('Are you sure you want to delete ' + trashList.length + ' records?')) {
-				var self = this;
-				this.trashService.deleteTrashRecord(trashList,
-					(data) => {
-						for (var i = self.trashInfoViewModelList.length - 1; i >= 0; i--) {
-							var trash = self.trashInfoViewModelList[i];
-							for (var j = 0; j < data.length; j++) {
-								if (data[j].id == trash.id) {
-									self.trashInfoViewModelList.splice(i, 1);
-									break;
-								}
-							}
-						}
-						self.numPages = Math.ceil(self.trashInfoViewModelList.length / self.itemsPerPage);
-						self.trashInfoViewModelsOnPage = self.trashInfoViewModelList.slice(0);
-						alert('Deleted ' + data.length + ' records.');
-						this.selectedAll = false;
-					},
-					(data) => {
-					});
-			}
-		}
+    deleteRecord(event: Event) {
+      var trashList = [];
+      for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
+        var trash = this.trashInfoViewModelList[i];
+        if (trash.isSelected) {
+          trashList.push(trash.id);
+        }
+      }
+
+      var confirm = this.$mdDialog.confirm()
+        .title('Are you sure you want to delete ' + trashList.length + ' records?')
+        .targetEvent(event)
+        .ok('OK')
+        .cancel('Cancel');
+
+      var self = this;
+      this.$mdDialog.show(confirm).then(function () {        
+        self.trashService.deleteTrashRecord(trashList,
+          (data) => {
+            for (var i = self.trashInfoViewModelList.length - 1; i >= 0; i--) {
+              var trash = self.trashInfoViewModelList[i];
+              for (var j = 0; j < data.length; j++) {
+                if (data[j].id == trash.id) {
+                  self.trashInfoViewModelList.splice(i, 1);
+                  break;
+                }
+              }
+            }
+            self.numPages = Math.ceil(self.trashInfoViewModelList.length / self.itemsPerPage);
+            self.trashInfoViewModelsOnPage = self.trashInfoViewModelList.slice(0);
+            self.selectedAll = false;
+            self.showResultDialog('Deleted ' + data.length + ' records', event);
+          },
+          (data) => {
+          });
+      }, function () { });
+
+    }
 
 		enableUpdateOrShowMap() {
 			if (this.trashInfoViewModelList != null && this.trashInfoViewModelList.length > 0) {
@@ -706,7 +711,9 @@ module Clarity.Controller {
 			var self = this;
 			this.$mdDialog.show({
 				controller: function ($scope, $mdDialog) {
-					$scope.assignee = new Model.AssigneeModel();
+          $scope.assignee = new Model.AssigneeModel();
+          $scope.errorMessage = '';
+
 					$scope.cancel = function () {
 						$mdDialog.cancel();
 					};
@@ -717,7 +724,7 @@ module Clarity.Controller {
 								$mdDialog.hide();
 							},
 							(data) => {
-								alert('Assignee already exists.');
+                $scope.errorMessage = 'Assignee already exists';
 							});
 					};
 				},
@@ -775,7 +782,9 @@ module Clarity.Controller {
 			var self = this;
 			this.$mdDialog.show({
 				controller: function ($scope, $mdDialog) {
-					$scope.adminUser = new Model.UserModel();
+          $scope.adminUser = new Model.UserModel();
+          $scope.errorMessage = '';
+
 					$scope.cancel = function () {
 						$mdDialog.cancel();
 					};
@@ -785,7 +794,7 @@ module Clarity.Controller {
 								$mdDialog.hide();
 							},
 							(data) => {
-								alert('Admin username is exist!!!');
+                $scope.errorMessage = 'Admin username already exists';
 							});
 					};
 				},
@@ -847,23 +856,41 @@ module Clarity.Controller {
 			}
 		}
 
-		dropRecord() {
-			this.$rootScope.showSpinner();
-			if (window.confirm('Are you sure you want to drop CSV and KML table')) {
-				this.trashService.dropRecord(this.assigneeList, (data) => {
-					this.polygonList = [];
-					this.trashInfoViewModelList = [];
-					this.numPages = 0;
-					alert('CSV Table and KML Table are cleared!!!!');
-					this.$rootScope.hideSpinner();
+    dropRecord(event: Event) {
+      var confirm = this.$mdDialog.confirm()
+        .title('Are you sure you want to drop CSV and KML table?')
+        .targetEvent(event)
+        .ok('OK')
+        .cancel('Cancel');
+
+      var self = this;
+      this.$mdDialog.show(confirm).then(function () {
+        self.$rootScope.showSpinner();
+        self.trashService.dropRecord(this.assigneeList, (data) => {
+          self.polygonList = [];
+          self.trashInfoViewModelList = [];
+          self.numPages = 0;
+          self.$rootScope.hideSpinner();
+          self.showResultDialog('CSV Table and KML Table are cleared', event);
 				}, function () { });
-			}
+      }, function () { });
 		}
 
 		pad(str) {
 			str = str.toString();
 			return "00" + str;
-		}
+    }
+
+    showResultDialog(message: string, event) {
+      this.$mdDialog.show(
+        this.$mdDialog.alert()
+          .parent(angular.element(document.querySelector('#kiosksSurvey')))
+          .clickOutsideToClose(true)
+          .title(message)
+          .ok('OK')
+          .targetEvent(event)
+      );
+    }
 
 	}
 }
