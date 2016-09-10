@@ -59,9 +59,9 @@ ngGoogleMap.directive('googleMap', function () {
       		title: scope.ngModel.description
       	});
 				
-      	var infowindow = new google.maps.InfoWindow();
-      	infowindow.setContent(scope.ngModel.customId);
-      	infowindow.open(map, marker);
+      	//var infowindow = new google.maps.InfoWindow();
+      	//infowindow.setContent(scope.ngModel.size[0] + '00' + scope.ngModel.id);
+      	//infowindow.open(map, marker);
 
       	//event click on marker
       	google.maps.event.addListener(marker, 'click', (function (marker) {
@@ -76,6 +76,9 @@ ngGoogleMap.directive('googleMap', function () {
         google.maps.event.addListenerOnce(map, 'idle', function () {
         	google.maps.event.trigger(map, 'resize');
         	map.setCenter(center);
+        	var infowindow = new google.maps.InfoWindow();
+        	infowindow.setContent(scope.ngModel.size[0] + '00' + scope.ngModel.id);
+        	infowindow.open(map, marker);
         });
       }
 

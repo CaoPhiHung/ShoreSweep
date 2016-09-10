@@ -81,7 +81,7 @@ module Clarity.Controller {
 					return;
 				switch (self.searchType) {
 					case '0':
-						self.search = { id: newVal };
+						self.search = { customId: newVal };
 						break;
 					case '1':
 						self.search = { description: newVal };
@@ -149,10 +149,11 @@ module Clarity.Controller {
 			return type;
 		}
 
-		initTrashInfoType() {
+		initTrashViewInfoViewModelGeneralInfo() {
 			for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
 				var trash = this.trashInfoViewModelList[i];
 				trash.type = this.getTypeString(trash.types);
+				trash.customId = trash.size[0] + this.pad(trash.id);
 			}
 		}
 
@@ -163,7 +164,7 @@ module Clarity.Controller {
 				this.trashInfoViewModelList = data;
 				this.updateModifiedDate(this.trashInfoViewModelList);
 				this.trashInfoViewModelsOnPage = this.trashInfoViewModelList.slice(0);
-				this.initTrashInfoType();
+				this.initTrashViewInfoViewModelGeneralInfo();
 				this.initPolygonList();
 				this.initAssigneeList();
 				this.initPaging();
@@ -235,7 +236,8 @@ module Clarity.Controller {
     showGoogleMapDialog(trashInfo: Model.TrashInformationViewModel, event: Event) {
       trashInfo.assigneeName = this.getAssigneeName(trashInfo.assigneeId);
       trashInfo.statusName = this.getStatusString(trashInfo.status);
-      trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id);
+			trashInfo.latitude = parseFloat(trashInfo.latitude.toFixed(3));
+			trashInfo.longitude = parseFloat(trashInfo.longitude.toFixed(3));
       var self = this;
       this.$mdDialog.show({
 
@@ -282,6 +284,8 @@ module Clarity.Controller {
 
 		onImportTrashListSuccess(data: Array<Model.TrashInformationViewModel>) {
 			for (var i = 0; i < data.length; i++) {
+				data[i].customId = data[i].size[0] + '00' + data[i].id;
+				data[i].type = this.getTypeString(data[i].types);
 				this.trashInfoViewModelList.push(data[i]);
 			}
 			if (data.length > 0) {
@@ -594,57 +598,28 @@ module Clarity.Controller {
 				if (trash.isSelected) {
 					trashList.push(trash.id);
 				}
-      }
-
-      var confirm = this.$mdDialog.confirm()
-        .title('Would you like to delete your debt?')
-        .textContent('All of the banks have agreed to forgive you your debts.')
-        .ariaLabel('Lucky day')
-        //.targetEvent(ev)
-        .ok('OK')
-        .cancel('Cancel');
-
-      this.$mdDialog.show(confirm).then(function () {
-        var self = this;
-        this.trashService.deleteTrashRecord(trashList,
-          (data) => {
-            for (var i = self.trashInfoViewModelList.length - 1; i >= 0; i--) {
-              var trash = self.trashInfoViewModelList[i];
-              for (var j = 0; j < data.length; j++) {
-                if (data[j].id == trash.id) {
-                  self.trashInfoViewModelList.splice(i, 1);
-                  break;
-                }
-              }
-            }
-            self.numPages = Math.ceil(self.trashInfoViewModelList.length / self.itemsPerPage);
-            self.trashInfoViewModelsOnPage = self.trashInfoViewModelList.slice(0);
-            alert('Delete ' + data.length + ' records!!!');
-          });
-      }, function () {
-        //$scope.status = 'You decided to keep your debt.';
-        });
-
-			//if (window.confirm('Are you sure you want to delete ' + trashList.length + ' records')) {
-			//	var self = this;
-			//	this.trashService.deleteTrashRecord(trashList,
-			//		(data) => {
-			//			for (var i = self.trashInfoViewModelList.length - 1; i >= 0; i--) {
-			//				var trash = self.trashInfoViewModelList[i];
-			//				for (var j = 0; j < data.length; j++) {
-			//					if (data[j].id == trash.id) {
-			//						self.trashInfoViewModelList.splice(i, 1);
-			//						break;
-			//					}
-			//				}
-			//			}
-			//			self.numPages = Math.ceil(self.trashInfoViewModelList.length / self.itemsPerPage);
-			//			self.trashInfoViewModelsOnPage = self.trashInfoViewModelList.slice(0);
-			//			alert('Delete ' + data.length + ' records!!!');
-			//		},
-			//		(data) => {
-			//		});
-			//}
+			}
+			if (window.confirm('Are you sure you want to delete ' + trashList.length + ' records?')) {
+				var self = this;
+				this.trashService.deleteTrashRecord(trashList,
+					(data) => {
+						for (var i = self.trashInfoViewModelList.length - 1; i >= 0; i--) {
+							var trash = self.trashInfoViewModelList[i];
+							for (var j = 0; j < data.length; j++) {
+								if (data[j].id == trash.id) {
+									self.trashInfoViewModelList.splice(i, 1);
+									break;
+								}
+							}
+						}
+						self.numPages = Math.ceil(self.trashInfoViewModelList.length / self.itemsPerPage);
+						self.trashInfoViewModelsOnPage = self.trashInfoViewModelList.slice(0);
+						alert('Deleted ' + data.length + ' records.');
+						this.selectedAll = false;
+					},
+					(data) => {
+					});
+			}
 		}
 
 		enableUpdateOrShowMap() {
@@ -663,8 +638,9 @@ module Clarity.Controller {
 			for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
 				var trashInfo = this.trashInfoViewModelList[i];
 				if (trashInfo.isSelected) {
+					trashInfo.latitude = parseFloat(trashInfo.latitude.toFixed(3));
+					trashInfo.longitude = parseFloat(trashInfo.longitude.toFixed(3));
 					trashInfo.statusName = this.getStatusString(trashInfo.status);
-					trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id);
 					selectedTrashInfoList.push(trashInfo);
 				}
 			}
@@ -675,7 +651,8 @@ module Clarity.Controller {
     showMapAndImages(trashInfo: Model.TrashInformationViewModel) {
       trashInfo.assigneeName = this.getAssigneeName(trashInfo.assigneeId);
       trashInfo.statusName = this.getStatusString(trashInfo.status);
-      trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id);
+			trashInfo.latitude = parseFloat(trashInfo.latitude.toFixed(3));
+			trashInfo.longitude = parseFloat(trashInfo.longitude.toFixed(3));
 
       this.$window.sessionStorage.setItem('selectedTrashInfo', angular.toJson(trashInfo));
       this.$window.open('/#/map_and_images');
@@ -740,7 +717,7 @@ module Clarity.Controller {
 								$mdDialog.hide();
 							},
 							(data) => {
-								alert('Assignee username is exist!!!');
+								alert('Assignee already exists.');
 							});
 					};
 				},
