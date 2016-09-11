@@ -604,7 +604,8 @@ module Clarity.Controller {
         .cancel('Cancel');
 
       var self = this;
-      this.$mdDialog.show(confirm).then(function () {        
+      this.$mdDialog.show(confirm).then(function () { 
+				self.$rootScope.showSpinner();       
         self.trashService.deleteTrashRecord(trashList,
           (data) => {
             for (var i = self.trashInfoViewModelList.length - 1; i >= 0; i--) {
@@ -616,12 +617,14 @@ module Clarity.Controller {
                 }
               }
             }
-            self.numPages = Math.ceil(self.trashInfoViewModelList.length / self.itemsPerPage);
-            self.trashInfoViewModelsOnPage = self.trashInfoViewModelList.slice(0);
+						self.trashInfoViewModelsOnPage = self.$filter('filter')(self.trashInfoViewModelList, self.search);
+            self.numPages = Math.ceil(self.trashInfoViewModelsOnPage.length / self.itemsPerPage);
             self.selectedAll = false;
             self.showResultDialog('Deleted ' + data.length + ' records', event);
+						self.$rootScope.hideSpinner();
           },
           (data) => {
+						self.$rootScope.hideSpinner();
           });
       }, function () { });
 
