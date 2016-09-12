@@ -278,7 +278,7 @@ module Clarity.Controller {
 					(data) => {
 					});
 			} else {
-        alert('Please choose the csv file!!!');
+				this.showResultDialog('Please choose the csv file', event);
 			}
 		}
 
@@ -307,7 +307,7 @@ module Clarity.Controller {
 				var self = this;
 				this.polygonService.importPolygons(this.importPolygonList, (data) => this.onImportPolygonSuccess(data), function () { });
 			} else {
-				alert('Please choose the kml file!!!');
+				this.showResultDialog('Please choose the kml file', event);
 			}
 		}
 
@@ -824,7 +824,8 @@ module Clarity.Controller {
 		sortBy(propertyName: string) {
 			this.isReverse = (propertyName !== null && this.propertyName === propertyName) ? !this.isReverse : false;
 			this.propertyName = propertyName;
-			this.trashInfoViewModelsOnPage = this.$filter('orderBy')(this.trashInfoViewModelList, this.propertyName, this.isReverse);
+			var trashList = this.$filter('filter')(this.trashInfoViewModelList, this.search);
+			this.trashInfoViewModelsOnPage = this.$filter('orderBy')(trashList, this.propertyName, this.isReverse);
 		}
 
 		showSearchDropDowList() {
