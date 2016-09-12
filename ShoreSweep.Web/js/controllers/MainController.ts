@@ -113,7 +113,10 @@ module Clarity.Controller {
 				}
 				self.clearAllSelected();
 				self.numPages = Math.ceil($filter('filter')(this.trashInfoViewModelList, self.search).length / self.itemsPerPage);
-				self.trashInfoViewModelsOnPage = $filter('filter')(this.trashInfoViewModelList, self.search);
+
+        var trashList = this.$filter('orderBy')(this.trashInfoViewModelList, self.propertyName, self.isReverse);
+        self.trashInfoViewModelsOnPage = $filter('filter')(trashList, self.search);
+
 				self.currentPage = 1;
 			}, true);
 		}
@@ -669,7 +672,8 @@ module Clarity.Controller {
 		itemsPerPageChanged(itemsPerPage) {
 			this.currentPage = 1;
 			this.numPages = Math.ceil(this.trashInfoViewModelsOnPage.length / itemsPerPage);
-			return this.currentPage;
+      this.clearAllSelected();
+      return this.currentPage;
 		}
 
 		goToNextPage() {
@@ -817,11 +821,13 @@ module Clarity.Controller {
 				if (i >= this.trashInfoViewModelsOnPage.length) {
 					break;
 				}
-				this.trashInfoViewModelsOnPage[i].isSelected = this.selectedAll;
+        this.trashInfoViewModelsOnPage[i].isSelected = this.selectedAll;
+        console.log(this.trashInfoViewModelsOnPage[i].customId);
 			}
 		}
 
-		sortBy(propertyName: string) {
+    sortBy(propertyName: string) {
+      this.clearAllSelected();
 			this.isReverse = (propertyName !== null && this.propertyName === propertyName) ? !this.isReverse : false;
 			this.propertyName = propertyName;
 			var trashList = this.$filter('filter')(this.trashInfoViewModelList, this.search);
