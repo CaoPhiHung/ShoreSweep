@@ -259,11 +259,11 @@ md-checkbox.md-checked ._md-icon { background-color: #da5c0c; }
 
 md-checkbox:last-of-type { margin-left: 10px !important; }
 
-.title { font-size: 25px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
+.title { font-size: 25px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
 
 .text-info { font-size: 16px; }
 
-.img-report { width: 90%; height: 100px; }
+.img-report { width: 90%; height: 125px; }
 
 .img-map { width: 90%; height: 130px; }
 
@@ -290,13 +290,13 @@ select.field { width: 90%; height: 50px; border-radius: 10px; border: 1px solid 
 
 .col-md-offset-2 { margin-left: 20%; }
 
-.trash-info-section { margin-left: 10%; margin-right: 10%; padding-top: 30px; clear: left; overflow: hidden; }
+.trash-info-section { margin-left: 10%; margin-right: 10%; padding-top: 50px; clear: left; overflow: hidden; }
 
-.trash-info-map { height: 250px; width: 100%; }
+.trash-info-map { height: 350px; width: 100%; }
 
 .trash-info-map-image { height: 350px; width: 100%; }
 
-.trash-info-map-summary { height: 400px; width: 100%; }
+.trash-info-map-summary { height: 450px; width: 100%; }
 
 .trash-info-title { padding-left: 40px; }
 
@@ -333,3 +333,11 @@ tr:hover { background-color: #da5c0c; color: #ffffff; }
 .num-of-records { background-color: #da5c0c; text-align: center; font-size: 24px; border-radius: 10px; padding: 4px 10px; }
 
 .dialog-error-message { margin-bottom: 10px; color: #a94442; font-style: italic; background-color: #f2dede; border-color: #ebccd1; height: 26px; line-height: 26px; border-radius: 4px; padding-left: 4px; }
+
+.margin-top-5 { margin-top: 5px; }
+
+.margin-top-10 { margin-top: 10px; }
+
+.margin-bottom-5 { margin-bottom: 5px; }
+
+.margin-bottom-10 { margin-bottom: 10px; }

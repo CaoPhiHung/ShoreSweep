@@ -1070,7 +1070,7 @@ md-checkbox:last-of-type {
     font-size: 25px;
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .text-info{
@@ -1079,7 +1079,7 @@ md-checkbox:last-of-type {
 
 .img-report{
     width: 90%;
-    height: 100px;
+    height: 125px;
 }
 
 .img-map{
@@ -1151,12 +1151,12 @@ select.field{
 .trash-info-section{
     margin-left: 10%;
     margin-right: 10%;
-    padding-top: 30px;
+    padding-top: 50px;
     clear: left;
     overflow: hidden;
 }
 .trash-info-map{
-    height: 250px;
+    height: 350px;
     width: 100%;
 }
 .trash-info-map-image{
@@ -1164,7 +1164,7 @@ select.field{
     width: 100%;
 }
 .trash-info-map-summary{
-    height: 400px;
+    height: 450px;
     width: 100%;
 }
 .trash-info-title{
@@ -1269,4 +1269,16 @@ tr:hover {
     line-height: 26px;
     border-radius: 4px;
     padding-left: 4px;
+}
+.margin-top-5{
+    margin-top: 5px;
+}
+.margin-top-10{
+    margin-top: 10px;
+}
+.margin-bottom-5{
+    margin-bottom: 5px;
+}
+.margin-bottom-10{
+    margin-bottom: 10px;
 }
