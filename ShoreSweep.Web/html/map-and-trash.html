@@ -29,11 +29,11 @@
   </div>
 
   <div class="trash-info-section" data-ng-class="{'break-page': $index % 2 == 0}" data-ng-repeat="trashInfo in viewModel.selectedTrashInformationList">
-    <div class="col-md-6">
+    <div class="col-md-7">
       <div class="title">{{trashInfo.size[0]}}00{{trashInfo.id}} </div>
       <google-map class="trash-info-map" ng-model="trashInfo"></google-map>
-      <div class="text-info">Description: {{trashInfo.description}}</div>
-      <div class="text-info">Type: {{trashInfo.type}}</div>
+      <div class="text-info margin-top-10">Description: {{trashInfo.description}}</div>
+      <div class="text-info margin-top-5 margin-bottom-10">Type: {{trashInfo.type}}</div>
       <div>
         <div class="img-trash-info" data-ng-repeat="image in trashInfo.images">
           <img class="img-report" data-ng-src="{{image}}" />
@@ -41,13 +41,13 @@
       </div>
     </div>
 
-    <div class="col-md-4 trash-info-title">
+    <div class="col-md-3 trash-info-title">
       <div class="title">{{trashInfo.statusName}}</div>
       <div class="text-info">Latitude: {{trashInfo.latitude}}</div>
-      <div class="text-info">Longitude: {{trashInfo.longitude}}</div>
-      <div class="text-info">Area: {{trashInfo.administrativeArea1}}</div>
-      <div class="text-info">Section: {{trashInfo.sectionName}}</div>
-      <div class="text-info">Assignee: {{trashInfo.assigneeName}}</div>
+      <div class="text-info margin-top-5">Longitude: {{trashInfo.longitude}}</div>
+      <div class="text-info margin-top-5">Area: {{trashInfo.administrativeArea1}}</div>
+      <div class="text-info margin-top-5">Section: {{trashInfo.sectionName}}</div>
+      <div class="text-info margin-top-5">Assignee: {{trashInfo.assigneeName}}</div>
     </div>
   </div>
 </div>
