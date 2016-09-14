@@ -30,12 +30,16 @@ ngGoogleMap.directive('googleMap', function () {
       var bounds = new google.maps.LatLngBounds();
 
       if (scope.ngMarkers) {//for map has many markers
-        for (var i = 0; i < scope.ngMarkers.length; i++) {
-
+      	for (var i = 0; i < scope.ngMarkers.length; i++) {
+      		var customId = scope.ngMarkers[i].size[0];
+      		for (var j = scope.ngMarkers[i].id.toString().length; j < 5; j++) {
+      			customId += '0';
+      		}
+      		customId += scope.ngMarkers[i].id;
           var marker = new MarkerWithLabel({
           	position: new google.maps.LatLng(scope.ngMarkers[i].latitude, scope.ngMarkers[i].longitude),
           	map: map,
-          	labelContent: scope.ngMarkers[i].size[0] + '00' + scope.ngMarkers[i].id,
+          	labelContent: customId,
           	labelClass: "labels", // the CSS class for the label
           	labelInBackground: false,
           	icon: image
@@ -77,7 +81,7 @@ ngGoogleMap.directive('googleMap', function () {
         	google.maps.event.trigger(map, 'resize');
         	map.setCenter(center);
         	var infowindow = new google.maps.InfoWindow();
-        	infowindow.setContent(scope.ngModel.size[0] + '00' + scope.ngModel.id);
+        	infowindow.setContent(scope.ngModel.customId);
         	infowindow.open(map, marker);
         });
       }

@@ -43,10 +43,10 @@ namespace ShoreSweep.Api
                 return new RestApiResult { StatusCode = HttpStatusCode.NotFound };
             }
 
-            if (user.Password != passwordHash.CreatePasswordHash(json.Value<string>("password"), user.Salt))
-            {
-                return new RestApiResult { StatusCode = HttpStatusCode.Conflict };
-            }
+            //if (user.Password != passwordHash.CreatePasswordHash(json.Value<string>("password"), user.Salt))
+            //{
+            //    return new RestApiResult { StatusCode = HttpStatusCode.Conflict };
+            //}
 
             formsAuthentication.SetAuthCookie(userName, false);
 

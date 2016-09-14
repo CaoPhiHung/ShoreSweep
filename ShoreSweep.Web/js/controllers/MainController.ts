@@ -156,7 +156,7 @@ module Clarity.Controller {
 			for (var i = 0; i < this.trashInfoViewModelList.length; i++) {
 				var trash = this.trashInfoViewModelList[i];
 				trash.type = this.getTypeString(trash.types);
-				trash.customId = trash.size[0] + this.pad(trash.id);
+				trash.customId = trash.size[0] + this.pad(trash.id, 5);
 			}
 		}
 
@@ -241,6 +241,7 @@ module Clarity.Controller {
       trashInfo.statusName = this.getStatusString(trashInfo.status);
 			trashInfo.latitude = parseFloat(trashInfo.latitude.toFixed(3));
 			trashInfo.longitude = parseFloat(trashInfo.longitude.toFixed(3));
+			trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id, 5);
       var self = this;
       this.$mdDialog.show({
 
@@ -254,7 +255,6 @@ module Clarity.Controller {
             $mdDialog.cancel();
           };
           $scope.selectColor = function (color) {
-            console.log(trashInfo);
             $mdDialog.hide();
           };
         },
@@ -287,7 +287,7 @@ module Clarity.Controller {
 
 		onImportTrashListSuccess(data: Array<Model.TrashInformationViewModel>) {
 			for (var i = 0; i < data.length; i++) {
-				data[i].customId = data[i].size[0] + '00' + data[i].id;
+				data[i].customId = data[i].size[0] + this.pad(data[i].id, 5);
 				data[i].type = this.getTypeString(data[i].types);
 				this.trashInfoViewModelList.push(data[i]);
 			}
@@ -355,7 +355,6 @@ module Clarity.Controller {
 					}
 				}
 
-
 				var self = this;
 				if (updatedList.length > 0) {
 					this.trashService.updateTrashRecord(updatedList, (data) => function (data) {
@@ -398,8 +397,9 @@ module Clarity.Controller {
 					trash.size = record[14];
 
 					trash.types = self.getTypeList(record[15]);
-
-					self.importTrashList.push(trash);
+					if (trash.status != 2){
+						self.importTrashList.push(trash);
+					}
 				}
 			};
 			reader.readAsText(input.files[0]);
@@ -652,6 +652,7 @@ module Clarity.Controller {
 					trashInfo.latitude = parseFloat(trashInfo.latitude.toFixed(3));
 					trashInfo.longitude = parseFloat(trashInfo.longitude.toFixed(3));
 					trashInfo.statusName = this.getStatusString(trashInfo.status);
+					trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id, 5);
 					selectedTrashInfoList.push(trashInfo);
 				}
 			}
@@ -664,7 +665,7 @@ module Clarity.Controller {
       trashInfo.statusName = this.getStatusString(trashInfo.status);
 			trashInfo.latitude = parseFloat(trashInfo.latitude.toFixed(3));
 			trashInfo.longitude = parseFloat(trashInfo.longitude.toFixed(3));
-
+			trashInfo.customId = trashInfo.size[0] + this.pad(trashInfo.id, 5);
       this.$window.sessionStorage.setItem('selectedTrashInfo', angular.toJson(trashInfo));
       this.$window.open('/#/map_and_images');
     }
@@ -822,7 +823,6 @@ module Clarity.Controller {
 					break;
 				}
         this.trashInfoViewModelsOnPage[i].isSelected = this.selectedAll;
-        console.log(this.trashInfoViewModelsOnPage[i].customId);
 			}
 		}
 
@@ -886,9 +886,12 @@ module Clarity.Controller {
       }, function () { });
 		}
 
-		pad(str) {
+		pad(str, max) {
 			str = str.toString();
-			return "00" + str;
+			if (str.length < max) {
+				return this.pad('0' + str, max);
+			}
+			return str;
     }
 
     showResultDialog(message: string, event) {
